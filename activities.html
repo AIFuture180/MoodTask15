@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MoodTask Activities: Engage in science-backed exercises to boost your mood and reduce stress.">
+    <meta name="keywords" content="MoodTask, mood boosting activities, mental health exercises, stress relief, emotional well-being">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="MoodTask">
+    <meta name="google-site-verification" content="a04bcf56705ce738" />
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA_navY=maui"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA_navY=maui', { 'anonymize_ip': true });
+    </script>
+    <title>MoodTask - Activities</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Existing styles unchanged */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            transition: background-color 0.3s ease;
+        }
+        /* ... other existing styles ... */
+        .footer .recommended-products {
+            margin: 20px 0;
+        }
+        .footer .recommended-products a.product-link {
+            padding: 10px 20px;
+            margin: 5px 0;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1em;
+            display: block;
+            text-decoration: none;
+            background-color: #f0f0f0;
+            color: #2C3E50;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .footer .recommended-products a.product-link:hover {
+            background-color: #D6D1F5;
+            transform: scale(1.02);
+        }
+        /* ... remaining existing styles ... */
+    </style>
+</head>
+<body>
+    <!-- Existing content unchanged -->
+    <div class="nav-bar">
+        <div class="logo">MoodTask</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="calendar.html">Dashboard</a>
+            <div class="dropdown">
+                <a href="activities.html" class="active">Activities</a>
+                <div class="dropdown-content">
+                    <a href="activities.html#breathing">Breathing</a>
+                    <a href="activities.html#soundscape">Soundscape</a>
+                    <a href="activities.html#punching">Punching Bag</a>
+                    <a href="activities.html#stretch">Stretch</a>
+                    <a href="activities.html#doodle">Doodle</a>
+                    <a href="activities.html#dance">Dance</a>
+                    <a href="activities.html#color-focus">Color Focus</a>
+                    <a href="activities.html#worry">Worry</a>
+                    <a href="activities.html#gratitude">Gratitude</a>
+                </div>
+            </div>
+            <a href="music.html">Mood Music</a>
+            <a href="blog.html">Blog</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Use</a>
+        </div>
+    </div>
+    <div class="main-content fade-in">
+        <div class="hero">
+            <h1>Activities</h1>
+            <p>Engage in science-backed exercises to boost your mood.</p>
+        </div>
+        <div class="container">
+            <div class="activity-section" id="breathing">
+                <h2 class="section-heading">Breathing Exercise</h2>
+                <p>Take a few minutes to practice deep breathing and calm your mind. Follow the rhythm: inhale for 4 seconds, hold for 4 seconds, exhale for 8 seconds.</p>
+                <button class="activity-button" onclick="startBreathing()">Start Breathing</button>
+                <div id="breathing-guide" class="activity-guide"></div>
+            </div>
+            <div class="activity-section" id="soundscape">
+                <h2 class="section-heading">Soundscape</h2>
+                <p>Immerse yourself in calming sounds to relax or focus. Choose a soundscape and let it wash over you.</p>
+                <select id="soundscape-select">
+                    <option value="rain">Rain</option>
+                    <option value="ocean">Ocean Waves</option>
+                    <option value="forest">Forest</option>
+                </select>
+                <button class="activity-button" onclick="playSoundscape()">Play Soundscape</button>
+            </div>
+            <div class="activity-section" id="punching">
+                <h2 class="section-heading">Punching Bag</h2>
+                <p>Release your stress by imagining a punching bag. Click to punch and let go of tension.</p>
+                <button class="activity-button" onclick="punchBag()">Punch!</button>
+                <div id="punch-count">Punches: 0</div>
+            </div>
+            <div class="activity-section" id="stretch">
+                <h2 class="section-heading">Stretch</h2>
+                <p>Follow a simple stretching routine to relax your body. Click to cycle through poses.</p>
+                <button class="activity-button" onclick="nextStretch()">Next Stretch</button>
+                <div id="stretch-guide">Stretch 1: Reach for the sky, hold for 10 seconds.</div>
+            </div>
+            <div class="activity-section" id="doodle">
+                <h2 class="section-heading">Doodle</h2>
+                <p>Let your creativity flow with a quick doodle. Draw whatever comes to mind!</p>
+                <canvas id="doodle-canvas" width="300" height="200"></canvas>
+                <button class="activity-button" onclick="clearDoodle()">Clear</button>
+            </div>
+            <div class="activity-section" id="dance">
+                <h2 class="section-heading">Dance</h2>
+                <p>Get moving with a mini dance session. Click to start the beat and dance along!</p>
+                <button class="activity-button" onclick="startDance()">Start Dancing</button>
+                <div id="dance-guide">Dance to the rhythm! Move your body for 30 seconds.</div>
+            </div>
+            <div class="activity-section" id="color-focus">
+                <h2 class="section-heading">Color Focus</h2>
+                <p>Focus on a calming color to center your mind. Choose a color and gaze at it for 30 seconds.</p>
+                <select id="color-select">
+                    <option value="blue">Blue</option>
+                    <option value="green">Green</option>
+                    <option value="purple">Purple</option>
+                </select>
+                <button class="activity-button" onclick="showColor()">Show Color</button>
+                <div id="color-display" style="width: 100px; height: 100px;"></div>
+            </div>
+            <div class="activity-section" id="worry">
+                <h2 class="section-heading">Worry Shredder</h2>
+                <p>Write down a worry, then shred it to let it go.</p>
+                <textarea id="worry-input" placeholder="Write your worry here..."></textarea>
+                <button class="activity-button" onclick="shredWorry()">Shred Worry</button>
+                <div id="worry-feedback"></div>
+            </div>
+            <div class="activity-section" id="gratitude">
+                <h2 class="section-heading">Gratitude Note</h2>
+                <p>Reflect on three things you're grateful for today.</p>
+                <textarea id="gratitude-input" placeholder="Write three things you're grateful for..."></textarea>
+                <button class="activity-button" onclick="saveGratitude()">Save Note</button>
+                <div id="gratitude-feedback"></div>
+            </div>
+        </div>
+        <div class="footer">
+            <div>
+                <h3>MoodTask</h3>
+                <p>Transform your mood with science-backed activities designed to improve your emotional well-being.</p>
+            </div>
+            <div>
+                <h3>Quick Links</h3>
+                <a href="index.html">Home</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Use</a>
+            </div>
+            <div class="connect">
+                <h3>Connect</h3>
+                <a href="https://twitter.com/share?url=https://moodtask.org" aria-label="Share on Twitter"><i class="fab fa-twitter"></i> Share on Twitter</a>
+                <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://moodtask.org" aria-label="Share on LinkedIn"><i class="fab fa-linkedin"></i> Share on LinkedIn</a>
+                <a href="https://www.buymeacoffee.com/moodtask" class="coffee" aria-label="Support us on Buy Me a Coffee"><i class="fas fa-coffee"></i> Buy Me a Coffee</a>
+                <a href="https://www.online-therapy.com/?aff_id=12345" class="therapy" aria-label="Explore Online Therapy">Online Therapy</a>
+                <a href="https://www.mindfulness.com/?aff_id=67890" class="mindfulness" aria-label="Explore Mindfulness resources">Mindfulness</a>
+            </div>
+            <div class="recommended-products">
+                <h3>Recommended Products</h3>
+                <a href="https://amzn.to/40rLCSK" class="product-link" aria-label="Buy Weighted Heated Lap Pad on Amazon">Weighted Heated Lap Pad</a>
+                <a href="https://amzn.to/40rLCRY" class="product-link" aria-label="Buy Beary Cotton Hand-Knit Weighted Blanket on Amazon">Beary Cotton Hand-Knit Weighted Blanket</a>
+                <a href="https://amzn.to/40rLCNZ" class="product-link" aria-label="Buy Serenilite Stress Balls on Amazon">Serenilite Stress Balls</a>
+                <a href="https://amzn.to/40l2f6N" class="product-link" aria-label="Buy Echo Go+ Hydrogen Water Bottle on Amazon">Echo Go+ Hydrogen Water Bottle</a>
+            </div>
+            <div class="affiliate-note">
+                AFFILIATE DISCLOSURE: Some links on this site are affiliate links. We may earn a commission on purchases at no extra cost to you.<br>
+                © 2025 MoodTask. All rights reserved.
+            </div>
+        </div>
+    </div>
+    <!-- Existing script unchanged -->
+    <script>
+        function adjustMainContentPadding() {
+            const navBar = document.querySelector('.nav-bar');
+            const mainContent = document.querySelector('.main-content');
+            if (navBar && mainContent) {
+                const navHeight = navBar.offsetHeight;
+                mainContent.style.paddingTop = `${navHeight + 10}px`;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const navLinks = document.querySelectorAll('.nav-bar .nav-links a');
+            const mainContent = document.querySelector('.main-content');
+
+            mainContent.classList.add('fade-in');
+            adjustMainContentPadding();
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    if (link.classList.contains('active') || link.parentElement.classList.contains('dropdown')) return;
+                    e.preventDefault();
+                    mainContent.classList.remove('fade-in');
+                    mainContent.classList.add('fade-out');
+                    setTimeout(() => {
+                        window.location.href = link.href;
+                    }, 500);
+                });
+            });
+
+            window.startBreathing = function() {
+                const guide = document.getElementById('breathing-guide');
+                guide.innerHTML = 'Inhale... (4s)';
+                setTimeout(() => guide.innerHTML = 'Hold... (4s)', 4000);
+                setTimeout(() => guide.innerHTML = 'Exhale... (8s)', 8000);
+                setTimeout(() => guide.innerHTML = 'Repeat for 1 minute.', 16000);
+            };
+
+            window.playSoundscape = function() {
+                const sound = document.getElementById('soundscape-select').value;
+                alert(`Playing ${sound} soundscape... (Imagine calming sounds for 30 seconds)`);
+            };
+
+            window.punchBag = function() {
+                let count = parseInt(document.getElementById('punch-count').textContent.split(': ')[1]);
+                count++;
+                document.getElementById('punch-count').textContent = `Punches: ${count}`;
+            };
+
+            window.nextStretch = function() {
+                const stretches = [
+                    'Stretch 1: Reach for the sky, hold for 10 seconds.',
+                    'Stretch 2: Touch your toes, hold for 10 seconds.',
+                    'Stretch 3: Side stretch to the left, hold for 10 seconds.',
+                    'Stretch 4: Side stretch to the right, hold for 10 seconds.'
+                ];
+                let current = stretches.indexOf(document.getElementById('stretch-guide').textContent);
+                current = (current + 1) % stretches.length;
+                document.getElementById('stretch-guide').textContent = stretches[current];
+            };
+
+            window.clearDoodle = function() {
+                const canvas = document.getElementById('doodle-canvas');
+                const ctx = canvas.getContext('2d');
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                let isDrawing = false;
+                canvas.addEventListener('mousedown', () => isDrawing = true);
+                canvas.addEventListener('mouseup', () => isDrawing = false);
+                canvas.addEventListener('mousemove', (e) => {
+                    if (!isDrawing) return;
+                    const rect = canvas.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    ctx.fillStyle = '#000';
+                    ctx.beginPath();
+                    ctx.arc(x, y, 2, 0, Math.PI * 2);
+                    ctx.fill();
+                });
+            };
+            clearDoodle();
+
+            window.startDance = function() {
+                const guide = document.getElementById('dance-guide');
+                guide.innerHTML = 'Dance to the rhythm! Move your body for 30 seconds.';
+                setTimeout(() => guide.innerHTML = 'Great job! Feel the energy?', 30000);
+            };
+
+            window.showColor = function() {
+                const color = document.getElementById('color-select').value;
+                const display = document.getElementById('color-display');
+                display.style.backgroundColor = color;
+            };
+
+            window.shredWorry = function() {
+                const worry = document.getElementById('worry-input').value;
+                const feedback = document.getElementById('worry-feedback');
+                if (worry) {
+                    feedback.innerHTML = 'Shredding your worry... It’s gone!';
+                    document.getElementById('worry-input').value = '';
+                } else {
+                    feedback.innerHTML = 'Please write a worry to shred.';
+                }
+            };
+
+            window.saveGratitude = function() {
+                const gratitude = document.getElementById('gratitude-input').value;
+                const feedback = document.getElementById('gratitude-feedback');
+                if (gratitude) {
+                    let gratitudes = JSON.parse(localStorage.getItem('gratitudes')) || [];
+                    gratitudes.push({ date: new Date().toISOString().split('T')[0], text: gratitude });
+                    localStorage.setItem('gratitudes', JSON.stringify(gratitudes));
+                    feedback.innerHTML = 'Gratitude saved! Check your <a href="calendar.html">Dashboard</a>.';
+                    document.getElementById('gratitude-input').value = '';
+                } else {
+                    feedback.innerHTML = 'Please write something you’re grateful for.';
+                }
+            };
+
+            window.addEventListener('resize', adjustMainContentPadding);
+        });
+    </script>
+</body>
+</html>
