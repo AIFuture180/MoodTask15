@@ -3,59 +3,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="MoodTask Dashboard: Track your mood, activities, and progress over time.">
+    <meta name="description" content="MoodTask Dashboard - Track your mood and activities to improve your emotional well-being.">
     <meta name="keywords" content="MoodTask, mood tracking, emotional well-being, mental health dashboard">
     <meta name="robots" content="index, follow">
     <meta name="author" content="MoodTask">
-    <meta name="google-site-verification" content="a04bcf56705ce738" />
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA_navY=maui"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'UA_navY=maui', { 'anonymize_ip': true });
-    </script>
+    <meta name="google-site-verification" content="googlea04bcf56705ce738">
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="MoodTask Dashboard - Track Your Mood">
+    <meta property="og:description" content="Track your mood and activities to improve your emotional well-being.">
+    <meta property="og:url" content="https://moodtask.org/dashboard/">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://moodtask.org/images/og-image.jpg">
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MoodTask Dashboard - Track Your Mood">
+    <meta name="twitter:description" content="Track your mood and activities to improve your emotional well-being.">
+    <meta name="twitter:image" content="https://moodtask.org/images/og-image.jpg">
     <title>MoodTask - Dashboard</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
     <style>
-        /* Existing styles unchanged */
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f5f5f5;
-            margin: 0;
-            padding: 0;
-            color: #333;
-            transition: background-color 0.3s ease;
+        .dashboard-section {
+            margin: 40px 0;
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeIn 0.5s ease forwards;
         }
-        /* ... other existing styles ... */
-        .footer .recommended-products {
-            margin: 20px 0;
+        .dashboard-section h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #4A90E2;
+            border-bottom: 2px solid #D6D1F5;
+            padding-bottom: 10px;
+            text-align: center;
         }
-        .footer .recommended-products a.product-link {
+        .mood-log {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        .mood-btn {
             padding: 10px 20px;
-            margin: 5px 0;
             border: none;
             border-radius: 20px;
             cursor: pointer;
             font-size: 1em;
-            display: block;
-            text-decoration: none;
-            background-color: #f0f0f0;
+            font-weight: 500;
+            transition: transform 0.2s, box-shadow 0.3s;
+        }
+        .mood-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .mood-btn.happy {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: white;
+        }
+        .mood-btn.sad {
+            background: linear-gradient(135deg, #4682B4, #1E90FF);
+            color: white;
+        }
+        .mood-btn.anxious {
+            background: linear-gradient(135deg, #FF4500, #FF6347);
+            color: white;
+        }
+        .mood-btn.calm {
+            background: linear-gradient(135deg, #32CD32, #00FF7F);
+            color: white;
+        }
+        .mood-btn.angry {
+            background: linear-gradient(135deg, #FF0000, #DC143C);
+            color: white;
+        }
+        .history {
+            margin-top: 40px;
+        }
+        .history h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
             color: #2C3E50;
-            transition: background-color 0.3s, transform 0.3s;
+            text-align: center;
         }
-        .footer .recommended-products a.product-link:hover {
-            background-color: #D6D1F5;
-            transform: scale(1.02);
+        .history-list {
+            list-style-type: none;
+            padding: 0;
+            max-height: 300px;
+            overflow-y: auto;
         }
-        /* ... remaining existing styles ... */
+        .history-list li {
+            background-color: #f9f9f9;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .history-list li .delete-btn {
+            background: none;
+            border: none;
+            color: #FF6347;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        .insights {
+            margin-top: 40px;
+        }
+        .insights h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #2C3E50;
+            text-align: center;
+        }
+        .insights p {
+            font-size: 1em;
+            color: #555;
+            text-align: center;
+        }
+        .insights p span {
+            font-weight: 600;
+            color: #4A90E2;
+        }
+        @media (max-width: 600px) {
+            .dashboard-section {
+                padding: 20px;
+                margin: 20px 0;
+            }
+            .dashboard-section h2 {
+                font-size: 1.8em;
+            }
+            .mood-log {
+                gap: 10px;
+            }
+            .mood-btn {
+                padding: 8px 15px;
+                font-size: 0.9em;
+            }
+            .history h3, .insights h3 {
+                font-size: 1.3em;
+            }
+            .history-list li {
+                font-size: 0.95em;
+                padding: 8px;
+            }
+            .insights p {
+                font-size: 0.95em;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Existing content unchanged -->
     <div class="nav-bar">
         <div class="logo">MoodTask</div>
         <div class="nav-links">
@@ -84,49 +188,28 @@
     <div class="main-content fade-in">
         <div class="hero">
             <h1>Your Dashboard</h1>
-            <p>Track your mood and activities over time.</p>
+            <p>Track your mood and activities to understand your emotional well-being.</p>
         </div>
         <div class="container">
-            <div class="mood-tracker">
-                <h2 class="section-heading">Mood Tracker</h2>
-                <div class="mood-input">
-                    <label for="mood-date">Date:</label>
-                    <input type="date" id="mood-date" value="2025-04-29">
-                    <label for="mood-level">Mood (1-10):</label>
-                    <input type="number" id="mood-level" min="1" max="10" placeholder="1-10">
-                    <label for="mood-notes">Notes:</label>
-                    <textarea id="mood-notes" placeholder="How are you feeling today?"></textarea>
-                    <button id="save-mood">Save Mood</button>
+            <div class="dashboard-section">
+                <h2>Mood Tracker</h2>
+                <div class="mood-log">
+                    <div>
+                        <button class="mood-btn happy" data-mood="Happy" aria-label="Log Happy mood">Happy</button>
+                        <button class="mood-btn sad" data-mood="Sad" aria-label="Log Sad mood">Sad</button>
+                        <button class="mood-btn anxious" data-mood="Anxious" aria-label="Log Anxious mood">Anxious</button>
+                        <button class="mood-btn calm" data-mood="Calm" aria-label="Log Calm mood">Calm</button>
+                        <button class="mood-btn angry" data-mood="Angry" aria-label="Log Angry mood">Angry</button>
+                    </div>
                 </div>
-                <div class="mood-history">
-                    <h3>Mood History</h3>
-                    <div id="mood-entries"></div>
+                <div class="history">
+                    <h3>History</h3>
+                    <ul class="history-list"></ul>
                 </div>
-            </div>
-            <div class="activity-tracker">
-                <h2 class="section-heading">Activity Tracker</h2>
-                <div class="activity-input">
-                    <label for="activity-date">Date:</label>
-                    <input type="date" id="activity-date" value="2025-04-29">
-                    <label for="activity-type">Activity:</label>
-                    <select id="activity-type">
-                        <option value="breathing">Breathing</option>
-                        <option value="soundscape">Soundscape</option>
-                        <option value="punching">Punching Bag</option>
-                        <option value="stretch">Stretch</option>
-                        <option value="doodle">Doodle</option>
-                        <option value="dance">Dance</option>
-                        <option value="color-focus">Color Focus</option>
-                        <option value="worry">Worry Shredder</option>
-                        <option value="gratitude">Gratitude Note</option>
-                    </select>
-                    <label for="activity-duration">Duration (minutes):</label>
-                    <input type="number" id="activity-duration" min="1" placeholder="Minutes">
-                    <button id="save-activity">Save Activity</button>
-                </div>
-                <div class="activity-history">
-                    <h3>Activity History</h3>
-                    <div id="activity-entries"></div>
+                <div class="insights">
+                    <h3>Insights</h3>
+                    <p>Your most frequent mood this week is: <span id="frequentMood">N/A</span></p>
+                    <p>Days tracked this week: <span id="daysTracked">0</span></p>
                 </div>
             </div>
         </div>
@@ -143,18 +226,10 @@
             </div>
             <div class="connect">
                 <h3>Connect</h3>
-                <a href="https://twitter.com/share?url=https://moodtask.org" aria-label="Share on Twitter"><i class="fab fa-twitter"></i> Share on Twitter</a>
-                <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://moodtask.org" aria-label="Share on LinkedIn"><i class="fab fa-linkedin"></i> Share on LinkedIn</a>
-                <a href="https://www.buymeacoffee.com/moodtask" class="coffee" aria-label="Support us on Buy Me a Coffee"><i class="fas fa-coffee"></i> Buy Me a Coffee</a>
-                <a href="https://www.online-therapy.com/?aff_id=12345" class="therapy" aria-label="Explore Online Therapy">Online Therapy</a>
-                <a href="https://www.mindfulness.com/?aff_id=67890" class="mindfulness" aria-label="Explore Mindfulness resources">Mindfulness</a>
-            </div>
-            <div class="recommended-products">
-                <h3>Recommended Products</h3>
-                <a href="https://amzn.to/40rLCSK" class="product-link" aria-label="Buy Weighted Heated Lap Pad on Amazon">Weighted Heated Lap Pad</a>
-                <a href="https://amzn.to/40rLCRY" class="product-link" aria-label="Buy Beary Cotton Hand-Knit Weighted Blanket on Amazon">Beary Cotton Hand-Knit Weighted Blanket</a>
-                <a href="https://amzn.to/40rLCNZ" class="product-link" aria-label="Buy Serenilite Stress Balls on Amazon">Serenilite Stress Balls</a>
-                <a href="https://amzn.to/40l2f6N" class="product-link" aria-label="Buy Echo Go+ Hydrogen Water Bottle on Amazon">Echo Go+ Hydrogen Water Bottle</a>
+                <a href="https://twitter.com/share?url=https://moodtask.org"><i class="fab fa-twitter"></i> Share on Twitter</a>
+                <a href="https://www.buymeacoffee.com/moodtask" class="coffee"><i class="fas fa-coffee"></i> Buy Me a Coffee</a>
+                <a href="https://www.online-therapy.com/?aff_id=12345" class="therapy">Online Therapy</a>
+                <a href="https://www.mindfulness.com/?aff_id=67890" class="mindfulness">Mindfulness</a>
             </div>
             <div class="affiliate-note">
                 AFFILIATE DISCLOSURE: Some links on this site are affiliate links. We may earn a commission on purchases at no extra cost to you.<br>
@@ -162,102 +237,100 @@
             </div>
         </div>
     </div>
-    <!-- Existing script unchanged -->
+    <script src="scripts.js"></script>
     <script>
-        function adjustMainContentPadding() {
-            const navBar = document.querySelector('.nav-bar');
-            const mainContent = document.querySelector('.main-content');
-            if (navBar && mainContent) {
-                const navHeight = navBar.offsetHeight;
-                mainContent.style.paddingTop = `${navHeight + 10}px`;
+        function checkLocalStorage() {
+            try {
+                localStorage.setItem('test', 'test');
+                localStorage.removeItem('test');
+                return true;
+            } catch (e) {
+                return false;
             }
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            const navLinks = document.querySelectorAll('.nav-bar .nav-links a');
-            const mainContent = document.querySelector('.main-content');
-            const saveMoodBtn = document.getElementById('save-mood');
-            const moodEntries = document.getElementById('mood-entries');
-            const saveActivityBtn = document.getElementById('save-activity');
-            const activityEntries = document.getElementById('activity-entries');
+            if (!checkLocalStorage()) {
+                alert('Local storage is not available. Features like mood tracking may not work in private browsing mode or if storage is full.');
+                document.querySelector('.mood-log').style.display = 'none';
+                document.querySelector('.history').style.display = 'none';
+                document.querySelector('.insights').style.display = 'none';
+                return;
+            }
 
-            mainContent.classList.add('fade-in');
-            adjustMainContentPadding();
+            const moodLog = document.querySelector('.mood-log');
+            const moodButtons = document.querySelectorAll('.mood-btn');
+            const historyList = document.querySelector('.history-list');
+            const frequentMoodSpan = document.querySelector('#frequentMood');
+            const daysTrackedSpan = document.querySelector('#daysTracked');
 
-            navLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    if (link.classList.contains('active') || link.parentElement.classList.contains('dropdown')) return;
-                    e.preventDefault();
-                    mainContent.classList.remove('fade-in');
-                    mainContent.classList.add('fade-out');
-                    setTimeout(() => {
-                        window.location.href = link.href;
-                    }, 500);
+            let moodHistory = JSON.parse(localStorage.getItem('moodHistory')) || [];
+
+            function saveMoodHistory() {
+                localStorage.setItem('moodHistory', JSON.stringify(moodHistory));
+            }
+
+            function renderHistory() {
+                historyList.innerHTML = '';
+                moodHistory.forEach((entry, index) => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `${entry.mood} - ${entry.date} <button class="delete-btn" data-index="${index}" aria-label="Delete mood entry">Delete</button>`;
+                    historyList.appendChild(li);
+                });
+
+                const deleteButtons = document.querySelectorAll('.delete-btn');
+                deleteButtons.forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const index = e.target.getAttribute('data-index');
+                        moodHistory.splice(index, 1);
+                        saveMoodHistory();
+                        renderHistory();
+                        updateInsights();
+                    });
+                });
+            }
+
+            function updateInsights() {
+                const today = new Date();
+                const oneWeekAgo = new Date(today);
+                oneWeekAgo.setDate(today.getDate() - 7);
+
+                const recentMoods = moodHistory.filter(entry => {
+                    const entryDate = new Date(entry.date);
+                    return entryDate >= oneWeekAgo && entryDate <= today;
+                });
+
+                const moodCounts = {};
+                recentMoods.forEach(entry => {
+                    moodCounts[entry.mood] = (moodCounts[entry.mood] || 0) + 1;
+                });
+
+                let frequentMood = 'N/A';
+                let maxCount = 0;
+                for (const mood in moodCounts) {
+                    if (moodCounts[mood] > maxCount) {
+                        maxCount = moodCounts[mood];
+                        frequentMood = mood;
+                    }
+                }
+
+                frequentMoodSpan.textContent = frequentMood;
+                daysTrackedSpan.textContent = recentMoods.length;
+            }
+
+            moodButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const mood = button.getAttribute('data-mood');
+                    const date = new Date().toLocaleString();
+                    moodHistory.push({ mood, date });
+                    saveMoodHistory();
+                    renderHistory();
+                    updateInsights();
                 });
             });
 
-            saveMoodBtn.addEventListener('click', () => {
-                const date = document.getElementById('mood-date').value;
-                const moodLevel = document.getElementById('mood-level').value;
-                const notes = document.getElementById('mood-notes').value;
-
-                if (!date || !moodLevel) {
-                    alert('Please fill in the date and mood level.');
-                    return;
-                }
-
-                const moodData = { date, moodLevel, notes };
-                let moods = JSON.parse(localStorage.getItem('moods')) || [];
-                moods.push(moodData);
-                localStorage.setItem('moods', JSON.stringify(moods));
-
-                displayMoodEntries();
-            });
-
-            saveActivityBtn.addEventListener('click', () => {
-                const date = document.getElementById('activity-date').value;
-                const activityType = document.getElementById('activity-type').value;
-                const duration = document.getElementById('activity-duration').value;
-
-                if (!date || !duration) {
-                    alert('Please fill in the date and duration.');
-                    return;
-                }
-
-                const activityData = { date, activityType, duration };
-                let activities = JSON.parse(localStorage.getItem('activities')) || [];
-                activities.push(activityData);
-                localStorage.setItem('activities', JSON.stringify(activities));
-
-                displayActivityEntries();
-            });
-
-            function displayMoodEntries() {
-                const moods = JSON.parse(localStorage.getItem('moods')) || [];
-                moodEntries.innerHTML = moods.map(mood => `
-                    <div class="entry">
-                        <p><strong>Date:</strong> ${mood.date}</p>
-                        <p><strong>Mood Level:</strong> ${mood.moodLevel}/10</p>
-                        <p><strong>Notes:</strong> ${mood.notes || 'None'}</p>
-                    </div>
-                `).join('');
-            }
-
-            function displayActivityEntries() {
-                const activities = JSON.parse(localStorage.getItem('activities')) || [];
-                activityEntries.innerHTML = activities.map(activity => `
-                    <div class="entry">
-                        <p><strong>Date:</strong> ${activity.date}</p>
-                        <p><strong>Activity:</strong> ${activity.activityType}</p>
-                        <p><strong>Duration:</strong> ${activity.duration} minutes</p>
-                    </div>
-                `).join('');
-            }
-
-            displayMoodEntries();
-            displayActivityEntries();
-
-            window.addEventListener('resize', adjustMainContentPadding);
+            renderHistory();
+            updateInsights();
         });
     </script>
 </body>
