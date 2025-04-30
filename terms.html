@@ -3,10 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="MoodTask Terms of Use - Understand the rules and conditions for using our platform.">
-    <meta name="keywords" content="MoodTask, terms of use, user agreement, mental health, emotional well-being">
-    <meta name="robots" content="index, follow">
-    <meta name="author" content="MoodTask">
     <meta name="google-site-verification" content="a04bcf56705ce738" />
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA_navY=maui"></script>
@@ -21,7 +17,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
-        /* Existing styles unchanged */
         body {
             font-family: 'Poppins', sans-serif;
             background-color: #f5f5f5;
@@ -30,18 +25,116 @@
             color: #333;
             transition: background-color 0.3s ease;
         }
-        /* ... other existing styles ... */
+        .nav-bar {
+            background-color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        .nav-bar .logo {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #4A90E2;
+        }
+        .nav-bar .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+        .nav-bar a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+        }
+        .nav-bar a:hover {
+            color: #4A90E2;
+        }
+        .main-content {
+            padding: 80px 20px 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .terms-section h1 {
+            font-size: 2em;
+            color: #2C3E50;
+            text-align: center;
+        }
+        .terms-section h2 {
+            font-size: 1.5em;
+            color: #4A90E2;
+            margin-top: 20px;
+        }
+        .terms-section p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .footer a {
+            color: #D6D1F5;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        .footer .connect a {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1em;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            text-decoration: none;
+        }
+        .footer .connect .coffee {
+            background-color: #FFC107;
+            color: #333;
+        }
+        .footer .connect .therapy {
+            background-color: #4A90E2;
+            color: white;
+        }
+        .footer .connect .mindfulness {
+            background-color: #6BCB77;
+            color: white;
+        }
+        .footer .affiliate-note {
+            font-size: 0.8em;
+            color: #aaa;
+            margin-top: 10px;
+        }
+        /* Added CSS for Recommended Products */
         .footer .recommended-products {
             margin: 20px 0;
         }
         .footer .recommended-products a.product-link {
             padding: 10px 20px;
-            margin: 5px 0;
+            margin: 5px;
             border: none;
             border-radius: 20px;
             cursor: pointer;
             font-size: 1em;
-            display: block;
+            display: inline-flex;
+            align-items: center;
             text-decoration: none;
             background-color: #f0f0f0;
             color: #2C3E50;
@@ -51,43 +144,116 @@
             background-color: #D6D1F5;
             transform: scale(1.02);
         }
-        /* ... remaining existing styles ... */
     </style>
 </head>
 <body>
-    <!-- Existing content unchanged -->
     <div class="nav-bar">
         <div class="logo">MoodTask</div>
         <div class="nav-links">
             <a href="index.html">Home</a>
             <a href="calendar.html">Dashboard</a>
-            <div class="dropdown">
-                <a href="activities.html">Activities</a>
-                <div class="dropdown-content">
-                    <a href="activities.html#breathing">Breathing</a>
-                    <a href="activities.html#soundscape">Soundscape</a>
-                    <a href="activities.html#punching">Punching Bag</a>
-                    <a href="activities.html#stretch">Stretch</a>
-                    <a href="activities.html#doodle">Doodle</a>
-                    <a href="activities.html#dance">Dance</a>
-                    <a href="activities.html#color-focus">Color Focus</a>
-                    <a href="activities.html#worry">Worry</a>
-                    <a href="activities.html#gratitude">Gratitude</a>
-                </div>
-            </div>
+            <a href="activities.html">Activities</a>
             <a href="music.html">Mood Music</a>
             <a href="blog.html">Blog</a>
             <a href="privacy.html">Privacy Policy</a>
-            <a href="terms.html" class="active">Terms of Use</a>
+            <a href="terms.html">Terms of Use</a>
         </div>
     </div>
-    <div class="main-content fade-in">
-        <div class="hero">
-            <h1>Terms of Use</h1>
-            <p>Understand the rules for using MoodTask.</p>
-        </div>
+
+    <div class="main-content">
         <div class="container">
             <div class="terms-section">
-                <h2 class="section-heading">Terms of Use</h2>
+                <h1>Terms of Use</h1>
                 <p><em>Effective Date: April 27, 2025</em></p>
-                <p>Welcome to MoodTask
+                <p>Welcome to MoodTask! These Terms of Use govern your access to and use of our website and services. By using MoodTask, you agree to comply with these terms. If you do not agree, please do not use our services.</p>
+
+                <h2>1. Acceptance of Terms</h2>
+                <p>By accessing or using MoodTask, you agree to be bound by these Terms of Use, our Privacy Policy, and any additional guidelines or rules posted on our site. We may update these terms from time to time, and your continued use of MoodTask constitutes acceptance of those changes.</p>
+
+                <h2>2. Use of Services</h2>
+                <p>MoodTask provides tools, activities, and music playlists designed to support your emotional well-being. You agree to use our services only for lawful purposes and in a way that does not infringe on the rights of others or restrict their use of MoodTask. You are responsible for your conduct while using our services.</p>
+
+                <h2>3. Intellectual Property</h2>
+                <p>All content on MoodTask, including text, graphics, activities, and music recommendations, is the property of MoodTask or its licensors and is protected by copyright, trademark, and other intellectual property laws. You may not reproduce, distribute, or create derivative works from our content without our express written permission.</p>
+
+                <h2>4. User Content</h2>
+                <p>When you use our tools (e.g., Gratitude Note, Worry Shredder, Mood Tracking, Music Insights), you may create content such as notes or mood entries. This content is stored in your browser's local storage and is not shared with us or third parties unless explicitly stated (e.g., through affiliate links). You retain ownership of your content, but by using MoodTask, you grant us a non-exclusive, royalty-free license to use, store, and display your content solely to provide and improve our services.</p>
+
+                <h2>5. Third-Party Links and Services</h2>
+                <p>MoodTask may include links to third-party websites or services (e.g., Online Therapy, Buy Me a Coffee, Mindfulness, YouTube embeds). We are not responsible for the content, accuracy, or practices of these third parties. Your interactions with third-party services are at your own risk, and you should review their terms and privacy policies.</p>
+
+                <h2>6. Disclaimer of Warranties</h2>
+                <p>MoodTask is provided "as is" and "as available" without warranties of any kind, express or implied, including but not limited to warranties of merchantability, fitness for a particular purpose, or non-infringement. We do not guarantee that our services will be uninterrupted, error-free, or free from viruses or other harmful components.</p>
+
+                <h2>7. Limitation of Liability</h2>
+                <p>MoodTask provides tools, activities, and music playlists designed to support emotional well-being, but we are not a substitute for professional medical advice, diagnosis, or treatment. The information, activities, and recommendations on our site are for general informational purposes only and should not be relied upon as a basis for making medical decisions. Always seek the advice of a qualified healthcare provider for any mental health concerns. To the fullest extent permitted by law, MoodTask, its affiliates, and its partners shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to emotional distress, loss of data, or financial loss, arising from your use of our services or third-party links.</p>
+
+                <h2>8. Indemnification</h2>
+                <p>You agree to indemnify, defend, and hold harmless MoodTask, its affiliates, officers, directors, employees, and agents from any claims, liabilities, damages, losses, or expenses, including legal fees, arising out of or in connection with your use of our services, your violation of these Terms of Use, or your violation of any rights of another party.</p>
+
+                <h2>9. Termination</h2>
+                <p>We reserve the right to suspend or terminate your access to MoodTask at our sole discretion, with or without notice, if we believe you have violated these Terms of Use or engaged in conduct that may harm MoodTask, its users, or third parties. Upon termination, your right to use our services will cease immediately.</p>
+
+                <h2>10. Governing Law</h2>
+                <p>These Terms of Use and your use of MoodTask are governed by the laws of the State of California, USA, without regard to its conflict of law principles. Any disputes arising under these terms shall be resolved exclusively in the state or federal courts located in San Francisco, California, and you consent to the jurisdiction of such courts.</p>
+
+                <h2>11. Contact Us</h2>
+                <p>If you have any questions about these Terms of Use, please contact us at <a href="mailto:support@moodtask.org">support@moodtask.org</a>.</p>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="connect">
+                <a href="https://twitter.com/share?url=https://moodtask.org"><i class="fab fa-twitter"></i> Share on Twitter</a>
+                <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://moodtask.org" aria-label="Share on LinkedIn"><i class="fab fa-linkedin"></i> Share on LinkedIn</a>
+                <a href="https://www.buymeacoffee.com/moodtask" class="coffee"><i class="fas fa-coffee"></i> Buy Me a Coffee</a>
+                <a href="https://www.online-therapy.com/?aff_id=12345" class="therapy">Online Therapy</a>
+                <a href="https://www.mindfulness.com/?aff_id=67890" class="mindfulness">Mindfulness</a>
+            </div>
+            <div class="recommended-products">
+                <h3>Recommended Products</h3>
+                <a href="https://amzn.to/40rLCSK" class="product-link" aria-label="Buy Weighted Heated Lap Pad on Amazon">Weighted Heated Lap Pad</a>
+                <a href="https://amzn.to/40rLCRY" class="product-link" aria-label="Buy Beary Cotton Hand-Knit Weighted Blanket on Amazon">Beary Cotton Hand-Knit Weighted Blanket</a>
+                <a href="https://amzn.to/40rLCNZ" class="product-link" aria-label="Buy Serenilite Stress Balls on Amazon">Serenilite Stress Balls</a>
+                <a href="https://amzn.to/40l2f6N" class="product-link" aria-label="Buy Echo Go+ Hydrogen Water Bottle on Amazon">Echo Go+ Hydrogen Water Bottle</a>
+            </div>
+            <div class="affiliate-note">
+                AFFILIATE DISCLOSURE: Some links on this site are affiliate links. We may earn a commission on purchases at no extra cost to you.<br>
+                © 2025 MoodTask. All rights reserved.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function adjustMainContentPadding() {
+            const navBar = document.querySelector('.nav-bar');
+            const mainContent = document.querySelector('.main-content');
+            if (navBar && mainContent) {
+                const navHeight = navBar.offsetHeight;
+                mainContent.style.paddingTop = `${navHeight + 10}px`;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const navLinks = document.querySelectorAll('.nav-bar .nav-links a');
+            const mainContent = document.querySelector('.main-content');
+
+            mainContent.classList.add('fade-in');
+            adjustMainContentPadding();
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    if (link.classList.contains('active') || link.parentElement.classList.contains('dropdown')) return;
+                    e.preventDefault();
+                    mainContent.classList.remove('fade-in');
+                    mainContent.classList.add('fade-out');
+                    setTimeout(() => {
+                        window.location.href = link.href;
+                    }, 500);
+                });
+            });
+
+            window.addEventListener('resize', adjustMainContentPadding);
+        });
+    </script>
+</body>
+</html>
