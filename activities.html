@@ -3,59 +3,186 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="MoodTask Activities: Engage in science-backed exercises to boost your mood and reduce stress.">
-    <meta name="keywords" content="MoodTask, mood boosting activities, mental health exercises, stress relief, emotional well-being">
+    <meta name="description" content="MoodTask Activities - Engage in science-backed exercises to improve your mood.">
+    <meta name="keywords" content="MoodTask, mental health activities, stress relief, emotional well-being">
     <meta name="robots" content="index, follow">
     <meta name="author" content="MoodTask">
-    <meta name="google-site-verification" content="a04bcf56705ce738" />
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA_navY=maui"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'UA_navY=maui', { 'anonymize_ip': true });
-    </script>
+    <meta name="google-site-verification" content="googlea04bcf56705ce738">
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="MoodTask Activities - Improve Your Mood">
+    <meta property="og:description" content="Engage in science-backed exercises to improve your mood.">
+    <meta property="og:url" content="https://moodtask.org/activities/">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://moodtask.org/images/og-image.jpg">
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MoodTask Activities - Improve Your Mood">
+    <meta name="twitter:description" content="Engage in science-backed exercises to improve your mood.">
+    <meta name="twitter:image" content="https://moodtask.org/images/og-image.jpg">
     <title>MoodTask - Activities</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
     <style>
-        /* Existing styles unchanged */
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f5f5f5;
-            margin: 0;
-            padding: 0;
-            color: #333;
-            transition: background-color 0.3s ease;
+        .activity-section {
+            margin: 40px 0;
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeIn 0.5s ease forwards;
         }
-        /* ... other existing styles ... */
-        .footer .recommended-products {
-            margin: 20px 0;
+        .activity-section h2.section-heading {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #4A90E2;
+            border-bottom: 2px solid #D6D1F5;
+            padding-bottom: 10px;
+            text-align: center;
         }
-        .footer .recommended-products a.product-link {
+        .activity-section h3 {
+            font-size: 1.5em;
+            margin: 20px 0 10px;
+            color: #2C3E50;
+        }
+        .activity-section p {
+            font-size: 1em;
+            color: #555;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        .activity-section button {
             padding: 10px 20px;
-            margin: 5px 0;
             border: none;
             border-radius: 20px;
             cursor: pointer;
             font-size: 1em;
-            display: block;
-            text-decoration: none;
-            background-color: #f0f0f0;
-            color: #2C3E50;
-            transition: background-color 0.3s, transform 0.3s;
+            font-weight: 500;
+            transition: transform 0.2s, box-shadow 0.3s;
+            background: linear-gradient(135deg, #4A90E2, #2C3E50);
+            color: white;
         }
-        .footer .recommended-products a.product-link:hover {
-            background-color: #D6D1F5;
-            transform: scale(1.02);
+        .activity-section button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
-        /* ... remaining existing styles ... */
+        .activity-section canvas {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 10px 0;
+            width: 100%;
+            max-width: 800px;
+            height: 400px;
+        }
+        .activity-section .timer, .activity-section .countdown {
+            font-size: 1.5em;
+            color: #4A90E2;
+            margin: 10px 0;
+            text-align: center;
+        }
+        .activity-section .saved-notes, .activity-section .saved-worries {
+            margin-top: 20px;
+        }
+        .activity-section .saved-notes li, .activity-section .saved-worries li {
+            background-color: #f9f9f9;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .activity-section .saved-notes li button, .activity-section .saved-worries li button {
+            background: none;
+            border: none;
+            color: #FF6347;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        .activity-section textarea {
+            width: 100%;
+            max-width: 600px;
+            height: 100px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+            margin: 10px 0;
+            resize: vertical;
+        }
+        .activity-section .dance-area, .activity-section .punch-area, .activity-section .color-area {
+            width: 100%;
+            max-width: 600px;
+            height: 300px;
+            margin: 10px 0;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            color: #555;
+        }
+        .activity-section .dance-area {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+        }
+        .activity-section .punch-area {
+            background: linear-gradient(135deg, #FF4500, #FF6347);
+        }
+        .activity-section .color-area {
+            background: linear-gradient(135deg, #32CD32, #00FF7F);
+        }
+        .soundscape-player {
+            margin: 10px 0;
+            text-align: center;
+        }
+        .soundscape-player audio {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 5px;
+        }
+        @media (max-width: 600px) {
+            .activity-section {
+                padding: 20px;
+                margin: 20px 0;
+            }
+            .activity-section h2.section-heading {
+                font-size: 1.8em;
+            }
+            .activity-section h3 {
+                font-size: 1.3em;
+            }
+            .activity-section p {
+                font-size: 0.95em;
+            }
+            .activity-section button {
+                padding: 8px 15px;
+                font-size: 0.9em;
+            }
+            .activity-section canvas {
+                height: 300px;
+            }
+            .activity-section .timer, .activity-section .countdown {
+                font-size: 1.3em;
+            }
+            .activity-section .dance-area, .activity-section .punch-area, .activity-section .color-area {
+                height: 200px;
+                font-size: 1em;
+            }
+            .activity-section textarea {
+                height: 80px;
+                font-size: 0.95em;
+            }
+            .activity-section .saved-notes li, .activity-section .saved-worries li {
+                font-size: 0.95em;
+                padding: 8px;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Existing content unchanged -->
     <div class="nav-bar">
         <div class="logo">MoodTask</div>
         <div class="nav-links">
@@ -84,73 +211,84 @@
     <div class="main-content fade-in">
         <div class="hero">
             <h1>Activities</h1>
-            <p>Engage in science-backed exercises to boost your mood.</p>
+            <p>Engage in science-backed exercises to improve your mood.</p>
         </div>
         <div class="container">
-            <div class="activity-section" id="breathing">
-                <h2 class="section-heading">Breathing Exercise</h2>
-                <p>Take a few minutes to practice deep breathing and calm your mind. Follow the rhythm: inhale for 4 seconds, hold for 4 seconds, exhale for 8 seconds.</p>
-                <button class="activity-button" onclick="startBreathing()">Start Breathing</button>
-                <div id="breathing-guide" class="activity-guide"></div>
-            </div>
-            <div class="activity-section" id="soundscape">
-                <h2 class="section-heading">Soundscape</h2>
-                <p>Immerse yourself in calming sounds to relax or focus. Choose a soundscape and let it wash over you.</p>
-                <select id="soundscape-select">
-                    <option value="rain">Rain</option>
-                    <option value="ocean">Ocean Waves</option>
-                    <option value="forest">Forest</option>
-                </select>
-                <button class="activity-button" onclick="playSoundscape()">Play Soundscape</button>
-            </div>
-            <div class="activity-section" id="punching">
-                <h2 class="section-heading">Punching Bag</h2>
-                <p>Release your stress by imagining a punching bag. Click to punch and let go of tension.</p>
-                <button class="activity-button" onclick="punchBag()">Punch!</button>
-                <div id="punch-count">Punches: 0</div>
-            </div>
-            <div class="activity-section" id="stretch">
-                <h2 class="section-heading">Stretch</h2>
-                <p>Follow a simple stretching routine to relax your body. Click to cycle through poses.</p>
-                <button class="activity-button" onclick="nextStretch()">Next Stretch</button>
-                <div id="stretch-guide">Stretch 1: Reach for the sky, hold for 10 seconds.</div>
-            </div>
-            <div class="activity-section" id="doodle">
-                <h2 class="section-heading">Doodle</h2>
-                <p>Let your creativity flow with a quick doodle. Draw whatever comes to mind!</p>
-                <canvas id="doodle-canvas" width="300" height="200"></canvas>
-                <button class="activity-button" onclick="clearDoodle()">Clear</button>
-            </div>
-            <div class="activity-section" id="dance">
-                <h2 class="section-heading">Dance</h2>
-                <p>Get moving with a mini dance session. Click to start the beat and dance along!</p>
-                <button class="activity-button" onclick="startDance()">Start Dancing</button>
-                <div id="dance-guide">Dance to the rhythm! Move your body for 30 seconds.</div>
-            </div>
-            <div class="activity-section" id="color-focus">
-                <h2 class="section-heading">Color Focus</h2>
-                <p>Focus on a calming color to center your mind. Choose a color and gaze at it for 30 seconds.</p>
-                <select id="color-select">
-                    <option value="blue">Blue</option>
-                    <option value="green">Green</option>
-                    <option value="purple">Purple</option>
-                </select>
-                <button class="activity-button" onclick="showColor()">Show Color</button>
-                <div id="color-display" style="width: 100px; height: 100px;"></div>
-            </div>
-            <div class="activity-section" id="worry">
-                <h2 class="section-heading">Worry Shredder</h2>
-                <p>Write down a worry, then shred it to let it go.</p>
-                <textarea id="worry-input" placeholder="Write your worry here..."></textarea>
-                <button class="activity-button" onclick="shredWorry()">Shred Worry</button>
-                <div id="worry-feedback"></div>
-            </div>
-            <div class="activity-section" id="gratitude">
-                <h2 class="section-heading">Gratitude Note</h2>
-                <p>Reflect on three things you're grateful for today.</p>
-                <textarea id="gratitude-input" placeholder="Write three things you're grateful for..."></textarea>
-                <button class="activity-button" onclick="saveGratitude()">Save Note</button>
-                <div id="gratitude-feedback"></div>
+            <div class="activity-section">
+                <h2 class="section-heading">Explore Activities</h2>
+
+                <div id="breathing">
+                    <h3>Breathing Exercise</h3>
+                    <p>Take a moment to breathe deeply and reduce stress with this 2-minute guided exercise.</p>
+                    <button id="startBreathing" aria-label="Start breathing exercise">Start Breathing</button>
+                    <div class="timer" id="breathingTimer">2:00</div>
+                </div>
+
+                <div id="soundscape">
+                    <h3>Soundscape</h3>
+                    <p>Listen to calming sounds to relax your mind.</p>
+                    <div class="soundscape-player">
+                        <audio controls src="https://www.example.com/sounds/forest-stream.mp3" aria-label="Play forest stream soundscape">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                </div>
+
+                <div id="punching">
+                    <h3>Punching Bag</h3>
+                    <p>Release your frustrations by imagining a punching bag. Click to punch!</p>
+                    <div class="punch-area" id="punchArea">Click to Punch!</div>
+                </div>
+
+                <div id="stretch">
+                    <h3>Stretch</h3>
+                    <p>Follow this 3-minute stretching routine to release physical tension.</p>
+                    <button id="startStretch" aria-label="Start stretching routine">Start Stretching</button>
+                    <div class="timer" id="stretchTimer">3:00</div>
+                </div>
+
+                <div id="doodle">
+                    <h3>Doodle</h3>
+                    <p>Draw freely to express your emotions and relax.</p>
+                    <canvas id="doodleCanvas" width="800" height="400" aria-label="Digital canvas for doodling to relieve stress"></canvas>
+                    <button id="clearCanvas" aria-label="Clear doodle canvas">Clear Canvas</button>
+                </div>
+
+                <div id="dance">
+                    <h3>Dance</h3>
+                    <p>Move your body to this 2-minute dance prompt to boost your energy.</p>
+                    <button id="startDance" aria-label="Start dance activity">Start Dancing</button>
+                    <div class="dance-area" id="danceArea">Get ready to dance!</div>
+                    <div class="countdown" id="danceCountdown">2:00</div>
+                </div>
+
+                <div id="color-focus">
+                    <h3>Color Focus</h3>
+                    <p>Focus on a calming color to center your mind.</p>
+                    <div class="color-area" id="colorArea">Focus on this color</div>
+                </div>
+
+                <div id="worry">
+                    <h3>Worry Shredder</h3>
+                    <p>Write down your worries and shred them to let go of stress.</p>
+                    <textarea id="worryInput" placeholder="Write your worries here..." aria-label="Input area for writing worries"></textarea>
+                    <button id="shredWorry" aria-label="Shred worry">Shred Worry</button>
+                    <div class="saved-worries">
+                        <h4>Saved Worries</h4>
+                        <ul id="worryList"></ul>
+                    </div>
+                </div>
+
+                <div id="gratitude">
+                    <h3>Gratitude Note</h3>
+                    <p>Reflect on things you're grateful for to boost positivity.</p>
+                    <textarea id="gratitudeInput" placeholder="What are you grateful for today?" aria-label="Input area for writing gratitude notes"></textarea>
+                    <button id="saveGratitude" aria-label="Save gratitude note">Save Note</button>
+                    <div class="saved-notes">
+                        <h4>Saved Gratitude Notes</h4>
+                        <ul id="gratitudeList"></ul>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="footer">
@@ -166,18 +304,10 @@
             </div>
             <div class="connect">
                 <h3>Connect</h3>
-                <a href="https://twitter.com/share?url=https://moodtask.org" aria-label="Share on Twitter"><i class="fab fa-twitter"></i> Share on Twitter</a>
-                <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://moodtask.org" aria-label="Share on LinkedIn"><i class="fab fa-linkedin"></i> Share on LinkedIn</a>
-                <a href="https://www.buymeacoffee.com/moodtask" class="coffee" aria-label="Support us on Buy Me a Coffee"><i class="fas fa-coffee"></i> Buy Me a Coffee</a>
-                <a href="https://www.online-therapy.com/?aff_id=12345" class="therapy" aria-label="Explore Online Therapy">Online Therapy</a>
-                <a href="https://www.mindfulness.com/?aff_id=67890" class="mindfulness" aria-label="Explore Mindfulness resources">Mindfulness</a>
-            </div>
-            <div class="recommended-products">
-                <h3>Recommended Products</h3>
-                <a href="https://amzn.to/40rLCSK" class="product-link" aria-label="Buy Weighted Heated Lap Pad on Amazon">Weighted Heated Lap Pad</a>
-                <a href="https://amzn.to/40rLCRY" class="product-link" aria-label="Buy Beary Cotton Hand-Knit Weighted Blanket on Amazon">Beary Cotton Hand-Knit Weighted Blanket</a>
-                <a href="https://amzn.to/40rLCNZ" class="product-link" aria-label="Buy Serenilite Stress Balls on Amazon">Serenilite Stress Balls</a>
-                <a href="https://amzn.to/40l2f6N" class="product-link" aria-label="Buy Echo Go+ Hydrogen Water Bottle on Amazon">Echo Go+ Hydrogen Water Bottle</a>
+                <a href="https://twitter.com/share?url=https://moodtask.org"><i class="fab fa-twitter"></i> Share on Twitter</a>
+                <a href="https://www.buymeacoffee.com/moodtask" class="coffee"><i class="fas fa-coffee"></i> Buy Me a Coffee</a>
+                <a href="https://www.online-therapy.com/?aff_id=12345" class="therapy">Online Therapy</a>
+                <a href="https://www.mindfulness.com/?aff_id=67890" class="mindfulness">Mindfulness</a>
             </div>
             <div class="affiliate-note">
                 AFFILIATE DISCLOSURE: Some links on this site are affiliate links. We may earn a commission on purchases at no extra cost to you.<br>
@@ -185,126 +315,291 @@
             </div>
         </div>
     </div>
-    <!-- Existing script unchanged -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "MoodTask Activities",
+        "description": "Explore science-backed activities to improve your emotional well-being.",
+        "mainEntity": [
+            {
+                "@type": "CreativeWork",
+                "name": "Breathing Exercise",
+                "description": "A guided breathing exercise to reduce stress in 2 minutes.",
+                "url": "https://moodtask.org/activities/#breathing"
+            },
+            {
+                "@type": "CreativeWork",
+                "name": "Soundscape",
+                "description": "Listen to calming sounds to relax your mind.",
+                "url": "https://moodtask.org/activities/#soundscape"
+            },
+            {
+                "@type": "CreativeWork",
+                "name": "Punching Bag",
+                "description": "Release frustrations by imagining a punching bag.",
+                "url": "https://moodtask.org/activities/#punching"
+            },
+            {
+                "@type": "CreativeWork",
+                "name": "Stretch",
+                "description": "A 3-minute stretching routine to release physical tension.",
+                "url": "https://moodtask.org/activities/#stretch"
+            },
+            {
+                "@type": "CreativeWork",
+                "name": "Doodle",
+                "description": "Draw freely to express emotions and relax.",
+                "url": "https://moodtask.org/activities/#doodle"
+            },
+            {
+                "@type": "CreativeWork",
+                "name": "Dance",
+                "description": "A 2-minute dance prompt to boost energy.",
+                "url": "https://moodtask.org/activities/#dance"
+            },
+            {
+                "@type": "CreativeWork",
+                "name": "Color Focus",
+                "description": "Focus on a calming color to center your mind.",
+                "url": "https://moodtask.org/activities/#color-focus"
+            },
+            {
+                "@type": "CreativeWork",
+                "name": "Worry Shredder",
+                "description": "Write down worries and shred them to let go of stress.",
+                "url": "https://moodtask.org/activities/#worry"
+            },
+            {
+                "@type": "CreativeWork",
+                "name": "Gratitude Note",
+                "description": "Reflect on things you're grateful for to boost positivity.",
+                "url": "https://moodtask.org/activities/#gratitude"
+            }
+        ]
+    }
+    </script>
+    <script src="scripts.js"></script>
     <script>
-        function adjustMainContentPadding() {
-            const navBar = document.querySelector('.nav-bar');
-            const mainContent = document.querySelector('.main-content');
-            if (navBar && mainContent) {
-                const navHeight = navBar.offsetHeight;
-                mainContent.style.paddingTop = `${navHeight + 10}px`;
+        function checkLocalStorage() {
+            try {
+                localStorage.setItem('test', 'test');
+                localStorage.removeItem('test');
+                return true;
+            } catch (e) {
+                return false;
             }
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            const navLinks = document.querySelectorAll('.nav-bar .nav-links a');
-            const mainContent = document.querySelector('.main-content');
+            if (!checkLocalStorage()) {
+                alert('Local storage is not available. Features like Gratitude Note and Worry Shredder may not work in private browsing mode or if storage is full.');
+                document.querySelector('#worry').style.display = 'none';
+                document.querySelector('#gratitude').style.display = 'none';
+            }
 
-            mainContent.classList.add('fade-in');
-            adjustMainContentPadding();
+            // Breathing Exercise
+            const startBreathing = document.getElementById('startBreathing');
+            const breathingTimer = document.getElementById('breathingTimer');
+            let breathingInterval;
 
-            navLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    if (link.classList.contains('active') || link.parentElement.classList.contains('dropdown')) return;
-                    e.preventDefault();
-                    mainContent.classList.remove('fade-in');
-                    mainContent.classList.add('fade-out');
-                    setTimeout(() => {
-                        window.location.href = link.href;
-                    }, 500);
-                });
+            startBreathing.addEventListener('click', () => {
+                let time = 120;
+                startBreathing.disabled = true;
+                breathingInterval = setInterval(() => {
+                    time--;
+                    const minutes = Math.floor(time / 60);
+                    const seconds = time % 60;
+                    breathingTimer.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                    if (time <= 0) {
+                        clearInterval(breathingInterval);
+                        breathingTimer.textContent = 'Done!';
+                        startBreathing.disabled = false;
+                    }
+                }, 1000);
             });
 
-            window.startBreathing = function() {
-                const guide = document.getElementById('breathing-guide');
-                guide.innerHTML = 'Inhale... (4s)';
-                setTimeout(() => guide.innerHTML = 'Hold... (4s)', 4000);
-                setTimeout(() => guide.innerHTML = 'Exhale... (8s)', 8000);
-                setTimeout(() => guide.innerHTML = 'Repeat for 1 minute.', 16000);
-            };
+            // Punching Bag
+            const punchArea = document.getElementById('punchArea');
+            punchArea.addEventListener('click', () => {
+                punchArea.textContent = 'Punch!';
+                punchArea.style.background = 'linear-gradient(135deg, #FF6347, #FF4500)';
+                setTimeout(() => {
+                    punchArea.textContent = 'Click to Punch!';
+                    punchArea.style.background = 'linear-gradient(135deg, #FF4500, #FF6347)';
+                }, 500);
+            });
 
-            window.playSoundscape = function() {
-                const sound = document.getElementById('soundscape-select').value;
-                alert(`Playing ${sound} soundscape... (Imagine calming sounds for 30 seconds)`);
-            };
+            // Stretching
+            const startStretch = document.getElementById('startStretch');
+            const stretchTimer = document.getElementById('stretchTimer');
+            let stretchInterval;
 
-            window.punchBag = function() {
-                let count = parseInt(document.getElementById('punch-count').textContent.split(': ')[1]);
-                count++;
-                document.getElementById('punch-count').textContent = `Punches: ${count}`;
-            };
+            startStretch.addEventListener('click', () => {
+                let time = 180;
+                startStretch.disabled = true;
+                stretchInterval = setInterval(() => {
+                    time--;
+                    const minutes = Math.floor(time / 60);
+                    const seconds = time % 60;
+                    stretchTimer.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                    if (time <= 0) {
+                        clearInterval(stretchInterval);
+                        stretchTimer.textContent = 'Done!';
+                        startStretch.disabled = false;
+                    }
+                }, 1000);
+            });
 
-            window.nextStretch = function() {
-                const stretches = [
-                    'Stretch 1: Reach for the sky, hold for 10 seconds.',
-                    'Stretch 2: Touch your toes, hold for 10 seconds.',
-                    'Stretch 3: Side stretch to the left, hold for 10 seconds.',
-                    'Stretch 4: Side stretch to the right, hold for 10 seconds.'
-                ];
-                let current = stretches.indexOf(document.getElementById('stretch-guide').textContent);
-                current = (current + 1) % stretches.length;
-                document.getElementById('stretch-guide').textContent = stretches[current];
-            };
+            // Doodle
+            const canvas = document.getElementById('doodleCanvas');
+            const ctx = canvas.getContext('2d');
+            const clearCanvas = document.getElementById('clearCanvas');
+            let isDrawing = false;
 
-            window.clearDoodle = function() {
-                const canvas = document.getElementById('doodle-canvas');
-                const ctx = canvas.getContext('2d');
+            canvas.addEventListener('mousedown', (e) => {
+                isDrawing = true;
+                const rect = canvas.getBoundingClientRect();
+                ctx.beginPath();
+                ctx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+            });
+
+            canvas.addEventListener('mousemove', (e) => {
+                if (!isDrawing) return;
+                const rect = canvas.getBoundingClientRect();
+                ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+                ctx.strokeStyle = '#4A90E2';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+            });
+
+            canvas.addEventListener('mouseup', () => {
+                isDrawing = false;
+                ctx.closePath();
+            });
+
+            canvas.addEventListener('mouseout', () => {
+                isDrawing = false;
+                ctx.closePath();
+            });
+
+            clearCanvas.addEventListener('click', () => {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
+            });
 
-                let isDrawing = false;
-                canvas.addEventListener('mousedown', () => isDrawing = true);
-                canvas.addEventListener('mouseup', () => isDrawing = false);
-                canvas.addEventListener('mousemove', (e) => {
-                    if (!isDrawing) return;
-                    const rect = canvas.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    ctx.fillStyle = '#000';
-                    ctx.beginPath();
-                    ctx.arc(x, y, 2, 0, Math.PI * 2);
-                    ctx.fill();
+            // Dance
+            const startDance = document.getElementById('startDance');
+            const danceArea = document.getElementById('danceArea');
+            const danceCountdown = document.getElementById('danceCountdown');
+            let danceInterval;
+
+            startDance.addEventListener('click', () => {
+                let time = 120;
+                startDance.disabled = true;
+                danceArea.textContent = 'Dance to the beat!';
+                danceInterval = setInterval(() => {
+                    time--;
+                    const minutes = Math.floor(time / 60);
+                    const seconds = time % 60;
+                    danceCountdown.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                    if (time <= 0) {
+                        clearInterval(danceInterval);
+                        danceArea.textContent = 'Great job!';
+                        danceCountdown.textContent = 'Done!';
+                        startDance.disabled = false;
+                    }
+                }, 1000);
+            });
+
+            // Color Focus
+            const colorArea = document.getElementById('colorArea');
+            let hue = 0;
+            setInterval(() => {
+                hue = (hue + 1) % 360;
+                colorArea.style.background = `linear-gradient(135deg, hsl(${hue}, 70%, 60%), hsl(${(hue + 90) % 360}, 70%, 60%))`;
+            }, 100);
+
+            // Worry Shredder
+            const worryInput = document.getElementById('worryInput');
+            const shredWorry = document.getElementById('shredWorry');
+            const worryList = document.getElementById('worryList');
+            let worries = JSON.parse(localStorage.getItem('worries')) || [];
+
+            function saveWorries() {
+                localStorage.setItem('worries', JSON.stringify(worries));
+            }
+
+            function renderWorries() {
+                worryList.innerHTML = '';
+                worries.forEach((worry, index) => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `${worry.text} - ${worry.date} <button class="delete-worry" data-index="${index}" aria-label="Delete worry entry">Delete</button>`;
+                    worryList.appendChild(li);
                 });
-            };
-            clearDoodle();
 
-            window.startDance = function() {
-                const guide = document.getElementById('dance-guide');
-                guide.innerHTML = 'Dance to the rhythm! Move your body for 30 seconds.';
-                setTimeout(() => guide.innerHTML = 'Great job! Feel the energy?', 30000);
-            };
+                const deleteButtons = document.querySelectorAll('.delete-worry');
+                deleteButtons.forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const index = e.target.getAttribute('data-index');
+                        worries.splice(index, 1);
+                        saveWorries();
+                        renderWorries();
+                    });
+                });
+            }
 
-            window.showColor = function() {
-                const color = document.getElementById('color-select').value;
-                const display = document.getElementById('color-display');
-                display.style.backgroundColor = color;
-            };
-
-            window.shredWorry = function() {
-                const worry = document.getElementById('worry-input').value;
-                const feedback = document.getElementById('worry-feedback');
-                if (worry) {
-                    feedback.innerHTML = 'Shredding your worry... It’s gone!';
-                    document.getElementById('worry-input').value = '';
-                } else {
-                    feedback.innerHTML = 'Please write a worry to shred.';
+            shredWorry.addEventListener('click', () => {
+                const worryText = worryInput.value.trim();
+                if (worryText) {
+                    worries.push({ text: worryText, date: new Date().toLocaleString() });
+                    saveWorries();
+                    worryInput.value = '';
+                    renderWorries();
                 }
-            };
+            });
 
-            window.saveGratitude = function() {
-                const gratitude = document.getElementById('gratitude-input').value;
-                const feedback = document.getElementById('gratitude-feedback');
-                if (gratitude) {
-                    let gratitudes = JSON.parse(localStorage.getItem('gratitudes')) || [];
-                    gratitudes.push({ date: new Date().toISOString().split('T')[0], text: gratitude });
-                    localStorage.setItem('gratitudes', JSON.stringify(gratitudes));
-                    feedback.innerHTML = 'Gratitude saved! Check your <a href="calendar.html">Dashboard</a>.';
-                    document.getElementById('gratitude-input').value = '';
-                } else {
-                    feedback.innerHTML = 'Please write something you’re grateful for.';
+            renderWorries();
+
+            // Gratitude Note
+            const gratitudeInput = document.getElementById('gratitudeInput');
+            const saveGratitude = document.getElementById('saveGratitude');
+            const gratitudeList = document.getElementById('gratitudeList');
+            let gratitudeNotes = JSON.parse(localStorage.getItem('gratitudeNotes')) || [];
+
+            function saveGratitudeNotes() {
+                localStorage.setItem('gratitudeNotes', JSON.stringify(gratitudeNotes));
+            }
+
+            function renderGratitudeNotes() {
+                gratitudeList.innerHTML = '';
+                gratitudeNotes.forEach((note, index) => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `${note.text} - ${note.date} <button class="delete-note" data-index="${index}" aria-label="Delete gratitude note">Delete</button>`;
+                    gratitudeList.appendChild(li);
+                });
+
+                const deleteButtons = document.querySelectorAll('.delete-note');
+                deleteButtons.forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const index = e.target.getAttribute('data-index');
+                        gratitudeNotes.splice(index, 1);
+                        saveGratitudeNotes();
+                        renderGratitudeNotes();
+                    });
+                });
+            }
+
+            saveGratitude.addEventListener('click', () => {
+                const gratitudeText = gratitudeInput.value.trim();
+                if (gratitudeText) {
+                    gratitudeNotes.push({ text: gratitudeText, date: new Date().toLocaleString() });
+                    saveGratitudeNotes();
+                    gratitudeInput.value = '';
+                    renderGratitudeNotes();
                 }
-            };
+            });
 
-            window.addEventListener('resize', adjustMainContentPadding);
+            renderGratitudeNotes();
         });
     </script>
 </body>
