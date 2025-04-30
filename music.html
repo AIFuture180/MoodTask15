@@ -3,59 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="MoodTask Mood Music: Discover curated playlists to relax, focus, or energize your day.">
-    <meta name="keywords" content="MoodTask, mood music, relaxing playlists, focus music, energizing music">
+    <meta name="description" content="MoodTask Mood Music - Listen to curated playlists to relax, focus, or energize.">
+    <meta name="keywords" content="MoodTask, mood music, mental health, relaxation playlists">
     <meta name="robots" content="index, follow">
     <meta name="author" content="MoodTask">
-    <meta name="google-site-verification" content="a04bcf56705ce738" />
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA_navY=maui"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'UA_navY=maui', { 'anonymize_ip': true });
-    </script>
+    <meta name="google-site-verification" content="googlea04bcf56705ce738">
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="MoodTask Mood Music - Curated Playlists">
+    <meta property="og:description" content="Listen to curated playlists to relax, focus, or energize.">
+    <meta property="og:url" content="https://moodtask.org/music/">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://moodtask.org/images/og-image.jpg">
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MoodTask Mood Music - Curated Playlists">
+    <meta name="twitter:description" content="Listen to curated playlists to relax, focus, or energize.">
+    <meta name="twitter:image" content="https://moodtask.org/images/og-image.jpg">
     <title>MoodTask - Mood Music</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
     <style>
-        /* Existing styles unchanged */
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f5f5f5;
-            margin: 0;
-            padding: 0;
-            color: #333;
-            transition: background-color 0.3s ease;
+        .music-section {
+            margin: 40px 0;
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeIn 0.5s ease forwards;
         }
-        /* ... other existing styles ... */
-        .footer .recommended-products {
-            margin: 20px 0;
+        .music-section h2.section-heading {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #4A90E2;
+            border-bottom: 2px solid #D6D1F5;
+            padding-bottom: 10px;
+            text-align: center;
         }
-        .footer .recommended-products a.product-link {
+        .music-section h3 {
+            font-size: 1.5em;
+            margin: 20px 0 10px;
+            color: #2C3E50;
+        }
+        .music-section p {
+            font-size: 1em;
+            color: #555;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        .music-section iframe {
+            width: 100%;
+            max-width: 600px;
+            height: 200px;
+            border-radius: 5px;
+            margin: 10px 0;
+            display: block;
+        }
+        .music-section button {
             padding: 10px 20px;
-            margin: 5px 0;
             border: none;
             border-radius: 20px;
             cursor: pointer;
             font-size: 1em;
-            display: block;
-            text-decoration: none;
-            background-color: #f0f0f0;
+            font-weight: 500;
+            transition: transform 0.2s, box-shadow 0.3s;
+            background: linear-gradient(135deg, #4A90E2, #2C3E50);
+            color: white;
+            margin: 5px;
+        }
+        .music-section button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .music-insights {
+            margin-top: 40px;
+        }
+        .music-insights h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
             color: #2C3E50;
-            transition: background-color 0.3s, transform 0.3s;
+            text-align: center;
         }
-        .footer .recommended-products a.product-link:hover {
-            background-color: #D6D1F5;
-            transform: scale(1.02);
+        .music-insights p {
+            font-size: 1em;
+            color: #555;
+            text-align: center;
         }
-        /* ... remaining existing styles ... */
+        .music-insights p span {
+            font-weight: 600;
+            color: #4A90E2;
+        }
+        @media (max-width: 600px) {
+            .music-section {
+                padding: 20px;
+                margin: 20px 0;
+            }
+            .music-section h2.section-heading {
+                font-size: 1.8em;
+            }
+            .music-section h3 {
+                font-size: 1.3em;
+            }
+            .music-section p {
+                font-size: 0.95em;
+            }
+            .music-section iframe {
+                height: 180px;
+            }
+            .music-section button {
+                padding: 8px 15px;
+                font-size: 0.9em;
+            }
+            .music-insights h3 {
+                font-size: 1.3em;
+            }
+            .music-insights p {
+                font-size: 0.95em;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Existing content unchanged -->
     <div class="nav-bar">
         <div class="logo">MoodTask</div>
         <div class="nav-links">
@@ -84,31 +155,65 @@
     <div class="main-content fade-in">
         <div class="hero">
             <h1>Mood Music</h1>
-            <p>Discover curated playlists to match your mood.</p>
+            <p>Listen to curated playlists to match your mood.</p>
         </div>
         <div class="container">
             <div class="music-section">
-                <h2 class="section-heading">Playlists</h2>
-                <div class="music-category">
+                <h2 class="section-heading">Music Playlists</h2>
+
+                <div id="relax">
                     <h3>Relax</h3>
-                    <button class="music-button" onclick="openPopup('https://www.youtube.com/embed/5qap5aO4i9A')">Play Lo-Fi Chill</button>
-                    <button class="music-button" onclick="openPopup('https://www.youtube.com/embed/zL2gDEr8D14')">Play Ambient Calm</button>
+                    <p>Unwind with soothing melodies.</p>
+                    <button onclick="playTrack('https://www.youtube.com/embed/l60MnDJklnM')" aria-label="Play Ocean Waves track for relaxation">Play</button>
+                    <button onclick="playTrack('https://www.youtube.com/embed/1zyhZc1MSwU')" aria-label="Play Forest Stream track for relaxation">Play</button>
+                    <iframe loading="lazy" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
-                <div class="music-category">
+
+                <div id="focus">
                     <h3>Focus</h3>
-                    <button class="music-button" onclick="openPopup('https://www.youtube.com/embed/jfKfPfyJRdk')">Play Deep Focus</button>
-                    <button class="music-button" onclick="openPopup('https://www.youtube.com/embed/hU9E8jCuXBA')">Play Classical Study</button>
+                    <p>Enhance concentration with instrumental tracks.</p>
+                    <button onclick="playTrack('https://www.youtube.com/embed/5qap5aO4i9A')" aria-label="Play Lo-Fi Beats track for focus">Play</button>
+                    <button onclick="playTrack('https://www.youtube.com/embed/jfKfPfyJRdk')" aria-label="Play Piano Focus track for focus">Play</button>
+                    <iframe loading="lazy" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
-                <div class="music-category">
+
+                <div id="energize">
                     <h3>Energize</h3>
-                    <button class="music-button" onclick="openPopup('https://www.youtube.com/embed/60ItHLz5WEA')">Play Upbeat Pop</button>
-                    <button class="music-button" onclick="openPopup('https://www.youtube.com/embed/5NV6Rdv1a3I')">Play Dance Hits</button>
+                    <p>Boost your energy with upbeat tunes.</p>
+                    <button onclick="playTrack('https://www.youtube.com/embed/zlJDTxahad0')" aria-label="Play Upbeat Pop track for energy">Play</button>
+                    <button onclick="playTrack('https://www.youtube.com/embed/60ItHLz5WEA')" aria-label="Play Dance Mix track for energy">Play</button>
+                    <iframe loading="lazy" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
-            </div>
-            <div class="music-insights">
-                <h2 class="section-heading">Music Insights</h2>
-                <p>Based on your listening history, here are your most played categories:</p>
-                <div id="music-insights"></div>
+
+                <div id="sleep">
+                    <h3>Sleep</h3>
+                    <p>Drift off with calming sleep music.</p>
+                    <button onclick="playTrack('https://www.youtube.com/embed/1MPRbX7ACh8')" aria-label="Play Sleep Music track">Play</button>
+                    <button onclick="playTrack('https://www.youtube.com/embed/ASuC6gQ0J9Q')" aria-label="Play Deep Sleep track">Play</button>
+                    <iframe loading="lazy" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+
+                <div id="meditation">
+                    <h3>Meditation</h3>
+                    <p>Find peace with meditation music.</p>
+                    <button onclick="playTrack('https://www.youtube.com/embed/8jPQjjsBbIc')" aria-label="Play Meditation Music track">Play</button>
+                    <button onclick="playTrack('https://www.youtube.com/embed/2f1kZbwNQS4')" aria-label="Play Zen Meditation track">Play</button>
+                    <iframe loading="lazy" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+
+                <div id="nature">
+                    <h3>Nature Sounds</h3>
+                    <p>Relax with the sounds of nature.</p>
+                    <button onclick="playTrack('https://www.youtube.com/embed/8myYyMg1fFE')" aria-label="Play Rainforest Sounds track">Play</button>
+                    <button onclick="playTrack('https://www.youtube.com/embed/qrephJHtW3M')" aria-label="Play Ocean Waves Nature track">Play</button>
+                    <iframe loading="lazy" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+
+                <div class="music-insights">
+                    <h3>Music Insights</h3>
+                    <p>Your most played category this week is: <span id="mostPlayedCategory">N/A</span></p>
+                    <p>Total tracks played this week: <span id="tracksPlayed">0</span></p>
+                </div>
             </div>
         </div>
         <div class="footer">
@@ -124,18 +229,10 @@
             </div>
             <div class="connect">
                 <h3>Connect</h3>
-                <a href="https://twitter.com/share?url=https://moodtask.org" aria-label="Share on Twitter"><i class="fab fa-twitter"></i> Share on Twitter</a>
-                <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://moodtask.org" aria-label="Share on LinkedIn"><i class="fab fa-linkedin"></i> Share on LinkedIn</a>
-                <a href="https://www.buymeacoffee.com/moodtask" class="coffee" aria-label="Support us on Buy Me a Coffee"><i class="fas fa-coffee"></i> Buy Me a Coffee</a>
-                <a href="https://www.online-therapy.com/?aff_id=12345" class="therapy" aria-label="Explore Online Therapy">Online Therapy</a>
-                <a href="https://www.mindfulness.com/?aff_id=67890" class="mindfulness" aria-label="Explore Mindfulness resources">Mindfulness</a>
-            </div>
-            <div class="recommended-products">
-                <h3>Recommended Products</h3>
-                <a href="https://amzn.to/40rLCSK" class="product-link" aria-label="Buy Weighted Heated Lap Pad on Amazon">Weighted Heated Lap Pad</a>
-                <a href="https://amzn.to/40rLCRY" class="product-link" aria-label="Buy Beary Cotton Hand-Knit Weighted Blanket on Amazon">Beary Cotton Hand-Knit Weighted Blanket</a>
-                <a href="https://amzn.to/40rLCNZ" class="product-link" aria-label="Buy Serenilite Stress Balls on Amazon">Serenilite Stress Balls</a>
-                <a href="https://amzn.to/40l2f6N" class="product-link" aria-label="Buy Echo Go+ Hydrogen Water Bottle on Amazon">Echo Go+ Hydrogen Water Bottle</a>
+                <a href="https://twitter.com/share?url=https://moodtask.org"><i class="fab fa-twitter"></i> Share on Twitter</a>
+                <a href="https://www.buymeacoffee.com/moodtask" class="coffee"><i class="fas fa-coffee"></i> Buy Me a Coffee</a>
+                <a href="https://www.online-therapy.com/?aff_id=12345" class="therapy">Online Therapy</a>
+                <a href="https://www.mindfulness.com/?aff_id=67890" class="mindfulness">Mindfulness</a>
             </div>
             <div class="affiliate-note">
                 AFFILIATE DISCLOSURE: Some links on this site are affiliate links. We may earn a commission on purchases at no extra cost to you.<br>
@@ -143,58 +240,22 @@
             </div>
         </div>
     </div>
-    <!-- Existing script unchanged -->
+    <script src="scripts.js"></script>
     <script>
-        function adjustMainContentPadding() {
-            const navBar = document.querySelector('.nav-bar');
-            const mainContent = document.querySelector('.main-content');
-            if (navBar && mainContent) {
-                const navHeight = navBar.offsetHeight;
-                mainContent.style.paddingTop = `${navHeight + 10}px`;
+        function checkLocalStorage() {
+            try {
+                localStorage.setItem('test', 'test');
+                localStorage.removeItem('test');
+                return true;
+            } catch (e) {
+                return false;
             }
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const navLinks = document.querySelectorAll('.nav-bar .nav-links a');
-            const mainContent = document.querySelector('.main-content');
-
-            mainContent.classList.add('fade-in');
-            adjustMainContentPadding();
-
-            navLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    if (link.classList.contains('active') || link.parentElement.classList.contains('dropdown')) return;
-                    e.preventDefault();
-                    mainContent.classList.remove('fade-in');
-                    mainContent.classList.add('fade-out');
-                    setTimeout(() => {
-                        window.location.href = link.href;
-                    }, 500);
-                });
-            });
-
-            window.openPopup = function(url) {
-                const category = url.includes('Lo-Fi') || url.includes('Ambient') ? 'Relax' :
-                                url.includes('Focus') || url.includes('Classical') ? 'Focus' : 'Energize';
-                let history = JSON.parse(localStorage.getItem('musicHistory')) || {};
-                history[category] = (history[category] || 0) + 1;
-                localStorage.setItem('musicHistory', JSON.stringify(history));
-                displayInsights();
-                window.open(url, 'musicPopup', 'width=800,height=600');
-            };
-
-            function displayInsights() {
-                const history = JSON.parse(localStorage.getItem('musicHistory')) || {};
-                const insightsDiv = document.getElementById('music-insights');
-                const sortedCategories = Object.entries(history).sort((a, b) => b[1] - a[1]);
-                insightsDiv.innerHTML = sortedCategories.length > 0
-                    ? sortedCategories.map(([category, count]) => `<p>${category}: ${count} plays</p>`).join('')
-                    : '<p>No listening history yet. Start playing some music!</p>';
-            }
-
-            displayInsights();
-            window.addEventListener('resize', adjustMainContentPadding);
-        });
-    </script>
-</body>
-</html>
+        function playTrack(url) {
+            const iframes = document.querySelectorAll('iframe');
+            const category = url.includes('l60MnDJklnM') || url.includes('1zyhZc1MSwU') ? 'Relax' :
+                            url.includes('5qap5aO4i9A') || url.includes('jfKfPfyJRdk') ? 'Focus' :
+                            url.includes('zlJDTxahad0') || url.includes('60ItHLz5WEA') ? 'Energize' :
+                            url.includes('1MPRbX7ACh8') || url.includes('ASuC6gQ0J9Q') ? 'Sleep' :
+                            url.includes('8jPQjjsBbIc') || url.includes('2f1kZbwNQS4') ? 'Med
