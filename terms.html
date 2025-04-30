@@ -54,6 +54,10 @@
         .nav-bar a:hover {
             color: #4A90E2;
         }
+        .nav-bar a.active {
+            color: #4A90E2;
+            font-weight: 600;
+        }
         .main-content {
             padding: 80px 20px 20px;
         }
@@ -122,7 +126,6 @@
             color: #aaa;
             margin-top: 10px;
         }
-        /* Added CSS for Recommended Products */
         .footer .recommended-products {
             margin: 20px 0;
         }
@@ -156,7 +159,7 @@
             <a href="music.html">Mood Music</a>
             <a href="blog.html">Blog</a>
             <a href="privacy.html">Privacy Policy</a>
-            <a href="terms.html">Terms of Use</a>
+            <a href="terms.html" class="active">Terms of Use</a>
         </div>
     </div>
 
@@ -203,11 +206,11 @@
         </div>
         <div class="footer">
             <div class="connect">
-                <a href="https://twitter.com/share?url=https://moodtask.org"><i class="fab fa-twitter"></i> Share on Twitter</a>
+                <a href="https://twitter.com/share?url=https://moodtask.org" aria-label="Share on Twitter"><i class="fab fa-twitter"></i> Share on Twitter</a>
                 <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://moodtask.org" aria-label="Share on LinkedIn"><i class="fab fa-linkedin"></i> Share on LinkedIn</a>
-                <a href="https://www.buymeacoffee.com/moodtask" class="coffee"><i class="fas fa-coffee"></i> Buy Me a Coffee</a>
-                <a href="https://www.online-therapy.com/?aff_id=12345" class="therapy">Online Therapy</a>
-                <a href="https://www.mindfulness.com/?aff_id=67890" class="mindfulness">Mindfulness</a>
+                <a href="https://www.buymeacoffee.com/moodtask" class="coffee" aria-label="Support us on Buy Me a Coffee"><i class="fas fa-coffee"></i> Buy Me a Coffee</a>
+                <a href="https://www.online-therapy.com/?aff_id=12345" class="therapy" aria-label="Explore Online Therapy">Online Therapy</a>
+                <a href="https://www.mindfulness.com/?aff_id=67890" class="mindfulness" aria-label="Explore Mindfulness resources">Mindfulness</a>
             </div>
             <div class="recommended-products">
                 <h3>Recommended Products</h3>
