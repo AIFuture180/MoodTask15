@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MoodTask: Boost your mood with science-backed activities and music designed for emotional well-being.">
+    <meta name="keywords" content="MoodTask, emotional well-being, mood tracking, mental health, wellness activities">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="MoodTask">
+    <meta name="google-site-verification" content="a04bcf56705ce738" />
+    <title>MoodTask - Boost Your Mood</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            transition: background-color 0.3s ease;
+        }
+        .nav-bar {
+            background-color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            max-width: 1400px;
+            margin: 0 auto;
+            left: 0;
+            right: 0;
+            height: 60px;
+            backdrop-filter: blur(5px);
+            background-color: rgba(255, 255, 255, 0.95);
+        }
+        .nav-bar .logo {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #4A90E2;
+        }
+        .nav-bar .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding-left: 30px;
+            padding-right: 20px;
+        }
+        .nav-bar a {
+            padding: 10px 15px;
+            text-decoration: none;
+            color: #2C3E50;
+            font-weight: 400;
+            transition: color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 5px;
+        }
+        .nav-bar a:hover {
+            background-color: #f0f0f0;
+            color: #2C3E50;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .nav-bar a.active {
+            background-color: #4A90E2;
+            color: white;
+            font-weight: 600;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .nav-bar .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .nav-bar .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 5px;
+            top: 100%;
+            left: 0;
+        }
+        .nav-bar .dropdown-content a {
+            color: #2C3E50;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            border-radius: 0;
+        }
+        .nav-bar .dropdown-content a:hover {
+            background-color: #f0f0f0;
+        }
+        .nav-bar .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .main-content {
+            transition: opacity 0.5s ease;
+            padding-top: 60px;
+        }
+        .main-content.fade-out {
+            opacity: 0;
+        }
+        .main-content.fade-in {
+            opacity: 1;
+        }
+        .hero {
+            background: linear-gradient(135deg, #4A90E2, #2C3E50);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            position: relative;
+        }
+        .hero h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        .hero p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+        .explore-button {
+            padding: 15px 30px;
+            background-color: #FFC107;
+            color: #333;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            animation: pulse 2s infinite;
+            position: relative;
+            z-index: 10;
+        }
+        .explore-button:hover {
+            background-color: #FFB300;
+            transform: scale(1.05);
+        }
+        .explore-button:focus {
+            outline: 2px solid #FFD700;
+            outline-offset: 2px;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 5px rgba(255, 193, 7, 0.5); }
+            50% { transform: scale(1.05); box-shadow: 0 0 15px rgba(255, 193, 7, 0.8); }
+            100% { transform: scale(1); box-shadow: 0 0 5px rgba(255, 193, 7, 0.5); }
+        }
+        .content-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .welcome-guide {
+            flex: 1;
+            max-width: 600px;
+            background: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin: 20px auto;
+            text-align: left;
+        }
+        .welcome-guide h2 {
+            font-size: 1.8em;
+            font-weight: 600;
+            color: #2C3E50;
+            margin-bottom: 15px;
+        }
+        .welcome-guide h3 {
+            font-size: 1.3em;
+            font-weight: 500;
+            color: #4A90E2;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        .welcome-guide p {
+            font-size: 1em;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        .welcome-guide a {
+            color: #4A90E2;
+            text-decoration: none;
+        }
+        .welcome-guide a:hover {
+            text-decoration: underline;
+        }
+        .ad-section {
+            flex: 1;
+            max-width: 600px;
+            background: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin: 20px auto;
+            text-align: center;
+            animation: pulse 2s infinite;
+        }
+        .ad-section h3 {
+            font-size: 1.5em;
+            font-weight: 600;
+            color: #2C3E50;
+            margin-bottom: 15px;
+        }
+        .ad-section p {
+            font-size: 1em;
+            color: #555;
+            margin-bottom: 20px;
+        }
+        .ad-section video {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .ad-section .cta-button {
+            padding: 10px 20px;
+            background-color: #4A90E2;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .ad-section .cta-button:hover {
+            background-color: #2C3E50;
+            transform: scale(1.05);
+        }
+        .activity-preview {
+            flex: 1;
+            max-width: 600px;
+            background: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin: 20px auto;
+            text-align: left;
+        }
+        .activity-preview h2 {
+            font-size: 1.8em;
+            font-weight: 600;
+            color: #2C3E50;
+            margin-bottom: 15px;
+        }
+        .activity-card {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            transition: transform 0.3s, background 0.3s;
+        }
+        .activity-card:hover {
+            transform: scale(1.02);
+            background: #f0f0f0;
+        }
+        .activity-card h3 {
+            font-size: 1.3em;
+            font-weight: 500;
+            color: #4A90E2;
+            margin-bottom: 10px;
+        }
+        .activity-card p {
+            font-size: 1em;
+            color: #555;
+            line-height: 1.6;
+        }
+        .activity-card a {
+            color: #4A90E2;
+            text-decoration: none;
+        }
+        .activity-card a:hover {
+            text-decoration: underline;
+        }
+        .activity-card .insight {
+            font-size: 0.9em;
+            font-style: italic;
+            color: #777;
+            margin-top: 10px;
+        }
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            text-align: left;
+        }
+        .footer h3 {
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+        .footer a {
+            color: #D6D1F5;
+            text-decoration: none;
+            display: block;
+            margin: 5px 0;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        .footer .affiliate-note {
+            font-size: 0.8em;
+            color: #aaa;
+            margin-top: 20px;
+            text-align: center;
+            width: 100%;
+        }
+        .footer .connect a {
+            padding: 10px 20px;
+            margin: 5px 0;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1em;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            text-decoration: none;
+        }
+        .footer .connect .coffee {
+            background-color: #FFC107;
+            color: #333;
+        }
+        .footer .connect .therapy {
+            background-color: #4A90E2;
+            color: white;
+        }
+        .footer .connect .mindfulness {
+            background-color: #6BCB77;
+            color: white;
+        }
+        @media (max-width: 600px) {
+            .nav-bar {
+                flex-direction: column;
+                gap: 8px;
+                padding: 10px 20px;
+                height: auto;
+                min-height: 120px;
+            }
+            .nav-bar .nav-links {
+                flex-direction: column;
+                gap: 8px;
+                align-items: center;
+                width: 100%;
+                padding-left: 0;
+                padding-right: 0;
+            }
+            .nav-bar a {
+                padding: 8px 20px;
+                width: 100%;
+                text-align: center;
+                box-sizing: border-box;
+            }
+            .nav-bar .dropdown {
+                width: 100%;
+            }
+            .nav-bar .dropdown-content {
+                width: 100%;
+                left: 0;
+            }
+            .main-content {
+                padding-top: 130px;
+            }
+            .hero {
+                padding: 40px 15px;
+            }
+            .hero h1 {
+                font-size: 1.8em;
+            }
+            .hero p {
+                font-size: 1em;
+            }
+            .content-wrapper {
+                flex-direction: column;
+                padding: 0 10px;
+            }
+            .welcome-guide, .activity-preview, .ad-section {
+                margin: 20px auto;
+                max-width: 100%;
+                padding: 20px;
+            }
+            .welcome-guide h2, .activity-preview h2, .ad-section h3 {
+                font-size: 1.5em;
+            }
+            .welcome-guide h3, .activity-card h3 {
+                font-size: 1.2em;
+            }
+            .welcome-guide p, .activity-card p {
+                font-size: 0.95em;
+            }
+            .activity-card .insight {
+                font-size: 0.85em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-bar">
+        <div class="logo">MoodTask</div>
+        <div class="nav-links">
+            <a href="index.html" class="active">Home</a>
+            <a href="calendar.html">Dashboard</a>
+            <div class="dropdown">
+                <a href="activities.html">Activities</a>
+                <div class="dropdown-content">
+                    <a href="activities.html#breathing">Breathing</a>
+                    <a href="activities.html#soundscape">Soundscape</a>
+                    <a href="activities.html#punching">Punching Bag</a>
+                    <a href="activities.html#stretch">Stretch</a>
+                    <a href="activities.html#doodle">Doodle</a>
+                    <a href="activities.html#dance">Dance</a>
+                    <a href="activities.html#color-focus">Color Focus</a>
+                    <a href="activities.html#worry">Worry</a>
+                    <a href="activities.html#gratitude">Gratitude</a>
+                </div>
+            </div>
+            <a href="music.html">Mood Music</a>
+            <a href="blog.html">Blog</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Use</a>
+        </div>
+    </div>
+    <div class="main-content fade-in">
+        <div class="hero">
+            <h1>Boost Your Mood Today</h1>
+            <p>Discover science-backed activities and music to enhance your emotional well-being.</p>
+            <button class="explore-button" onclick="window.location.href='activities.html'" tabindex="0" aria-label="Explore activities">Explore Activities</button>
+        </div>
+        <div class="content-wrapper">
+            <div class="welcome-guide">
+                <h2>Welcome to MoodTask</h2>
+                <p>At MoodTask, we believe small actions can lead to big changes in your emotional well-being. Our platform offers a variety of science-backed activities and curated music to help you manage stress, boost your mood, and find balance in your daily life. Whether you're looking to relax, focus, or lift your spirits, MoodTask provides tools designed with insights from experts in psychology and neuroscience.</p>
+                
+                <h3>Why MoodTask Works</h3>
+                <p>Research shows that intentional activities can significantly impact your mood. A 2017 study in the <em>Journal of Positive Psychology</em> found that practicing gratitude increases happiness by 25% (Emmons & McCullough, 2017). Similarly, a 2020 study in <em>Frontiers in Psychology</em> showed that mindfulness exercises reduce stress by 30% (Burke et al., 2020). Our activities, like the Gratitude Note and Breathing Exercises, are designed to leverage these findings, helping you feel better one step at a time.</p>
+                
+                <h3>How to Get Started</h3>
+                <p>Begin by exploring our <a href="activities.html">Activities</a> page, where you can try exercises like the Worry Shredder or Doodle Break to shift your mood. Track your progress on the <a href="calendar.html">Dashboard</a> to see how your mood evolves over time. For an added boost, check out our <a href="music.html">Mood Music</a> section, featuring playlists for relaxation, focus, and more. Let MoodTask guide you toward a more balanced, joyful day!</p>
+                
+                <h3>Explore More Features</h3>
+                <p>Dive deeper into emotional wellness with our <a href="blog.html">Blog</a>, where we share tips and insights on mental health and mindfulness. Learn about our commitment to your privacy on our <a href="privacy.html">Privacy Policy</a> page, or explore our <a href="terms.html">Terms of Use</a>. Connect with additional resources through our affiliate partners, like <a href="https://www.mindfulness.com/?aff_id=67890">mindfulness apps</a> or <a href="https://www.online-therapy.com/?aff_id=12345">online therapy</a>, to support your journey.</p>
+            </div>
+            <div class="ad-section">
+                <h3>Featured Partner: AG1</h3>
+                <p>Elevate your wellness routine with AG1—your daily dose of essential nutrients to support energy, focus, and overall health.</p>
+                <video width="320" height="240" controls>
+                    <source src="AG1 Clip.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <a href="https://www.ag1.com/affiliate?aff_id=moodtask" class="cta-button">Learn More About AG1</a>
+            </div>
+            <div class="activity-preview">
+                <h2>Try These Activities</h2>
+                <div class="activity-card">
+                    <h3>Gratitude Note</h3>
+                    <p>Take a moment to reflect on what you're thankful for. Writing down three things you're grateful for can shift your focus to the positive, as supported by a 2017 study in the <em>Journal of Positive Psychology</em> (Emmons & McCullough, 2017).</p>
+                    <div class="insight">Boosts happiness by 25% – Emmons & McCullough</div>
+                    <p><a href="activities.html#gratitude">Try it now</a></p>
+                </div>
+                <div class="activity-card">
+                    <h3>Breathing Exercise</h3>
+                    <p>Practice deep breathing to calm your mind and body. A 2020 study in <em>Frontiers in Psychology</em> found that mindful breathing reduces stress by 30% (Burke et al., 2020).</p>
+                    <div class="insight">Reduces stress – Burke et al.</div>
+                    <p><a href="activities.html#breathing">Start breathing</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div>
+                <h3>MoodTask</h3>
+                <p>Transform your mood with science-backed activities designed to improve your emotional well-being.</p>
+            </div>
+            <div>
+                <h3>Quick Links</h3>
+                <a href="index.html">Home</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Use</a>
+            </div>
+            <div class="connect">
+                <h3>Connect</h3>
+                <a href="https://twitter.com/share?url=https://moodtask.org"><i class="fab fa-twitter"></i> Share on Twitter</a>
+                <a href="https://www.buymeacoffee.com/moodtask" class="coffee"><i class="fas fa-coffee"></i> Buy Me a Coffee</a>
+                <a href="https://www.online-therapy.com/?aff_id=12345" class="therapy">Online Therapy</a>
+                <a href="https://www.mindfulness.com/?aff_id=67890" class="mindfulness">Mindfulness</a>
+            </div>
+            <div class="affiliate-note">
+                AFFILIATE DISCLOSURE: Some links on this site are affiliate links. We may earn a commission on purchases at no extra cost to you.<br>
+                © 2025 MoodTask. All rights reserved.
+            </div>
+        </div>
+    </div>
+    <script>
+        function adjustMainContentPadding() {
+            const navBar = document.querySelector('.nav-bar');
+            const mainContent = document.querySelector('.main-content');
+            if (navBar && mainContent) {
+                const navHeight = navBar.offsetHeight;
+                mainContent.style.paddingTop = `${navHeight + 10}px`;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const navLinks = document.querySelectorAll('.nav-bar .nav-links a');
+            const mainContent = document.querySelector('.main-content');
+
+            mainContent.classList.add('fade-in');
+            adjustMainContentPadding();
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    if (link.classList.contains('active') || link.parentElement.classList.contains('dropdown')) return;
+                    e.preventDefault();
+                    mainContent.classList.remove('fade-in');
+                    mainContent.classList.add('fade-out');
+                    setTimeout(() => {
+                        window.location.href = link.href;
+                    }, 500);
+                });
+            });
+
+            window.addEventListener('resize', adjustMainContentPadding);
+        });
+    </script>
+</body>
+</html>
