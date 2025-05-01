@@ -141,71 +141,79 @@
         .welcome-guide a:hover {
             text-decoration: underline;
         }
-        .activities-grid {
+        .activity-section {
             margin-top: 30px;
             width: 100%;
             padding: 20px;
             box-sizing: border-box;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
             max-width: 1200px;
             margin-left: auto;
             margin-right: auto;
         }
+        .activity-section h2 {
+            font-size: 1.8em;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 15px;
+        }
+        .activity-row {
+            display: flex;
+            overflow-x: auto;
+            gap: 15px;
+            padding-bottom: 10px;
+            scrollbar-width: thin;
+            scrollbar-color: #4A90E2 #2C3E50;
+        }
+        .activity-row::-webkit-scrollbar {
+            height: 8px;
+        }
+        .activity-row::-webkit-scrollbar-track {
+            background: #2C3E50;
+            border-radius: 4px;
+        }
+        .activity-row::-webkit-scrollbar-thumb {
+            background: #4A90E2;
+            border-radius: 4px;
+        }
+        .activity-row::-webkit-scrollbar-thumb:hover {
+            background: #3B82F6;
+        }
         .activity-card {
             background: rgba(255, 255, 255, 0.2);
             color: white;
-            padding: 20px;
+            padding: 15px;
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            width: 280px;
+            width: 200px;
+            flex: 0 0 auto;
             text-align: center;
             transition: transform 0.3s, background 0.3s;
-            opacity: 0;
-            position: relative;
-            animation: fadeIn 0.5s ease forwards;
         }
         .activity-card:hover {
             transform: scale(1.05);
             background: rgba(255, 255, 255, 0.3);
         }
         .activity-card i {
-            font-size: 2em;
-            margin-bottom: 10px;
+            font-size: 1.5em;
+            margin-bottom: 8px;
         }
         .activity-card h3 {
-            font-size: 1.2em;
+            font-size: 1em;
             font-weight: 600;
-            margin-bottom: 10px;
-        }
-        .activity-card p {
-            font-size: 0.9em;
-            margin-bottom: 10px;
-        }
-        .activity-card .insight {
-            font-size: 0.85em;
-            font-style: italic;
-            color: #FFD700;
-            margin-bottom: 15px;
+            margin-bottom: 8px;
         }
         .activity-card .try-button {
-            padding: 8px 15px;
+            padding: 6px 12px;
             background-color: #4A90E2;
             color: white;
             border: none;
-            border-radius: 20px;
+            border-radius: 15px;
             cursor: pointer;
-            font-size: 0.9em;
+            font-size: 0.8em;
             transition: background-color 0.3s;
         }
         .activity-card .try-button:hover {
             background-color: #2C3E50;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
         }
         .activity-summary {
             background-color: rgba(255, 255, 255, 0.9);
@@ -573,13 +581,8 @@
             .hero h1 {
                 font-size: 1.8em;
             }
-            .activities-grid {
-                flex-direction: column;
-                align-items: center;
-            }
             .activity-card {
-                width: 100%;
-                max-width: 300px;
+                width: 150px;
             }
             .activity-summary {
                 margin: 20px 10px;
@@ -641,55 +644,151 @@
         <div class="hero">
             <h1>Boost Your Mood with Activities</h1>
             <p>Discover science-backed activities to improve your emotional well-being.</p>
-            <div class="activities-grid" id="activitiesGrid">
-                <div class="activity-card" data-tool="breathing">
-                    <i class="fas fa-wind"></i>
-                    <h3>Breathing Exercises</h3>
-                    <p>Take a moment to calm your mind with deep breathing techniques designed to reduce stress and promote relaxation. Neuroscientist Dr. Andrew Huberman explains that slow, intentional breathing activates the parasympathetic nervous system, lowering cortisol levels and heart rate. A 2018 study in <em>Psychophysiology</em> found that just 2 minutes of diaphragmatic breathing decreased perceived stress by 20% (Ma et al., 2018). Choose from techniques like 4-7-8 or Box Breathing, and let the guided visuals help you focus. Use this activity during a stressful moment or as a daily reset. Track your progress on our <a href="calendar.html" style="color: #FFD700;">Dashboard</a> to see how it impacts your mood over time.</p>
-                    <div class="insight">Reduces cortisol – Dr. Andrew Huberman</div>
-                    <button class="try-button">Try Now</button>
+            <div class="activity-section">
+                <div class="activity-section">
+                    <h2>Breathing Exercises</h2>
+                    <div class="activity-row">
+                        <div class="activity-card" data-tool="breathing" data-technique="diaphragmatic">
+                            <i class="fas fa-wind"></i>
+                            <h3>360 Diaphragmatic</h3>
+                            <button class="try-button">Try Now</button>
+                        </div>
+                        <div class="activity-card" data-tool="breathing" data-technique="resonance">
+                            <i class="fas fa-wind"></i>
+                            <h3>Resonance</h3>
+                            <button class="try-button">Try Now</button>
+                        </div>
+                        <div class="activity-card" data-tool="breathing" data-technique="4-7-8">
+                            <i class="fas fa-wind"></i>
+                            <h3>4-7-8</h3>
+                            <button class="try-button">Try Now</button>
+                        </div>
+                        <div class="activity-card" data-tool="breathing" data-technique="box">
+                            <i class="fas fa-wind"></i>
+                            <h3>Box Breathing</h3>
+                            <button class="try-button">Try Now</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="activity-card" data-tool="gratitude">
-                    <i class="fas fa-heart"></i>
-                    <h3>Gratitude Notes</h3>
-                    <p>Reflect on the positive aspects of your life with our Gratitude Notes activity, a simple yet powerful way to boost your mood. Neuroscientist Dr. Lisa Feldman Barrett notes that gratitude practices increase dopamine, enhancing feelings of joy and connection. A 2016 study in the <em>Journal of Neuroscience</em> showed that gratitude journaling led to lasting changes in the brain’s prefrontal cortex, improving emotional regulation (Fox et al., 2016). Write about three things you’re thankful for, a relationship you cherish, or a recent achievement. This activity helps shift your focus from stress to appreciation. Save your reflections in MoodTask and revisit them to see how gratitude transforms your outlook over time.</p>
-                    <div class="insight">Boosts dopamine – Dr. Lisa Feldman Barrett</div>
-                    <button class="try-button">Try Now</button>
+                <div class="activity-section">
+                    <h2>Gratitude Notes</h2>
+                    <div class="activity-row">
+                        <div class="activity-card" data-tool="gratitude" data-technique="daily">
+                            <i class="fas fa-heart"></i>
+                            <h3>Daily Gratitude</h3>
+                            <button class="try-button">Try Now</button>
+                        </div>
+                        <div class="activity-card" data-tool="gratitude" data-technique="relationships">
+                            <i class="fas fa-heart"></i>
+                            <h3>Relationships</h3>
+                            <button class="try-button">Try Now</button>
+                        </div>
+                        <div class="activity-card" data-tool="gratitude" data-technique="achievements">
+                            <i class="fas fa-heart"></i>
+                            <h3>Achievements</h3>
+                            <button class="try-button">Try Now</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="activity-card" data-tool="meditation">
-                    <i class="fas fa-spa"></i>
-                    <h3>Guided Meditation</h3>
-                    <p>Find inner peace with a short, guided mindfulness meditation session tailored to reduce anxiety and improve focus. Dr. Jon Kabat-Zinn, founder of Mindfulness-Based Stress Reduction, highlights that meditation lowers anxiety by enhancing activity in the brain’s anterior cingulate cortex. A 2020 study in <em>Mindfulness</em> found that just 1-minute daily meditations reduced anxiety by 25% after two weeks (Basso et al., 2020). Choose from techniques like Breath Awareness, Body Scan, or Visualization, and follow the prompts to relax for 60 seconds. Perfect for a midday break or evening wind-down, this activity helps you center yourself. Log your sessions on our <a href="calendar.html" style="color: #FFD700;">Dashboard</a> to track your progress.</p>
-                    <div class="insight">Lowers anxiety – Dr. Jon Kabat-Zinn</div>
-                    <button class="try-button">Try Now</button>
+                <div class="activity-section">
+                    <h2>Guided Meditation</h2>
+                    <div class="activity-row">
+                        <div class="activity-card" data-tool="meditation" data-technique="breath-awareness">
+                            <i class="fas fa-spa"></i>
+                            <h3>Breath Awareness</h3>
+                            <button class="try-button">Try Now</button>
+                        </div>
+                        <div class="activity-card" data-tool="meditation" data-technique="body-scan">
+                            <i class="fas fa-spa"></i>
+                            <h3>Body Scan</h3>
+                            <button class="try-button">Try Now</button>
+                        </div>
+                        <div class="activity-card" data-tool="meditation" data-technique="visualization">
+                            <i class="fas fa-spa"></i>
+                            <h3>Visualization</h3>
+                            <button class="try-button">Try Now</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="activity-card" data-tool="pmr">
-                    <i class="fas fa-hand-holding-heart"></i>
-                    <h3>Progressive Muscle Relaxation</h3>
-                    <p>Release physical and emotional tension with Progressive Muscle Relaxation (PMR), a technique developed by Dr. Edmund Jacobson in the 1920s. PMR involves tensing and relaxing muscle groups to reduce stress and promote a sense of calm. A 2016 study in <em>Body & Society</em> found that daily PMR practice lowered emotional stress by 22% over one month (Smith et al., 2016). Focus on your full body, lower body, or upper body, following guided prompts to tense each muscle group for 5 seconds, then relax for 10 seconds. Ideal after a long day or during moments of anxiety, PMR helps you reconnect with your body. Track its impact on our <a href="calendar.html" style="color: #FFD700;">Dashboard</a>.</p>
-                    <div class="insight">Reduces tension – Dr. Edmund Jacobson</div>
-                    <button class="try-button">Try Now</button>
+                <div class="activity-section">
+                    <h2>Progressive Muscle Relaxation</h2>
+                    <div class="activity-row">
+                        <div class="activity-card" data-tool="pmr" data-technique="full-body">
+                            <i class="fas fa-hand-holding-heart"></i>
+                            <h3>Full Body</h3>
+                            <button class="try-button">Try Now</button>
+                        </div>
+                        <div class="activity-card" data-tool="pmr" data-technique="lower-body">
+                            <i class="fas fa-hand-holding-heart"></i>
+                            <h3>Lower Body</h3>
+                            <button class="try-button">Try Now</button>
+                        </div>
+                        <div class="activity-card" data-tool="pmr" data-technique="upper-body">
+                            <i class="fas fa-hand-holding-heart"></i>
+                            <h3>Upper Body</h3>
+                            <button class="try-button">Try Now</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="activity-card" data-tool="walk">
-                    <i class="fas fa-walking"></i>
-                    <h3>Nature Walk</h3>
-                    <p>Step outside for a 5-minute Nature Walk to lower stress and boost your mood through the healing power of nature. Environmental psychologist Dr. Roger Ulrich’s research shows that exposure to natural settings reduces stress hormones like cortisol. A 2019 study in the <em>American Journal of Psychiatry</em> found that walking in nature lowered depression risk by 26% (Choi et al., 2019). Choose a mindful, sensory, or gratitude-focused walk, and let the timer guide you as you immerse yourself in your surroundings. Notice the trees, the breeze, or the sound of birds to fully engage. Perfect for a quick mental reset, this activity can be logged on our <a href="calendar.html" style="color: #FFD700;">Dashboard</a> to monitor its benefits.</p>
-                    <div class="insight">Lowers stress – Dr. Roger Ulrich</div>
-                    <button class="try-button">Try Now</button>
+                <div class="activity-section">
+                    <h2>Nature Walk</h2>
+                    <div class="activity-row">
+                        <div class="activity-card" data-tool="walk" data-technique="mindful">
+                            <i class="fas fa-walking"></i>
+                            <h3>Mindful Walk</h3>
+                            <button class="try-button">Try Now</button>
+                        </div>
+                        <div class="activity-card" data-tool="walk" data-technique="sensory">
+                            <i class="fas fa-walking"></i>
+                            <h3>Sensory Focus</h3>
+                            <button class="try-button">Try Now</button>
+                        </div>
+                        <div class="activity-card" data-tool="walk" data-technique="gratitude">
+                            <i class="fas fa-walking"></i>
+                            <h3>Gratitude Walk</h3>
+                            <button class="try-button">Try Now</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="activity-card" data-tool="journaling">
-                    <i class="fas fa-pen"></i>
-                    <h3>Mindful Journaling</h3>
-                    <p>Process your emotions and gain clarity with Mindful Journaling, a reflective practice that helps you understand your thoughts. Psychologist Dr. James Pennebaker’s research shows that expressive writing improves mental clarity and reduces emotional distress. A 1997 study in the <em>Journal of Experimental Psychology</em> found that journaling about emotions improved well-being by 15% after four weeks (Pennebaker, 1997). Choose prompts like exploring your emotions, reflecting on goals, or addressing challenges, and write for a few minutes to gain insight. This activity is ideal for moments of overwhelm or self-reflection. Save your entries in MoodTask and track how journaling impacts your mood over time using our <a href="calendar.html" style="color: #FFD700;">Dashboard</a>.</p>
-                    <div class="insight">Improves clarity – Dr. James Pennebaker</div>
-                    <button class="try-button">Try Now</button>
+                <div class="activity-section">
+                    <h2>Mindful Journaling</h2>
+                    <div class="activity-row">
+                        <div class="activity-card" data-tool="journaling" data-technique="emotions">
+                            <i class="fas fa-pen"></i>
+                            <h3>Explore Emotions</h3>
+                            <button class="try-button">Try Now</button>
+                        </div>
+                        <div class="activity-card" data-tool="journaling" data-technique="goals">
+                            <i class="fas fa-pen"></i>
+                            <h3>Reflect on Goals</h3>
+                            <button class="try-button">Try Now</button>
+                        </div>
+                        <div class="activity-card" data-tool="journaling" data-technique="challenges">
+                            <i class="fas fa-pen"></i>
+                            <h3>Address Challenges</h3>
+                            <button class="try-button">Try Now</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="activity-card" data-tool="reframing">
-                    <i class="fas fa-lightbulb"></i>
-                    <h3>Cognitive Reframing</h3>
-                    <p>Shift your perspective and build resilience with Cognitive Reframing, a technique rooted in cognitive-behavioral therapy (CBT). Dr. Aaron Beck, a pioneer of CBT, explains that reframing negative thoughts enhances emotional resilience by promoting balanced thinking. A 2015 study in <em>Cognitive Therapy and Research</em> found that reframing reduced negative thinking patterns by 30% after three weeks (Hofmann et al., 2015). Tackle a negative thought, stressful event, or self-criticism, and follow prompts to reframe it into a more positive or neutral perspective. This activity helps during moments of self-doubt or stress. Save your reframed thoughts in MoodTask and monitor your progress on our <a href="calendar.html" style="color: #FFD700;">Dashboard</a> to see the impact.</p>
-                    <div class="insight">Enhances resilience – Dr. Aaron Beck</div>
-                    <button class="try-button">Try Now</button>
+                <div class="activity-section">
+                    <h2>Cognitive Reframing</h2>
+                    <div class="activity-row">
+                        <div class="activity-card" data-tool="reframing" data-technique="negative-thought">
+                            <i class="fas fa-lightbulb"></i>
+                            <h3>Reframe a Negative Thought</h3>
+                            <button class="try-button">Try Now</button>
+                        </div>
+                        <div class="activity-card" data-tool="reframing" data-technique="stressful-event">
+                            <i class="fas fa-lightbulb"></i>
+                            <h3>Reframe a Stressful Event</h3>
+                            <button class="try-button">Try Now</button>
+                        </div>
+                        <div class="activity-card" data-tool="reframing" data-technique="self-criticism">
+                            <i class="fas fa-lightbulb"></i>
+                            <h3>Reframe Self-Criticism</h3>
+                            <button class="try-button">Try Now</button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="activity-summary" id="activitySummary">
@@ -725,7 +824,7 @@
                 <p>Engaging in intentional activities can profoundly impact your mental health by targeting specific neurological and physiological pathways. For example, deep breathing exercises, as noted by neuroscientist Dr. Andrew Huberman, activate the parasympathetic nervous system, which slows your heart rate and reduces cortisol levels, helping you feel calmer within minutes. A 2018 study in <em>Psychophysiology</em> supports this, showing a 20% reduction in stress after just 2 minutes of diaphragmatic breathing (Ma et al., 2018). Similarly, gratitude practices increase dopamine and enhance activity in the brain’s prefrontal cortex, improving emotional regulation, according to a 2016 study in the <em>Journal of Neuroscience</em> (Fox et al., 2016). Activities like Mindful Journaling and Cognitive Reframing, rooted in cognitive-behavioral therapy, help you process emotions and shift negative thought patterns, fostering resilience. At MoodTask, we’ve carefully selected these tools to provide quick, effective ways to improve your emotional state, backed by decades of research in psychology and neuroscience.</p>
                 
                 <h3>How to Use This Page</h3>
-                <p>Getting started with MoodTask’s activities is simple and intuitive. Browse the activity cards below, each representing a unique tool like Breathing Exercises or Gratitude Notes, with a brief description and scientific insight. Select an activity by clicking "Try Now" to open a popup with guided prompts. For instance, if you choose Breathing Exercises, you’ll select a technique like 4-7-8 or Box Breathing, then follow the visual timer to complete the session. After finishing, log your activity to track your journey over time on our <a href="calendar.html">Dashboard</a>. We recommend exploring all the options to discover which ones resonate most with you—whether you need to relax, refocus, or build emotional strength. Each activity takes just a few minutes but can have a lasting impact on your day.</p>
+                <p>Getting started with MoodTask’s activities is simple and intuitive. Browse the sections below, each dedicated to a unique tool like Breathing Exercises or Gratitude Notes. Within each section, you’ll find a row of options—like 4-7-8 or Box Breathing for Breathing Exercises. Select an option by clicking "Try Now" to open a popup with guided prompts. After finishing, log your activity to track your journey over time on our <a href="calendar.html">Dashboard</a>. We recommend exploring all the options to discover which ones resonate most with you—whether you need to relax, refocus, or build emotional strength. Each activity takes just a few minutes but can have a lasting impact on your day.</p>
                 
                 <h3>Maximizing Your Experience</h3>
                 <p>To get the most out of these activities, consistency and mindfulness are key. Start by setting aside 5-10 minutes each day to try one activity—perhaps a breathing exercise in the morning to start your day calmly, or a gratitude reflection before bed to end on a positive note. Pair activities with complementary tools on MoodTask: for example, listen to our <a href="music.html">Relaxation playlist</a> during a Guided Meditation session to enhance the calming effect. Track your mood before and after each activity on our Dashboard to see patterns over time—this can help you identify which activities work best for you. Don’t rush; focus on being fully present during each session, whether you’re journaling or taking a nature walk. Over time, these small habits can become powerful tools for managing stress and cultivating a more balanced, joyful life.</p>
@@ -762,15 +861,8 @@
         <div id="breathing-popup" class="popup">
             <div class="popup-content">
                 <h4>Breathing Exercises</h4>
-                <p>Select a breathing technique to begin:</p>
-                <div class="task-tiles" id="breathing-tiles">
-                    <button class="task-tile breathing-type" onclick="startBreathingTechnique('diaphragmatic')">360 Diaphragmatic</button>
-                    <button class="task-tile breathing-type" onclick="startBreathingTechnique('resonance')">Resonance</button>
-                    <button class="task-tile breathing-type" onclick="startBreathingTechnique('4-7-8')">4-7-8</button>
-                    <button class="task-tile breathing-type" onclick="startBreathingTechnique('box')">Box Breathing</button>
-                </div>
-                <div id="breathing-circle" style="display: none;"><span id="breathing-step">Inhale</span></div>
                 <p id="breathing-instruction"></p>
+                <div id="breathing-circle" style="display: none;"><span id="breathing-step">Inhale</span></div>
                 <button class="action-button" id="breathing-try-another" style="display: none;" onclick="resetBreathing()">Try Another</button>
                 <button class="log-button" id="breathing-log">Log Activity</button>
                 <p class="affirmation">Well done completing the breathing exercise.</p>
@@ -780,12 +872,7 @@
         <div id="gratitude-popup" class="popup">
             <div class="popup-content">
                 <h4>Gratitude Notes</h4>
-                <p>Select a gratitude prompt to reflect on:</p>
-                <div class="task-tiles" id="gratitude-tiles">
-                    <button class="task-tile gratitude-type" onclick="startGratitudeTechnique('daily')">Daily Gratitude</button>
-                    <button class="task-tile gratitude-type" onclick="startGratitudeTechnique('relationships')">Relationships</button>
-                    <button class="task-tile gratitude-type" onclick="startGratitudeTechnique('achievements')">Achievements</button>
-                </div>
+                <p id="gratitude-prompt"></p>
                 <textarea id="gratitude-text" rows="3" style="display: none;"></textarea>
                 <button class="action-button" id="gratitude-save" style="display: none;" onclick="saveGratitude()">Save Gratitude</button>
                 <button class="log-button" id="gratitude-log">Log Activity</button>
@@ -796,12 +883,6 @@
         <div id="meditation-popup" class="popup">
             <div class="popup-content">
                 <h4>Guided Meditation</h4>
-                <p>Select a meditation technique to begin:</p>
-                <div class="task-tiles" id="meditation-tiles">
-                    <button class="task-tile meditation-type" onclick="startMeditationTechnique('breath-awareness')">Breath Awareness</button>
-                    <button class="task-tile meditation-type" onclick="startMeditationTechnique('body-scan')">Body Scan</button>
-                    <button class="task-tile meditation-type" onclick="startMeditationTechnique('visualization')">Visualization</button>
-                </div>
                 <p id="meditation-prompt"></p>
                 <button class="action-button" id="meditation-try-another" style="display: none;" onclick="resetMeditation()">Try Another</button>
                 <button class="log-button" id="meditation-log">Log Activity</button>
@@ -812,12 +893,6 @@
         <div id="pmr-popup" class="popup">
             <div class="popup-content">
                 <h4>Progressive Muscle Relaxation</h4>
-                <p>Select a relaxation focus to begin:</p>
-                <div class="task-tiles" id="pmr-tiles">
-                    <button class="task-tile pmr-type" onclick="startPMRTechnique('full-body')">Full Body</button>
-                    <button class="task-tile pmr-type" onclick="startPMRTechnique('lower-body')">Lower Body</button>
-                    <button class="task-tile pmr-type" onclick="startPMRTechnique('upper-body')">Upper Body</button>
-                </div>
                 <p id="pmr-prompt"></p>
                 <button class="action-button" id="pmr-try-another" style="display: none;" onclick="resetPMR()">Try Another</button>
                 <button class="log-button" id="pmr-log">Log Activity</button>
@@ -828,12 +903,6 @@
         <div id="walk-popup" class="popup">
             <div class="popup-content">
                 <h4>Nature Walk</h4>
-                <p>Select a nature walk focus to begin:</p>
-                <div class="task-tiles" id="walk-tiles">
-                    <button class="task-tile walk-type" onclick="startWalkTechnique('mindful')">Mindful Walk</button>
-                    <button class="task-tile walk-type" onclick="startWalkTechnique('sensory')">Sensory Focus</button>
-                    <button class="task-tile walk-type" onclick="startWalkTechnique('gratitude')">Gratitude Walk</button>
-                </div>
                 <div class="progress-container"><div id="walk-progress" class="progress-bar"></div></div>
                 <p id="walk-timer"></p>
                 <button class="log-button" id="walk-log">Log Activity</button>
@@ -844,12 +913,6 @@
         <div id="journaling-popup" class="popup">
             <div class="popup-content">
                 <h4>Mindful Journaling</h4>
-                <p>Select a journaling prompt to begin:</p>
-                <div class="task-tiles" id="journaling-tiles">
-                    <button class="task-tile journaling-type" onclick="startJournalingTechnique('emotions')">Explore Emotions</button>
-                    <button class="task-tile journaling-type" onclick="startJournalingTechnique('goals')">Reflect on Goals</button>
-                    <button class="task-tile journaling-type" onclick="startJournalingTechnique('challenges')">Address Challenges</button>
-                </div>
                 <p id="journaling-prompt"></p>
                 <textarea id="journaling-text" rows="3" style="display: none;"></textarea>
                 <button class="action-button" id="journaling-save" style="display: none;" onclick="saveJournaling()">Save Entry</button>
@@ -861,12 +924,6 @@
         <div id="reframing-popup" class="popup">
             <div class="popup-content">
                 <h4>Cognitive Reframing</h4>
-                <p>Select a reframing exercise to begin:</p>
-                <div class="task-tiles" id="reframing-tiles">
-                    <button class="task-tile reframing-type" onclick="startReframingTechnique('negative-thought')">Reframe a Negative Thought</button>
-                    <button class="task-tile reframing-type" onclick="startReframingTechnique('stressful-event')">Reframe a Stressful Event</button>
-                    <button class="task-tile reframing-type" onclick="startReframingTechnique('self-criticism')">Reframe Self-Criticism</button>
-                </div>
                 <p id="reframing-prompt"></p>
                 <textarea id="reframing-text" rows="3" style="display: none;"></textarea>
                 <button class="action-button" id="reframing-save" style="display: none;" onclick="saveReframing()">Save Reframe</button>
@@ -891,12 +948,13 @@
 
         function setupActivityCards() {
             const tryButtons = document.querySelectorAll('.try-button');
-            tryButtons.forEach((button, index) => {
+            tryButtons.forEach((button) => {
                 button.addEventListener('click', () => {
                     const card = button.closest('.activity-card');
                     const tool = card.getAttribute('data-tool');
-                    openPopup(tool);
-                    console.log(`Opened popup for activity: ${tool}`);
+                    const technique = card.getAttribute('data-technique');
+                    openPopup(tool, technique);
+                    console.log(`Opened popup for activity: ${tool}, technique: ${technique}`);
                 });
             });
 
@@ -922,12 +980,23 @@
             console.log('Activity cards set up with', tryButtons.length, 'try buttons');
         }
 
-        function openPopup(tool) {
+        function openPopup(tool, technique) {
             const popup = document.getElementById(`${tool}-popup`);
             popup.style.display = 'flex';
             const logButton = popup.querySelector('.log-button');
             logButton.classList.add('active');
-            if (tool === 'walk') initWalk();
+
+            // Automatically start the technique
+            if (tool === 'breathing') startBreathingTechnique(technique);
+            if (tool === 'gratitude') startGratitudeTechnique(technique);
+            if (tool === 'meditation') startMeditationTechnique(technique);
+            if (tool === 'pmr') startPMRTechnique(technique);
+            if (tool === 'walk') {
+                initWalk();
+                startWalkTechnique(technique);
+            }
+            if (tool === 'journaling') startJournalingTechnique(technique);
+            if (tool === 'reframing') startReframingTechnique(technique);
         }
 
         function closePopup(tool) {
@@ -948,7 +1017,6 @@
             const circle = document.getElementById('breathing-circle');
             const stepText = document.getElementById('breathing-step');
             const instruction = document.getElementById('breathing-instruction');
-            const tiles = document.getElementById('breathing-tiles');
             const tryAnotherButton = document.getElementById('breathing-try-another');
             let phaseIndex = 0;
             let phaseTime = 0;
@@ -991,7 +1059,6 @@
             const selectedTechnique = techniques[type];
             const phases = selectedTechnique.phases;
             instruction.textContent = selectedTechnique.instruction;
-            tiles.style.display = 'none';
             circle.style.display = 'flex';
             tryAnotherButton.style.display = 'inline-flex';
 
@@ -1027,27 +1094,25 @@
             stopBreathing();
             const circle = document.getElementById('breathing-circle');
             const instruction = document.getElementById('breathing-instruction');
-            const tiles = document.getElementById('breathing-tiles');
             const tryAnotherButton = document.getElementById('breathing-try-another');
             const affirmation = document.querySelector('#breathing-popup .affirmation');
             circle.style.display = 'none';
             instruction.textContent = '';
-            tiles.style.display = 'flex';
             tryAnotherButton.style.display = 'none';
             affirmation.style.display = 'none';
         }
 
         // Gratitude Notes
         function startGratitudeTechnique(type) {
-            const tiles = document.getElementById('gratitude-tiles');
             const textArea = document.getElementById('gratitude-text');
             const saveButton = document.getElementById('gratitude-save');
+            const prompt = document.getElementById('gratitude-prompt');
             const prompts = {
                 'daily': 'Write about three things you are grateful for today.',
                 'relationships': 'Reflect on a relationship that brings you joy and why.',
                 'achievements': 'Describe a recent achievement you’re proud of and how it made you feel.'
             };
-            tiles.style.display = 'none';
+            prompt.textContent = prompts[type];
             textArea.style.display = 'block';
             saveButton.style.display = 'inline-flex';
             textArea.placeholder = prompts[type];
@@ -1066,11 +1131,11 @@
         }
 
         function resetGratitude() {
-            const tiles = document.getElementById('gratitude-tiles');
+            const prompt = document.getElementById('gratitude-prompt');
             const textArea = document.getElementById('gratitude-text');
             const saveButton = document.getElementById('gratitude-save');
             const affirmation = document.querySelector('#gratitude-popup .affirmation');
-            tiles.style.display = 'flex';
+            prompt.textContent = '';
             textArea.style.display = 'none';
             textArea.value = '';
             saveButton.style.display = 'none';
@@ -1080,14 +1145,12 @@
         // Guided Meditation
         function startMeditationTechnique(type) {
             const prompt = document.getElementById('meditation-prompt');
-            const tiles = document.getElementById('meditation-tiles');
             const tryAnotherButton = document.getElementById('meditation-try-another');
             const prompts = {
                 'breath-awareness': 'Focus on your breath. Inhale deeply, exhale slowly, and notice the air moving through your body for 60 seconds.',
                 'body-scan': 'Close your eyes and mentally scan your body from head to toe, noticing any sensations without judgment for 60 seconds.',
                 'visualization': 'Imagine a peaceful place—like a beach or forest. Picture the details and immerse yourself for 60 seconds.'
             };
-            tiles.style.display = 'none';
             prompt.textContent = prompts[type];
             setTimeout(() => {
                 prompt.textContent = 'Meditation complete. Take a moment to notice how you feel.';
@@ -1098,10 +1161,8 @@
 
         function resetMeditation() {
             const prompt = document.getElementById('meditation-prompt');
-            const tiles = document.getElementById('meditation-tiles');
             const tryAnotherButton = document.getElementById('meditation-try-another');
             const affirmation = document.querySelector('#meditation-popup .affirmation');
-            tiles.style.display = 'flex';
             prompt.textContent = '';
             tryAnotherButton.style.display = 'none';
             affirmation.style.display = 'none';
@@ -1112,7 +1173,6 @@
         let pmrInterval = null;
         function startPMRTechnique(type) {
             const prompt = document.getElementById('pmr-prompt');
-            const tiles = document.getElementById('pmr-tiles');
             const tryAnotherButton = document.getElementById('pmr-try-another');
             const muscleGroups = {
                 'full-body': [
@@ -1135,7 +1195,6 @@
                 ]
             };
             const selectedGroups = muscleGroups[type];
-            tiles.style.display = 'none';
             pmrIndex = 0;
 
             function nextStep() {
@@ -1159,10 +1218,8 @@
 
         function resetPMR() {
             const prompt = document.getElementById('pmr-prompt');
-            const tiles = document.getElementById('pmr-tiles');
             const tryAnotherButton = document.getElementById('pmr-try-another');
             const affirmation = document.querySelector('#pmr-popup .affirmation');
-            tiles.style.display = 'flex';
             prompt.textContent = '';
             tryAnotherButton.style.display = 'none';
             affirmation.style.display = 'none';
@@ -1173,12 +1230,10 @@
         // Nature Walk
         let walkInterval = null;
         function initWalk() {
-            const tiles = document.getElementById('walk-tiles');
-            tiles.style.display = 'flex';
+            // Placeholder for initialization if needed
         }
 
         function startWalkTechnique(type) {
-            const tiles = document.getElementById('walk-tiles');
             const timer = document.getElementById('walk-timer');
             const progress = document.getElementById('walk-progress');
             const prompts = {
@@ -1186,7 +1241,6 @@
                 'sensory': 'Pay attention to the sights, sounds, and smells around you as you walk.',
                 'gratitude': 'Reflect on things you’re grateful for in your environment as you walk.'
             };
-            tiles.style.display = 'none';
             timer.textContent = prompts[type];
             let timeLeft = 300;
             progress.style.width = '100%';
@@ -1220,7 +1274,6 @@
         // Mindful Journaling
         function startJournalingTechnique(type) {
             const prompt = document.getElementById('journaling-prompt');
-            const tiles = document.getElementById('journaling-tiles');
             const textArea = document.getElementById('journaling-text');
             const saveButton = document.getElementById('journaling-save');
             const prompts = {
@@ -1228,7 +1281,6 @@
                 'goals': 'Reflect on a goal you’d like to achieve and what steps you can take toward it.',
                 'challenges': 'Describe a challenge you’re facing and how you might approach it differently.'
             };
-            tiles.style.display = 'none';
             prompt.textContent = prompts[type];
             textArea.style.display = 'block';
             saveButton.style.display = 'inline-flex';
@@ -1248,11 +1300,9 @@
 
         function resetJournaling() {
             const prompt = document.getElementById('journaling-prompt');
-            const tiles = document.getElementById('journaling-tiles');
             const textArea = document.getElementById('journaling-text');
             const saveButton = document.getElementById('journaling-save');
             const affirmation = document.querySelector('#journaling-popup .affirmation');
-            tiles.style.display = 'flex';
             prompt.textContent = '';
             textArea.style.display = 'none';
             textArea.value = '';
@@ -1263,7 +1313,6 @@
         // Cognitive Reframing
         function startReframingTechnique(type) {
             const prompt = document.getElementById('reframing-prompt');
-            const tiles = document.getElementById('reframing-tiles');
             const textArea = document.getElementById('reframing-text');
             const saveButton = document.getElementById('reframing-save');
             const prompts = {
@@ -1271,7 +1320,6 @@
                 'stressful-event': 'Describe a recent stressful event, then find a positive or neutral way to view it.',
                 'self-criticism': 'Write a self-critical thought, then reframe it with self-compassion.'
             };
-            tiles.style.display = 'none';
             prompt.textContent = prompts[type];
             textArea.style.display = 'block';
             saveButton.style.display = 'inline-flex';
@@ -1291,11 +1339,9 @@
 
         function resetReframing() {
             const prompt = document.getElementById('reframing-prompt');
-            const tiles = document.getElementById('reframing-tiles');
             const textArea = document.getElementById('reframing-text');
             const saveButton = document.getElementById('reframing-save');
             const affirmation = document.querySelector('#reframing-popup .affirmation');
-            tiles.style.display = 'flex';
             prompt.textContent = '';
             textArea.style.display = 'none';
             textArea.value = '';
