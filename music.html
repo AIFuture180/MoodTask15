@@ -104,9 +104,6 @@
             margin-bottom: 30px;
         }
         .category-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             margin-bottom: 15px;
         }
         .category-header h2 {
@@ -114,15 +111,6 @@
             font-weight: 600;
             color: #2C3E50;
             margin: 0;
-        }
-        .view-all {
-            color: #4A90E2;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.9em;
-        }
-        .view-all:hover {
-            text-decoration: underline;
         }
         .tracks-container {
             display: flex;
@@ -396,7 +384,7 @@
             background-color: #6BCB77;
             color: white;
         }
-        .popup {
+        .video-player-popup {
             display: none;
             position: fixed;
             top: 0;
@@ -408,59 +396,55 @@
             align-items: center;
             z-index: 1000;
         }
-        .popup-content {
-            background: #fff;
-            padding: 25px;
-            border-radius: 10px;
+        .video-player-content {
+            width: 50%;
             max-width: 800px;
-            width: 95%;
+            background: #fff;
+            border-radius: 10px;
             position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .video-player-content.fullscreen {
+            width: 100%;
+            height: 100%;
+            max-width: none;
+            border-radius: 0;
+        }
+        .video-player-header {
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f9f9f9;
+        }
+        .video-player-header h3 {
+            margin: 0;
+            font-size: 1.2em;
             color: #333;
         }
-        .popup-header {
-            margin-bottom: 20px;
-            text-align: center;
+        .video-player-controls {
+            display: flex;
+            gap: 10px;
         }
-        .popup-header h3 {
-            font-size: 1.8em;
-            margin-bottom: 10px;
-            color: #2C3E50;
-        }
-        .popup-header p {
-            color: #666;
-            font-size: 1em;
-        }
-        .close-button {
-            position: absolute;
-            top: 15px;
-            right: 15px;
+        .video-player-controls button {
             background: none;
             border: none;
-            font-size: 1.5em;
+            font-size: 1.2em;
             cursor: pointer;
             color: #333;
-            z-index: 10;
+            transition: color 0.3s;
         }
-        .video-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
+        .video-player-controls button:hover {
+            color: #4A90E2;
         }
-        .video-item {
-            background: #f9f9f9;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        .video-thumbnail {
+        .video-player {
             position: relative;
             width: 100%;
             padding-top: 56.25%; /* 16:9 Aspect Ratio */
-            background-color: #eee;
-            overflow: hidden;
+            background-color: #000;
         }
-        .video-thumbnail iframe {
+        .video-player iframe {
             position: absolute;
             top: 0;
             left: 0;
@@ -468,52 +452,16 @@
             height: 100%;
             border: none;
         }
-        .video-info {
-            padding: 15px;
-        }
-        .video-info h4 {
-            margin: 0 0 5px 0;
-            font-size: 1.1em;
-            color: #333;
-        }
-        .video-info p {
-            margin: 0;
-            font-size: 0.9em;
-            color: #666;
-        }
-        .log-track-btn {
-            display: block;
-            width: 100%;
-            padding: 8px 0;
-            background-color: #6BCB77;
-            color: white;
-            text-align: center;
-            border: none;
-            border-radius: 5px;
-            margin-top: 10px;
-            cursor: pointer;
-            font-size: 0.9em;
-            font-weight: 500;
-            transition: background-color 0.3s;
-        }
-        .log-track-btn:hover {
-            background-color: #5BBF66;
-        }
-        @media (max-width: 1024px) {
-            .video-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            }
-        }
         @media (max-width: 768px) {
-            .video-grid {
-                grid-template-columns: 1fr 1fr;
-            }
             .track-card {
                 min-width: 130px;
                 width: 130px;
             }
             .track-image {
                 height: 130px;
+            }
+            .video-player-content {
+                width: 80%;
             }
         }
         @media (max-width: 600px) {
@@ -547,9 +495,6 @@
             .hero h1 {
                 font-size: 1.8em;
             }
-            .video-grid {
-                grid-template-columns: 1fr;
-            }
             .track-card {
                 min-width: 120px;
                 width: 120px;
@@ -559,6 +504,9 @@
             }
             .category-header h2 {
                 font-size: 1.5em;
+            }
+            .video-player-content {
+                width: 90%;
             }
         }
     </style>
@@ -588,10 +536,9 @@
             <div class="category-row">
                 <div class="category-header">
                     <h2>Sleep</h2>
-                    <a href="#" class="view-all" data-category="sleep">View All</a>
                 </div>
                 <div class="tracks-container">
-                    <div class="track-card" data-category="sleep" data-video="YENnvhlAGmQ" data-title="Waves Crashing">
+                    <div class="track-card" data-video="YENnvhlAGmQ" data-title="Waves Crashing">
                         <div class="track-image">
                             <img src="https://img.youtube.com/vi/YENnvhlAGmQ/maxresdefault.jpg" alt="Waves Crashing">
                             <div class="play-overlay">
@@ -605,7 +552,7 @@
                             <p>Calm ocean sounds for sleep</p>
                         </div>
                     </div>
-                    <div class="track-card" data-category="sleep" data-video="LFASWuckB1c" data-title="Distant Planet">
+                    <div class="track-card" data-video="LFASWuckB1c" data-title="Distant Planet">
                         <div class="track-image">
                             <img src="https://img.youtube.com/vi/LFASWuckB1c/maxresdefault.jpg" alt="Distant Planet">
                             <div class="play-overlay">
@@ -619,7 +566,7 @@
                             <p>Space ambient for deep sleep</p>
                         </div>
                     </div>
-                    <div class="track-card" data-category="sleep" data-video="i9sR_T76H34" data-title="Moonlight">
+                    <div class="track-card" data-video="i9sR_T76H34" data-title="Moonlight">
                         <div class="track-image">
                             <img src="https://img.youtube.com/vi/i9sR_T76H34/maxresdefault.jpg" alt="Moonlight">
                             <div class="play-overlay">
@@ -633,7 +580,7 @@
                             <p>Gentle night melodies</p>
                         </div>
                     </div>
-                    <div class="track-card" data-category="sleep" data-video="1ZYbU82GVz4" data-title="Calm Nature">
+                    <div class="track-card" data-video="1ZYbU82GVz4" data-title="Calm Nature">
                         <div class="track-image">
                             <img src="https://img.youtube.com/vi/1ZYbU82GVz4/maxresdefault.jpg" alt="Calm Nature">
                             <div class="play-overlay">
@@ -647,7 +594,7 @@
                             <p>Forest sounds for sleep</p>
                         </div>
                     </div>
-                    <div class="track-card" data-category="sleep" data-video="OeHLHNKQCXA" data-title="Beautiful Piano">
+                    <div class="track-card" data-video="OeHLHNKQCXA" data-title="Beautiful Piano">
                         <div class="track-image">
                             <img src="https://img.youtube.com/vi/OeHLHNKQCXA/maxresdefault.jpg" alt="Beautiful Piano">
                             <div class="play-overlay">
@@ -668,10 +615,9 @@
             <div class="category-row">
                 <div class="category-header">
                     <h2>Meditation</h2>
-                    <a href="#" class="view-all" data-category="meditation">View All</a>
                 </div>
                 <div class="tracks-container">
-                    <div class="track-card" data-category="meditation" data-video="O-6f5wQXSu8" data-title="Guided Meditation">
+                    <div class="track-card" data-video="O-6f5wQXSu8" data-title="Guided Meditation">
                         <div class="track-image">
                             <img src="https://img.youtube.com/vi/O-6f5wQXSu8/maxresdefault.jpg" alt="Guided Meditation">
                             <div class="play-overlay">
@@ -685,7 +631,7 @@
                             <p>Mindfulness practice</p>
                         </div>
                     </div>
-                    <div class="track-card" data-category="meditation" data-video="Affh1xGriY8" data-title="Positive Energy">
+                    <div class="track-card" data-video="Affh1xGriY8" data-title="Positive Energy">
                         <div class="track-image">
                             <img src="https://img.youtube.com/vi/Affh1xGriY8/maxresdefault.jpg" alt="Positive Energy">
                             <div class="play-overlay">
@@ -699,7 +645,7 @@
                             <p>Vibrational healing tones</p>
                         </div>
                     </div>
-                    <div class="track-card" data-category="meditation" data-video="Lju6h-C37hE" data-title="Meditation Music">
+                    <div class="track-card" data-video="Lju6h-C37hE" data-title="Meditation Music">
                         <div class="track-image">
                             <img src="https://img.youtube.com/vi/Lju6h-C37hE/maxresdefault.jpg" alt="Meditation Music">
                             <div class="play-overlay">
@@ -713,7 +659,7 @@
                             <p>Deep relaxation sounds</p>
                         </div>
                     </div>
-                    <div class="track-card" data-category="meditation" data-video="vj0JDwQLof4" data-title="10-Minute Meditation">
+                    <div class="track-card" data-video="vj0JDwQLof4" data-title="10-Minute Meditation">
                         <div class="track-image">
                             <img src="https://img.youtube.com/vi/vj0JDwQLof4/maxresdefault.jpg" alt="10-Minute Meditation">
                             <div class="play-overlay">
@@ -727,7 +673,7 @@
                             <p>Quick mindfulness break</p>
                         </div>
                     </div>
-                    <div class="track-card" data-category="meditation" data-video="7g96Zq9NSqo" data-title="Healing Meditation">
+                    <div class="track-card" data-video="7g96Zq9NSqo" data-title="Healing Meditation">
                         <div class="track-image">
                             <img src="https://img.youtube.com/vi/7g96Zq9NSqo/maxresdefault.jpg" alt="Healing Meditation">
                             <div class="play-overlay">
@@ -748,10 +694,9 @@
             <div class="category-row">
                 <div class="category-header">
                     <h2>Relaxation</h2>
-                    <a href="#" class="view-all" data-category="relaxation">View All</a>
                 </div>
                 <div class="tracks-container">
-                    <div class="track-card" data-category="relaxation" data-video="lFcSrYw-ARY" data-title="Stress Relief">
+                    <div class="track-card" data-video="lFcSrYw-ARY" data-title="Stress Relief">
                         <div class="track-image">
                             <img src="https://img.youtube.com/vi/lFcSrYw-ARY/maxresdefault.jpg" alt="Stress Relief">
                             <div class="play-overlay">
@@ -765,7 +710,7 @@
                             <p>Calming relaxation music</p>
                         </div>
                     </div>
-                    <div class="track-card" data-category="relaxation" data-video="DRFHklnN-SM" data-title="Nature Sounds">
+                    <div class="track-card" data-video="DRFHklnN-SM" data-title="Nature Sounds">
                         <div class="track-image">
                             <img src="https://img.youtube.com/vi/DRFHklnN-SM/maxresdefault.jpg" alt="Nature Sounds">
                             <div class="play-overlay">
@@ -779,7 +724,7 @@
                             <p>Peaceful forest ambience</p>
                         </div>
                     </div>
-                    <div class="track-card" data-category="relaxation" data-video="QZbuj3RJcjI" data-title="Massage Music">
+                    <div class="track-card" data-video="QZbuj3RJcjI" data-title="Massage Music">
                         <div class="track-image">
                             <img src="https://img.youtube.com/vi/QZbuj3RJcjI/maxresdefault.jpg" alt="Massage Music">
                             <div class="play-overlay">
@@ -793,7 +738,7 @@
                             <p>Spa therapy soundtrack</p>
                         </div>
                     </div>
-                    <div class="track-card" data-category="relaxation" data-video="dnBAU8Co6PA" data-title="Under The Sea">
+                    <div class="track-card" data-video="dnBAU8Co6PA" data-title="Under The Sea">
                         <div class="track-image">
                             <img src="https://img.youtube.com/vi/dnBAU8Co6PA/maxresdefault.jpg" alt="Under The Sea">
                             <div class="play-overlay">
@@ -807,7 +752,7 @@
                             <p>Ocean depths relaxation</p>
                         </div>
                     </div>
-                    <div class="track-card" data-category="relaxation" data-video="V1RPi2MYptM" data-title="Water Sounds">
+                    <div class="track-card" data-video="V1RPi2MYptM" data-title="Water Sounds">
                         <div class="track-image">
                             <img src="https://img.youtube.com/vi/V1RPi2MYptM/maxresdefault.jpg" alt="Water Sounds">
                             <div class="play-overlay">
@@ -828,10 +773,9 @@
             <div class="category-row">
                 <div class="category-header">
                     <h2>Motivation</h2>
-                    <a href="#" class="view-all" data-category="motivation">View All</a>
                 </div>
                 <div class="tracks-container">
-                    <div class="track-card" data-category="motivation" data-video="J7Aqwv2xNIE" data-title="Never Give Up">
+                    <div class="track-card" data-video="J7Aqwv2xNIE" data-title="Never Give Up">
                         <div class="track-image">
                             <img src="https://img.youtube.com/vi/J7Aqwv2xNIE/maxresdefault.jpg" alt="Never Give Up">
                             <div class="play-overlay">
@@ -845,7 +789,7 @@
                             <p>Uplifting motivational track</p>
                         </div>
                     </div>
-                    <div class="track-card" data-category="motivation" data-video="nuv1oOgzLKQ" data-title="Inspiring Music">
+                    <div class="track-card" data-video="nuv1oOgzLKQ" data-title="Inspiring Music">
                         <div class="track-image">
                             <img src="https://img.youtube.com/vi/nuv1oOgzLKQ/maxresdefault.jpg" alt="Inspiring Music">
                             <div class="play-overlay">
@@ -859,7 +803,7 @@
                             <p>Energizing background music</p>
                         </div>
                     </div>
-                    <div class="track-card" data-category="motivation" data-video="6IruQEIgu7w" data-title="Uplifting Acoustic">
+                    <div class="track-card" data-video="6IruQEIgu7w" data-title="Uplifting Acoustic">
                         <div class="track-image">
                             <img src="https://img.youtube.com/vi/6IruQEIgu7w/maxresdefault.jpg" alt="Uplifting Acoustic">
                             <div class="play-overlay">
@@ -873,7 +817,7 @@
                             <p>Positive guitar melodies</p>
                         </div>
                     </div>
-                    <div class="track-card" data-category="motivation" data-video="NQKC24th90U" data-title="Inspirational Music">
+                    <div class="track-card" data-video="NQKC24th90U" data-title="Inspirational Music">
                         <div class="track-image">
                             <img src="https://img.youtube.com/vi/NQKC24th90U/maxresdefault.jpg" alt="Inspirational Music">
                             <div class="play-overlay">
@@ -887,7 +831,7 @@
                             <p>Motivational orchestral track</p>
                         </div>
                     </div>
-                    <div class="track-card" data-category="motivation" data-video="WMdhPtS5vio" data-title="Epic Motivational">
+                    <div class="track-card" data-video="WMdhPtS5vio" data-title="Epic Motivational">
                         <div class="track-image">
                             <img src="https://img.youtube.com/vi/WMdhPtS5vio/maxresdefault.jpg" alt="Epic Motivational">
                             <div class="play-overlay">
@@ -908,10 +852,9 @@
             <div class="category-row">
                 <div class="category-header">
                     <h2>Study</h2>
-                    <a href="#" class="view-all" data-category="study">View All</a>
                 </div>
                 <div class="tracks-container">
-                    <div class="track-card" data-category="study" data-video="sjkrrmBnpGE" data-title="Study Music">
+                    <div class="track-card" data-video="sjkrrmBnpGE" data-title="Study Music">
                         <div class="track-image">
                             <img src="https://img.youtube.com/vi/sjkrrmBnpGE/maxresdefault.jpg" alt="Study Music">
                             <div class="play-overlay">
@@ -925,7 +868,7 @@
                             <p>Focus-enhancing tracks</p>
                         </div>
                     </div>
-                    <div class="track-card" data-category="study" data-video="sAcj8me7wGI" data-title="Peaceful Piano">
+                    <div class="track-card" data-video="sAcj8me7wGI" data-title="Peaceful Piano">
                         <div class="track-image">
                             <img src="https://img.youtube.com/vi/sAcj8me7wGI/maxresdefault.jpg" alt="Peaceful Piano">
                             <div class="play-overlay">
@@ -939,7 +882,7 @@
                             <p>Soft piano for concentration</p>
                         </div>
                     </div>
-                    <div class="track-card" data-category="study" data-video="WPni755-Krg" data-title="Alpha Waves">
+                    <div class="track-card" data-video="WPni755-Krg" data-title="Alpha Waves">
                         <div class="track-image">
                             <img src="https://img.youtube.com/vi/WPni755-Krg/maxresdefault.jpg" alt="Alpha Waves">
                             <div class="play-overlay">
@@ -953,7 +896,7 @@
                             <p>Brainwave focus music</p>
                         </div>
                     </div>
-                    <div class="track-card" data-category="study" data-video="RG2IK8oRZNA" data-title="Focus">
+                    <div class="track-card" data-video="RG2IK8oRZNA" data-title="Focus">
                         <div class="track-image">
                             <img src="https://img.youtube.com/vi/RG2IK8oRZNA/maxresdefault.jpg" alt="Focus">
                             <div class="play-overlay">
@@ -967,7 +910,7 @@
                             <p>Deep concentration sounds</p>
                         </div>
                     </div>
-                    <div class="track-card" data-category="study" data-video="oiGmGFxsJi8" data-title="Calm Piano">
+                    <div class="track-card" data-video="oiGmGFxsJi8" data-title="Calm Piano">
                         <div class="track-image">
                             <img src="https://img.youtube.com/vi/oiGmGFxsJi8/maxresdefault.jpg" alt="Calm Piano">
                             <div class="play-overlay">
@@ -1018,10 +961,10 @@
                 <p>Music has a profound effect on our brain and emotions, influencing everything from stress levels to productivity. Research shows that slow-tempo music can lower heart rate and cortisol levels, helping you relax or sleep better, as noted by environmental psychologist Dr. Roger Ulrich. A 2018 study in the <em>Journal of Sleep Research</em> found that calming music reduced sleep onset time by 35% (Trahan et al., 2018). On the other hand, upbeat tracks can increase dopamine, boosting motivation, according to neuroscientist Dr. Lisa Feldman Barrett. A 2019 study in the <em>Journal of Neuroscience</em> showed that motivational music improved task performance by 18% (Thompson et al., 2019). Additionally, alpha wave music enhances focus by syncing brainwaves, as supported by a 2021 study in <em>Brain and Cognition</em> (Lee et al., 2021). At MoodTask, we’ve chosen tracks to leverage these benefits, ensuring you have the right music for every mood.</p>
                 
                 <h3>How to Use This Page</h3>
-                <p>Using MoodTask’s Mood Music page is easy and intuitive. Browse through the categories like Sleep or Motivation, and scroll horizontally to explore tracks. Click on a track to open a popup and play it, or use the "View All" link to see all tracks in a category. Each track is an embedded YouTube video—like "Waves Crashing" for Sleep or "Alpha Waves" for Study. You can log your listening habits to track which tracks work best for you over time on our <a href="calendar.html">Dashboard</a>. Whether you’re unwinding, focusing, or seeking inspiration, explore all categories to find the perfect soundtrack for your moment. Let music guide you toward a more balanced day!</p>
+                <p>Using MoodTask’s Mood Music page is easy and intuitive. Browse through the categories like Sleep or Motivation, and scroll horizontally to explore tracks. Click on a track to open a video player and enjoy the music directly. Each track is an embedded YouTube video—like "Waves Crashing" for Sleep or "Alpha Waves" for Study. You can close the player and select a different track anytime. Explore all categories to find the perfect soundtrack for your moment. Let music guide you toward a more balanced day!</p>
                 
                 <h3>Maximizing Your Music Experience</h3>
-                <p>To get the most out of MoodTask’s music, integrate it into your daily routine with intention. Play our Sleep tracks, like "Calm Nature," 15 minutes before bed to create a calming pre-sleep ritual, or use Motivation tracks like "Epic Motivational" during a morning workout to kickstart your day. Pair music with our <a href="activities.html">Activities</a> for a deeper experience—for example, listen to Meditation tracks during a Guided Meditation session to enhance mindfulness. Track your mood before and after listening on our Dashboard to identify patterns and discover which categories best support your emotional well-being. Experiment with different times of day and activities to see how music impacts your focus, relaxation, or energy. Over time, these tracks can become a powerful tool for emotional balance.</p>
+                <p>To get the most out of MoodTask’s music, integrate it into your daily routine with intention. Play our Sleep tracks, like "Calm Nature," 15 minutes before bed to create a calming pre-sleep ritual, or use Motivation tracks like "Epic Motivational" during a morning workout to kickstart your day. Pair music with our <a href="activities.html">Activities</a> for a deeper experience—for example, listen to Meditation tracks during a Guided Meditation session to enhance mindfulness. Experiment with different times of day and activities to see how music impacts your focus, relaxation, or energy. Over time, these tracks can become a powerful tool for emotional balance.</p>
                 
                 <h3>Explore More with MoodTask</h3>
                 <p>Your emotional wellness journey doesn’t end with music—MoodTask offers a range of tools to support you. After enjoying our curated tracks, explore our <a href="activities.html">Activities</a> page for science-backed practices like Breathing Exercises or Mindful Journaling to further improve your mood. Visit our <a href="blog.html">Blog</a> for in-depth articles on mindfulness, stress management, and mental health, packed with tips to complement your music experience. For additional resources, check out our affiliate partners, such as <a href="https://www.mindfulness.com/?aff_id=67890">mindfulness apps</a> for guided meditations or <a href="https://www.online-therapy.com/?aff_id=12345">online therapy</a> for professional support. Let MoodTask be your guide to a more balanced, joyful life through the power of music and intentional practices!</p>
@@ -1052,310 +995,19 @@
             </div>
         </div>
 
-        <!-- Popups -->
-        <div id="sleep-popup" class="popup">
-            <div class="popup-content">
-                <div class="popup-header">
-                    <h3>Sleep Music</h3>
-                    <p>Relax and drift off with soothing tracks.</p>
-                </div>
-                <div class="video-grid" id="sleep-videos">
-                    <div class="video-item">
-                        <div class="video-thumbnail">
-                            <iframe id="sleep-player-YENnvhlAGmQ" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-info">
-                            <h4>Waves Crashing</h4>
-                            <p>Calm ocean sounds for sleep</p>
-                            <button class="log-track-btn" data-video="YENnvhlAGmQ" data-title="Waves Crashing" data-category="sleep">Log Track</button>
-                        </div>
-                    </div>
-                    <div class="video-item">
-                        <div class="video-thumbnail">
-                            <iframe id="sleep-player-LFASWuckB1c" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-info">
-                            <h4>Distant Planet</h4>
-                            <p>Space ambient for deep sleep</p>
-                            <button class="log-track-btn" data-video="LFASWuckB1c" data-title="Distant Planet" data-category="sleep">Log Track</button>
-                        </div>
-                    </div>
-                    <div class="video-item">
-                        <div class="video-thumbnail">
-                            <iframe id="sleep-player-i9sR_T76H34" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-info">
-                            <h4>Moonlight</h4>
-                            <p>Gentle night melodies</p>
-                            <button class="log-track-btn" data-video="i9sR_T76H34" data-title="Moonlight" data-category="sleep">Log Track</button>
-                        </div>
-                    </div>
-                    <div class="video-item">
-                        <div class="video-thumbnail">
-                            <iframe id="sleep-player-1ZYbU82GVz4" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-info">
-                            <h4>Calm Nature</h4>
-                            <p>Forest sounds for sleep</p>
-                            <button class="log-track-btn" data-video="1ZYbU82GVz4" data-title="Calm Nature" data-category="sleep">Log Track</button>
-                        </div>
-                    </div>
-                    <div class="video-item">
-                        <div class="video-thumbnail">
-                            <iframe id="sleep-player-OeHLHNKQCXA" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-info">
-                            <h4>Beautiful Piano</h4>
-                            <p>Soothing piano for sleep</p>
-                            <button class="log-track-btn" data-video="OeHLHNKQCXA" data-title="Beautiful Piano" data-category="sleep">Log Track</button>
-                        </div>
+        <!-- Video Player Popup -->
+        <div id="video-player-popup" class="video-player-popup">
+            <div class="video-player-content" id="video-player-content">
+                <div class="video-player-header">
+                    <h3 id="video-player-title">Loading...</h3>
+                    <div class="video-player-controls">
+                        <button id="fullscreen-btn" onclick="toggleFullscreen()"><i class="fas fa-expand"></i></button>
+                        <button onclick="closeVideoPlayer()"><i class="fas fa-times"></i></button>
                     </div>
                 </div>
-                <button class="close-button" onclick="closePopup('sleep')"><i class="fas fa-times"></i></button>
-            </div>
-        </div>
-        <div id="meditation-popup" class="popup">
-            <div class="popup-content">
-                <div class="popup-header">
-                    <h3>Meditation Music</h3>
-                    <p>Enhance your mindfulness practice.</p>
+                <div class="video-player">
+                    <iframe id="video-player-iframe" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                 </div>
-                <div class="video-grid" id="meditation-videos">
-                    <div class="video-item">
-                        <div class="video-thumbnail">
-                            <iframe id="meditation-player-O-6f5wQXSu8" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-info">
-                            <h4>Guided Meditation</h4>
-                            <p>Mindfulness practice</p>
-                            <button class="log-track-btn" data-video="O-6f5wQXSu8" data-title="Guided Meditation" data-category="meditation">Log Track</button>
-                        </div>
-                    </div>
-                    <div class="video-item">
-                        <div class="video-thumbnail">
-                            <iframe id="meditation-player-Affh1xGriY8" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-info">
-                            <h4>Positive Energy</h4>
-                            <p>Vibrational healing tones</p>
-                            <button class="log-track-btn" data-video="Affh1xGriY8" data-title="Positive Energy" data-category="meditation">Log Track</button>
-                        </div>
-                    </div>
-                    <div class="video-item">
-                        <div class="video-thumbnail">
-                            <iframe id="meditation-player-Lju6h-C37hE" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-info">
-                            <h4>Meditation Music</h4>
-                            <p>Deep relaxation sounds</p>
-                            <button class="log-track-btn" data-video="Lju6h-C37hE" data-title="Meditation Music" data-category="meditation">Log Track</button>
-                        </div>
-                    </div>
-                    <div class="video-item">
-                        <div class="video-thumbnail">
-                            <iframe id="meditation-player-vj0JDwQLof4" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-info">
-                            <h4>10-Minute Meditation</h4>
-                            <p>Quick mindfulness break</p>
-                            <button class="log-track-btn" data-video="vj0JDwQLof4" data-title="10-Minute Meditation" data-category="meditation">Log Track</button>
-                        </div>
-                    </div>
-                    <div class="video-item">
-                        <div class="video-thumbnail">
-                            <iframe id="meditation-player-7g96Zq9NSqo" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-info">
-                            <h4>Healing Meditation</h4>
-                            <p>Inner peace journey</p>
-                            <button class="log-track-btn" data-video="7g96Zq9NSqo" data-title="Healing Meditation" data-category="meditation">Log Track</button>
-                        </div>
-                    </div>
-                </div>
-                <button class="close-button" onclick="closePopup('meditation')"><i class="fas fa-times"></i></button>
-            </div>
-        </div>
-        <div id="relaxation-popup" class="popup">
-            <div class="popup-content">
-                <div class="popup-header">
-                    <h3>Relaxation Music</h3>
-                    <p>Unwind with calming melodies.</p>
-                </div>
-                <div class="video-grid" id="relaxation-videos">
-                    <div class="video-item">
-                        <div class="video-thumbnail">
-                            <iframe id="relaxation-player-lFcSrYw-ARY" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-info">
-                            <h4>Stress Relief</h4>
-                            <p>Calming relaxation music</p>
-                            <button class="log-track-btn" data-video="lFcSrYw-ARY" data-title="Stress Relief" data-category="relaxation">Log Track</button>
-                        </div>
-                    </div>
-                    <div class="video-item">
-                        <div class="video-thumbnail">
-                            <iframe id="relaxation-player-DRFHklnN-SM" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-info">
-                            <h4>Nature Sounds</h4>
-                            <p>Peaceful forest ambience</p>
-                            <button class="log-track-btn" data-video="DRFHklnN-SM" data-title="Nature Sounds" data-category="relaxation">Log Track</button>
-                        </div>
-                    </div>
-                    <div class="video-item">
-                        <div class="video-thumbnail">
-                            <iframe id="relaxation-player-QZbuj3RJcjI" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-info">
-                            <h4>Massage Music</h4>
-                            <p>Spa therapy soundtrack</p>
-                            <button class="log-track-btn" data-video="QZbuj3RJcjI" data-title="Massage Music" data-category="relaxation">Log Track</button>
-                        </div>
-                    </div>
-                    <div class="video-item">
-                        <div class="video-thumbnail">
-                            <iframe id="relaxation-player-dnBAU8Co6PA" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-info">
-                            <h4>Under The Sea</h4>
-                            <p>Ocean depths relaxation</p>
-                            <button class="log-track-btn" data-video="dnBAU8Co6PA" data-title="Under The Sea" data-category="relaxation">Log Track</button>
-                        </div>
-                    </div>
-                    <div class="video-item">
-                        <div class="video-thumbnail">
-                            <iframe id="relaxation-player-V1RPi2MYptM" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-info">
-                            <h4>Water Sounds</h4>
-                            <p>Soothing stream sounds</p>
-                            <button class="log-track-btn" data-video="V1RPi2MYptM" data-title="Water Sounds" data-category="relaxation">Log Track</button>
-                        </div>
-                    </div>
-                </div>
-                <button class="close-button" onclick="closePopup('relaxation')"><i class="fas fa-times"></i></button>
-            </div>
-        </div>
-        <div id="motivation-popup" class="popup">
-            <div class="popup-content">
-                <div class="popup-header">
-                    <h3>Motivation Music</h3>
-                    <p>Get energized with uplifting tracks.</p>
-                </div>
-                <div class="video-grid" id="motivation-videos">
-                    <div class="video-item">
-                        <div class="video-thumbnail">
-                            <iframe id="motivation-player-J7Aqwv2xNIE" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-info">
-                            <h4>Never Give Up</h4>
-                            <p>Uplifting motivational track</p>
-                            <button class="log-track-btn" data-video="J7Aqwv2xNIE" data-title="Never Give Up" data-category="motivation">Log Track</button>
-                        </div>
-                    </div>
-                    <div class="video-item">
-                        <div class="video-thumbnail">
-                            <iframe id="motivation-player-nuv1oOgzLKQ" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-info">
-                            <h4>Inspiring Music</h4>
-                            <p>Energizing background music</p>
-                            <button class="log-track-btn" data-video="nuv1oOgzLKQ" data-title="Inspiring Music" data-category="motivation">Log Track</button>
-                        </div>
-                    </div>
-                    <div class="video-item">
-                        <div class="video-thumbnail">
-                            <iframe id="motivation-player-6IruQEIgu7w" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-info">
-                            <h4>Uplifting Acoustic</h4>
-                            <p>Positive guitar melodies</p>
-                            <button class="log-track-btn" data-video="6IruQEIgu7w" data-title="Uplifting Acoustic" data-category="motivation">Log Track</button>
-                        </div>
-                    </div>
-                    <div class="video-item">
-                        <div class="video-thumbnail">
-                            <iframe id="motivation-player-NQKC24th90U" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-info">
-                            <h4>Inspirational Music</h4>
-                            <p>Motivational orchestral track</p>
-                            <button class="log-track-btn" data-video="NQKC24th90U" data-title="Inspirational Music" data-category="motivation">Log Track</button>
-                        </div>
-                    </div>
-                    <div class="video-item">
-                        <div class="video-thumbnail">
-                            <iframe id="motivation-player-WMdhPtS5vio" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-info">
-                            <h4>Epic Motivational</h4>
-                            <p>Powerful cinematic music</p>
-                            <button class="log-track-btn" data-video="WMdhPtS5vio" data-title="Epic Motivational" data-category="motivation">Log Track</button>
-                        </div>
-                    </div>
-                </div>
-                <button class="close-button" onclick="closePopup('motivation')"><i class="fas fa-times"></i></button>
-            </div>
-        </div>
-        <div id="study-popup" class="popup">
-            <div class="popup-content">
-                <div class="popup-header">
-                    <h3>Study Music</h3>
-                    <p>Stay focused with concentration tracks.</p>
-                </div>
-                <div class="video-grid" id="study-videos">
-                    <div class="video-item">
-                        <div class="video-thumbnail">
-                            <iframe id="study-player-sjkrrmBnpGE" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-info">
-                            <h4>Study Music</h4>
-                            <p>Focus-enhancing tracks</p>
-                            <button class="log-track-btn" data-video="sjkrrmBnpGE" data-title="Study Music" data-category="study">Log Track</button>
-                        </div>
-                    </div>
-                    <div class="video-item">
-                        <div class="video-thumbnail">
-                            <iframe id="study-player-sAcj8me7wGI" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-info">
-                            <h4>Peaceful Piano</h4>
-                            <p>Soft piano for concentration</p>
-                            <button class="log-track-btn" data-video="sAcj8me7wGI" data-title="Peaceful Piano" data-category="study">Log Track</button>
-                        </div>
-                    </div>
-                    <div class="video-item">
-                        <div class="video-thumbnail">
-                            <iframe id="study-player-WPni755-Krg" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-info">
-                            <h4>Alpha Waves</h4>
-                            <p>Brainwave focus music</p>
-                            <button class="log-track-btn" data-video="WPni755-Krg" data-title="Alpha Waves" data-category="study">Log Track</button>
-                        </div>
-                    </div>
-                    <div class="video-item">
-                        <div class="video-thumbnail">
-                            <iframe id="study-player-RG2IK8oRZNA" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-info">
-                            <h4>Focus</h4>
-                            <p>Deep concentration sounds</p>
-                            <button class="log-track-btn" data-video="RG2IK8oRZNA" data-title="Focus" data-category="study">Log Track</button>
-                        </div>
-                    </div>
-                    <div class="video-item">
-                        <div class="video-thumbnail">
-                            <iframe id="study-player-oiGmGFxsJi8" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                        </div>
-                        <div class="video-info">
-                            <h4>Calm Piano</h4>
-                            <p>Relaxing piano for study</p>
-                            <button class="log-track-btn" data-video="oiGmGFxsJi8" data-title="Calm Piano" data-category="study">Log Track</button>
-                        </div>
-                    </div>
-                </div>
-                <button class="close-button" onclick="closePopup('study')"><i class="fas fa-times"></i></button>
             </div>
         </div>
     </div>
@@ -1369,70 +1021,39 @@
             }
         }
 
-        function openPopup(category, videoId = null, trackName = null) {
-            const popup = document.getElementById(`${category}-popup`);
-            popup.style.display = 'flex';
-            if (videoId && trackName) {
-                playTrack(category, videoId, trackName);
-            }
-            const logButtons = popup.querySelectorAll('.log-track-btn');
-            logButtons.forEach(button => {
-                button.textContent = 'Log Track';
-                button.disabled = false;
-                button.style.backgroundColor = '#6BCB77';
-            });
-        }
-
-        function closePopup(category) {
-            const popup = document.getElementById(`${category}-popup`);
-            popup.style.display = 'none';
-            const iframes = popup.querySelectorAll('iframe');
-            iframes.forEach(iframe => iframe.src = '');
-        }
-
-        function playTrack(category, videoId, trackName) {
-            const iframe = document.getElementById(`${category}-player-${videoId}`);
+        function openVideoPlayer(videoId, title) {
+            const popup = document.getElementById('video-player-popup');
+            const iframe = document.getElementById('video-player-iframe');
+            const titleElement = document.getElementById('video-player-title');
+            const content = document.getElementById('video-player-content');
+            
             iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+            titleElement.textContent = title;
+            content.classList.remove('fullscreen');
+            popup.style.display = 'flex';
+        }
+
+        function closeVideoPlayer() {
+            const popup = document.getElementById('video-player-popup');
+            const iframe = document.getElementById('video-player-iframe');
+            popup.style.display = 'none';
+            iframe.src = ''; // Stop the video
+        }
+
+        function toggleFullscreen() {
+            const content = document.getElementById('video-player-content');
+            const fullscreenBtn = document.getElementById('fullscreen-btn');
+            content.classList.toggle('fullscreen');
+            fullscreenBtn.innerHTML = content.classList.contains('fullscreen') ? '<i class="fas fa-compress"></i>' : '<i class="fas fa-expand"></i>';
         }
 
         function setupEventListeners() {
-            // Track cards
             const trackCards = document.querySelectorAll('.track-card');
             trackCards.forEach(card => {
                 card.addEventListener('click', () => {
-                    const category = card.getAttribute('data-category');
                     const videoId = card.getAttribute('data-video');
-                    const trackName = card.getAttribute('data-title');
-                    openPopup(category, videoId, trackName);
-                });
-            });
-
-            // View All links
-            const viewAllLinks = document.querySelectorAll('.view-all');
-            viewAllLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const category = link.getAttribute('data-category');
-                    openPopup(category);
-                });
-            });
-
-            // Log buttons
-            const logButtons = document.querySelectorAll('.log-track-btn');
-            logButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const category = button.getAttribute('data-category');
-                    const videoId = button.getAttribute('data-video');
-                    const trackName = button.getAttribute('data-title');
-                    const today = new Date('2025-04-30').toISOString().split('T')[0];
-                    const trackKey = `track-${today}`;
-                    let tracks = JSON.parse(localStorage.getItem(trackKey)) || [];
-                    tracks.push({ name: trackName, category: category.charAt(0).toUpperCase() + category.slice(1), timestamp: new Date().toISOString() });
-                    localStorage.setItem(trackKey, JSON.stringify(tracks));
-                    analyzeMusicTrends();
-                    button.textContent = 'Logged!';
-                    button.disabled = true;
-                    button.style.backgroundColor = '#A9A9A9';
+                    const title = card.getAttribute('data-title');
+                    openVideoPlayer(videoId, title);
                 });
             });
         }
