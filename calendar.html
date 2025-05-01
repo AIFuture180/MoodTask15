@@ -208,100 +208,39 @@
             text-decoration: none;
             font-size: 0.9em;
         }
-        .modal-content .affiliate-link:hover {
-            text-decoration: underline;
-        }
         .modal-content .recommendation {
             font-size: 0.9em;
             color: #666;
             margin-top: 10px;
             font-style: italic;
         }
-        .calendar-grid {
+        .graph-container {
             margin-top: 30px;
             width: 100%;
             padding: 20px;
             box-sizing: border-box;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
             max-width: 1200px;
             margin-left: auto;
             margin-right: auto;
-            margin-bottom: 30px;
-        }
-        .calendar-day {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 15px;
             text-align: center;
-            border-radius: 10px;
-            font-size: 1em;
-            font-weight: 500;
+        }
+        .graph-controls {
+            margin-bottom: 20px;
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
-            gap: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            width: 100px;
-            height: 100px;
-            border: 2px solid transparent;
-            transition: transform 0.3s, background 0.3s, border 0.3s;
-            opacity: 0;
-            position: relative;
+            gap: 20px;
+            flex-wrap: wrap;
         }
-        .calendar-grid .calendar-day {
-            animation: fadeIn 0.5s ease forwards;
-        }
-        .calendar-day:hover {
-            transform: scale(1.05);
-            background: rgba(255, 255, 255, 0.3);
-            border: 2px solid #FFD700;
-        }
-        .calendar-day.current {
-            border: 2px solid #FFD700;
-            box-shadow: 0 0 10px #FFD700;
-            animation: glow 0.5s ease;
-        }
-        .calendar-day i {
-            font-size: 1.5em;
-            margin-bottom: 5px;
-        }
-        .calendar-day span {
-            font-size: 0.9em;
-            font-weight: 600;
-        }
-        .calendar-day .tooltip {
-            visibility: hidden;
-            background-color: #333;
-            color: white;
-            text-align: center;
+        .graph-controls select {
             padding: 5px 10px;
+            font-size: 1em;
             border-radius: 5px;
-            position: absolute;
-            z-index: 1;
-            bottom: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.8em;
-            white-space: nowrap;
-            opacity: 0;
-            transition: opacity 0.3s;
+            border: 1px solid #ccc;
         }
-        .calendar-day:hover .tooltip {
-            visibility: visible;
-            opacity: 1;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes glow {
-            0% { box-shadow: 0 0 5px #FFD700; }
-            50% { box-shadow: 0 0 15px #FFD700; }
-            100% { box-shadow: 0 0 5px #FFD700; }
+        canvas {
+            max-width: 100%;
+            height: auto;
+            min-height: 300px;
         }
         .mood-summary {
             background-color: #fff;
@@ -533,15 +472,19 @@
                 padding: 8px 15px;
                 font-size: 0.9em;
             }
-            .calendar-grid {
+            .graph-container {
+                padding: 15px;
+            }
+            .graph-controls {
                 flex-direction: column;
                 align-items: center;
             }
-            .calendar-day {
+            .graph-controls select {
                 width: 100%;
-                max-width: 200px;
-                height: auto;
-                padding: 15px;
+                margin-bottom: 10px;
+            }
+            canvas {
+                height: 300px;
             }
             .mood-summary {
                 margin: 20px 10px;
@@ -629,7 +572,25 @@
                     <p id="exerciseDays" style="font-size: 0.8em; color: #777;">Days exercised: 0</p>
                 </div>
             </div>
-            <div class="calendar-grid" id="calendarGrid"></div>
+            <div class="graph-container">
+                <div class="graph-controls">
+                    <label for="metricSelect">Metric: </label>
+                    <select id="metricSelect" onchange="drawGraph()">
+                        <option value="sleep">Sleep</option>
+                        <option value="water">Water</option>
+                        <option value="exercise">Exercise</option>
+                    </select>
+                    <label for="periodSelect">View Period: </label>
+                    <select id="periodSelect" onchange="drawGraph()">
+                        <option value="7">Last 7 Days</option>
+                        <option value="30">Last 30 Days</option>
+                        <option value="week">Current Week</option>
+                        <option value="month">Current Month</option>
+                        <option value="all">All Time</option>
+                    </select>
+                </div>
+                <canvas id="progressGraph" width="800" height="400"></canvas>
+            </div>
             <div class="mood-summary" id="moodSummary">
                 <div class="header">
                     <h2>Your Mood Insights</h2>
@@ -654,7 +615,7 @@
                 <p>Tracking your daily habits helps you become more aware of their impact on your emotional well-being. For example, you might notice that listening to uplifting music or completing a gratitude exercise boosts your mood, while good sleep or hydration reduces tiredness. This awareness empowers you to make informed decisions about your wellness, supported by science-backed insights from experts like Dr. Andrew Huberman and Dr. Matt Walker.</p>
                 
                 <h3>How to Use This Dashboard</h3>
-                <p>Start by selecting a mood each day on the <a href="index.html">Home</a> page, and log your music, activities, sleep, water intake, and exercise here or on the <a href="activities.html">Activities</a> page. These will appear in your dashboard and calendar above. Hover over a calendar day to see your mood and habits for that date. Check the Mood Insights section to understand your most frequent mood. Future features will include filtering your history and exporting data as a CSV file!</p>
+                <p>Start by selecting a mood each day on the <a href="index.html">Home</a> page, and log your music, activities, sleep, water intake, and exercise here or on the <a href="activities.html">Activities</a> page. These will appear in your dashboard and graph above. Check the Mood Insights section to understand your most frequent mood. Future features will include filtering your history and exporting data as a CSV file!</p>
                 
                 <h3>Explore More Features</h3>
                 <p>Dive deeper into your emotional journey by exploring our <a href="blog.html">Blog</a> for expert tips, or try recommended tools like mindfulness apps and online therapy in the footer below. Enhance your experience with premium features coming soon!</p>
@@ -689,7 +650,7 @@
     <div class="modal" id="sleepModal">
         <div class="modal-content">
             <h3>Log Sleep Duration</h3>
-            <input type="number" id="sleepInput" placeholder="Enter hours (e.g., 7.5)" step="0.1" min="0">
+            <input type="number" id="sleepInput" placeholder="Enter hours (e.g., 7.5)" step="0.1" min="0" max="24">
             <button class="save-btn" onclick="saveSleep()">Save</button>
             <button class="cancel-btn" onclick="closeModal('sleepModal')">Cancel</button>
             <p class="recommendation">Good reminder: Aim for 7-8 hours per night (Dr. Matt Walker).</p>
@@ -727,9 +688,6 @@
             if (navBar && mainContent) {
                 const navHeight = navBar.offsetHeight;
                 mainContent.style.paddingTop = `${navHeight + 10}px`;
-                console.log('Adjusted main content padding to:', mainContent.style.paddingTop);
-            } else {
-                console.error('Nav bar or main content not found for padding adjustment');
             }
         }
 
@@ -759,19 +717,21 @@
 
         function saveSleep() {
             const sleepInput = parseFloat(document.getElementById('sleepInput').value);
-            const today = new Date('2025-04-27').toISOString().split('T')[0];
+            const today = new Date('2025-05-01').toISOString().split('T')[0];
             if (!isNaN(sleepInput) && sleepInput > 0) {
                 let totalSleep = 0;
                 const sleepHistory = JSON.parse(localStorage.getItem('sleep-history') || '{}');
                 if (sleepHistory[today]) {
                     totalSleep = parseFloat(sleepHistory[today].split(' ')[0]) + sleepInput;
+                    if (totalSleep > 24) totalSleep = 24;
                 } else {
-                    totalSleep = sleepInput;
+                    totalSleep = sleepInput > 24 ? 24 : sleepInput;
                 }
                 sleepHistory[today] = `${totalSleep} hours`;
                 localStorage.setItem('sleep-history', JSON.stringify(sleepHistory));
                 localStorage.setItem(`sleep-${today}`, `${totalSleep} hours`);
                 updateTrackingCards();
+                drawGraph();
             }
             closeModal('sleepModal');
         }
@@ -779,16 +739,10 @@
         function saveWater() {
             const waterInput = parseFloat(document.getElementById('waterInput').value);
             const waterUnit = document.getElementById('waterUnit').value;
-            const today = new Date('2025-04-27').toISOString().split('T')[0];
+            const today = new Date('2025-05-01').toISOString().split('T')[0];
             if (!isNaN(waterInput) && waterInput > 0) {
-                let amountInOz = waterInput;
-                if (waterUnit === 'ml') {
-                    amountInOz = (waterInput / 29.5735).toFixed(1);
-                }
-                let amountInMl = (waterInput * 29.5735).toFixed(1);
-                if (waterUnit === 'ml') {
-                    amountInMl = waterInput;
-                }
+                let amountInOz = waterUnit === 'ml' ? (waterInput / 29.5735).toFixed(1) : waterInput;
+                let amountInMl = waterUnit === 'oz' ? (waterInput * 29.5735).toFixed(1) : waterInput;
 
                 let totalOz = 0, totalMl = 0;
                 const waterHistory = JSON.parse(localStorage.getItem('water-history') || '{}');
@@ -804,6 +758,7 @@
                 localStorage.setItem('water-history', JSON.stringify(waterHistory));
                 localStorage.setItem(`water-${today}`, `${totalOz.toFixed(1)} oz (${totalMl.toFixed(1)} ml)`);
                 updateTrackingCards();
+                drawGraph();
             }
             closeModal('waterModal');
         }
@@ -811,10 +766,12 @@
         function saveExercise() {
             const duration = document.getElementById('exerciseDuration').value.trim();
             const type = document.getElementById('exerciseType').value.trim();
-            const today = new Date('2025-04-27').toISOString().split('T')[0];
+            const today = new Date('2025-05-01').toISOString().split('T')[0];
             if (duration && type) {
                 let exerciseHistory = JSON.parse(localStorage.getItem('exercise-history') || '[]');
-                exerciseHistory.push({ date: today, duration, type });
+                const durationMatch = duration.match(/(\d+)/);
+                const minutes = durationMatch ? parseInt(durationMatch[0]) : 0;
+                exerciseHistory.push({ date: today, duration, type, minutes });
                 localStorage.setItem('exercise-history', JSON.stringify(exerciseHistory));
 
                 const uniqueDays = new Set(exerciseHistory.map(entry => entry.date));
@@ -824,162 +781,13 @@
                     .map(entry => `${entry.duration} - ${entry.type}`).join(', ');
                 localStorage.setItem(`exercise-${today}`, currentDayExercises || 'Not logged.');
                 updateTrackingCards();
+                drawGraph();
             }
             closeModal('exerciseModal');
         }
 
-        function generateCalendar() {
-            const grid = document.getElementById('calendarGrid');
-            if (!grid) {
-                console.error('Calendar grid element not found in generateCalendar');
-                return;
-            }
-            console.log('Generating calendar...');
-
-            const today = new Date('2025-04-27');
-            const year = today.getFullYear();
-            const month = today.getMonth();
-            const firstDay = new Date(year, month, 1);
-            const lastDay = new Date(year, month + 1, 0);
-            const startingDay = firstDay.getDay();
-            const monthLength = lastDay.getDate();
-
-            grid.innerHTML = '';
-            console.log('Cleared calendar grid');
-
-            for (let i = 0; i < startingDay; i++) {
-                const emptyDay = document.createElement('div');
-                emptyDay.classList.add('calendar-day');
-                emptyDay.style.background = 'transparent';
-                emptyDay.style.boxShadow = 'none';
-                grid.appendChild(emptyDay);
-            }
-
-            const moodIcons = {
-                Sad: 'fa-frown',
-                Angry: 'fa-angry',
-                Frustrated: 'fa-exclamation-circle',
-                Anxious: 'fa-heartbeat',
-                Stressed: 'fa-bolt',
-                Tired: 'fa-bed',
-                Bored: 'fa-meh',
-                Excited: 'fa-star',
-                Relaxed: 'fa-spa',
-                Happy: 'fa-smile'
-            };
-            const moodInsights = {
-                Sad: 'Sad: Try gratitude to boost dopamine – Dr. Andrew Huberman',
-                Angry: 'Angry: Channel energy with physical activity – Dr. John Ratey',
-                Frustrated: 'Frustrated: Expressive writing can help – Dr. James Pennebaker',
-                Anxious: 'Anxious: Slow breathing reduces anxiety – Dr. Andrew Huberman',
-                Stressed: 'Stressed: Nature exposure lowers cortisol – Dr. Roger Ulrich',
-                Tired: 'Tired: Relaxation techniques aid rest – Dr. Matt Walker',
-                Bored: 'Bored: Creative tasks spark interest – Dr. Andrew Huberman',
-                Excited: 'Excited: Express energy creatively – Dr. Lisa Feldman Barrett',
-                Relaxed: 'Relaxed: Enhance calm with nature – Dr. Roger Ulrich',
-                Happy: 'Happy: Sustain positivity with gratitude – Dr. Lisa Feldman Barrett'
-            };
-
-            for (let day = 1; day <= monthLength; day++) {
-                const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-                const mood = localStorage.getItem(`mood-${dateStr}`);
-                const dayElement = document.createElement('div');
-                dayElement.classList.add('calendar-day');
-
-                if (dateStr === today.toISOString().split('T')[0]) {
-                    dayElement.classList.add('current');
-                }
-
-                const dayNumber = document.createElement('span');
-                dayNumber.textContent = day;
-                dayElement.appendChild(dayNumber);
-
-                if (mood && moodIcons[mood]) {
-                    const icon = document.createElement('i');
-                    icon.classList.add('fas', moodIcons[mood]);
-                    dayElement.appendChild(icon);
-                    const tooltip = document.createElement('div');
-                    tooltip.classList.add('tooltip');
-                    tooltip.textContent = moodInsights[mood] || `${mood}: No insight available`;
-                    dayElement.appendChild(tooltip);
-                }
-
-                grid.appendChild(dayElement);
-            }
-            console.log('Calendar generated with', monthLength, 'days');
-            analyzeMoodTrends();
-            updateTrackingCards();
-        }
-
-        function analyzeMoodTrends() {
-            const summary = document.getElementById('moodSummary');
-            if (!summary) {
-                console.error('Mood summary element not found in analyzeMoodTrends');
-                return;
-            }
-            console.log('Analyzing mood trends...');
-
-            const year = 2025;
-            const month = 3;
-            const moods = [];
-
-            for (let day = 1; day <= 30; day++) {
-                const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-                const mood = localStorage.getItem(`mood-${dateStr}`);
-                if (mood) {
-                    moods.push({ date: dateStr, mood });
-                }
-            }
-            console.log('Collected moods:', moods);
-
-            const moodCounts = {};
-            moods.forEach(({ mood }) => {
-                moodCounts[mood] = (moodCounts[mood] || 0) + 1;
-            });
-            const mostFrequentMood = Object.keys(moodCounts).reduce((a, b) => moodCounts[a] > moodCounts[b] ? a : b, null);
-            const frequentMoodText = document.getElementById('frequentMoodText');
-            const frequentMoodInsight = document.getElementById('frequentMoodInsight');
-            if (!frequentMoodText || !frequentMoodInsight) {
-                console.error('Frequent mood elements not found:', { frequentMoodText, frequentMoodInsight });
-                return;
-            }
-            if (mostFrequentMood) {
-                frequentMoodText.textContent = `${mostFrequentMood} (${moodCounts[mostFrequentMood]} days)`;
-                if (mostFrequentMood === 'Stressed') {
-                    frequentMoodInsight.textContent = 'Frequent stress may indicate high cortisol – try breathing exercises.';
-                } else if (mostFrequentMood === 'Happy') {
-                    frequentMoodInsight.textContent = 'Sustaining happiness strengthens optimism – keep up the gratitude!';
-                } else {
-                    frequentMoodInsight.textContent = `Reflect on your ${mostFrequentMood.toLowerCase()} days to understand patterns.`;
-                }
-            } else {
-                frequentMoodText.textContent = 'No moods logged yet.';
-                frequentMoodInsight.textContent = 'Start logging your moods on the Home page to see trends.';
-            }
-            console.log('Mood trends analyzed');
-        }
-
-        function updateTrackingCards() {
-            const today = new Date('2025-04-27').toISOString().split('T')[0];
-            const dateStr = today;
-
-            document.getElementById('lastMusic').textContent = localStorage.getItem(`music-last-${dateStr}`) || 'Not listened yet.';
-            document.getElementById('firstActivity').textContent = localStorage.getItem(`activity-first-${dateStr}`) || 'None today.';
-            document.getElementById('sleepDuration').textContent = localStorage.getItem(`sleep-${dateStr}`) || 'Not logged.';
-            document.getElementById('waterIntake').textContent = localStorage.getItem(`water-${dateStr}`) || '0 oz (0 ml)';
-            const exerciseHistory = JSON.parse(localStorage.getItem('exercise-history') || '[]');
-            const currentDayExercises = exerciseHistory.filter(entry => entry.date === today)
-                .map(entry => `${entry.duration} - ${entry.type}`).join(', ');
-            document.getElementById('exerciseDetails').textContent = currentDayExercises || 'Not logged.';
-            const uniqueDays = new Set(exerciseHistory.map(entry => entry.date));
-            document.getElementById('exerciseDays').textContent = `Days exercised: ${uniqueDays.size}`;
-
-            console.log('Tracking cards updated for', dateStr);
-        }
-
-        // Reset daily trackers at 12 AM
         function resetDailyTrackers() {
-            const now = new Date('2025-04-27');
+            const now = new Date('2025-05-01');
             const lastReset = localStorage.getItem('lastReset') ? new Date(localStorage.getItem('lastReset')) : null;
             if (!lastReset || now.getDate() !== lastReset.getDate()) {
                 const today = now.toISOString().split('T')[0];
@@ -989,33 +797,191 @@
 
                 delete sleepHistory[today];
                 delete waterHistory[today];
-                localStorage.setItem('sleep-history', JSON.stringify(sleepHistory));
-                localStorage.setItem('water-history', JSON.stringify(waterHistory));
                 exerciseHistory.forEach((entry, index) => {
                     if (entry.date === today) exerciseHistory.splice(index, 1);
                 });
+                localStorage.setItem('sleep-history', JSON.stringify(sleepHistory));
+                localStorage.setItem('water-history', JSON.stringify(waterHistory));
                 localStorage.setItem('exercise-history', JSON.stringify(exerciseHistory));
 
                 localStorage.setItem('lastReset', now.toISOString());
                 updateTrackingCards();
+                drawGraph();
             }
         }
 
+        function drawGraph() {
+            const canvas = document.getElementById('progressGraph');
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            const metric = document.getElementById('metricSelect').value;
+            const period = document.getElementById('periodSelect').value;
+            const now = new Date('2025-05-01');
+            let startDate = new Date(now);
+            let dates = [];
+
+            if (period === '7') {
+                startDate.setDate(now.getDate() - 6);
+                while (startDate.getDay() !== 0) startDate.setDate(startDate.getDate() - 1);
+                for (let d = new Date(startDate); d <= now; d.setDate(d.getDate() + 1)) {
+                    dates.push(new Date(d));
+                }
+            } else if (period === '30') {
+                startDate.setDate(now.getDate() - 29);
+                while (startDate.getDay() !== 0) startDate.setDate(startDate.getDate() - 1);
+                for (let d = new Date(startDate); d <= now; d.setDate(d.getDate() + 1)) {
+                    dates.push(new Date(d));
+                }
+            } else if (period === 'week') {
+                startDate.setDate(now.getDate() - now.getDay() + (now.getDay() === 0 ? -6 : 1));
+                for (let d = new Date(startDate); d <= now; d.setDate(d.getDate() + 1)) {
+                    dates.push(new Date(d));
+                }
+            } else if (period === 'month') {
+                startDate.setDate(1);
+                for (let d = new Date(startDate); d <= now; d.setDate(d.getDate() + 1)) {
+                    dates.push(new Date(d));
+                }
+            } else if (period === 'all') {
+                const allDates = Object.keys({
+                    ...JSON.parse(localStorage.getItem('sleep-history') || '{}'),
+                    ...JSON.parse(localStorage.getItem('water-history') || '{}'),
+                    ...Object.fromEntries(JSON.parse(localStorage.getItem('exercise-history') || '[]').map(e => [e.date, true]))
+                }).map(d => new Date(d));
+                dates = allDates.sort((a, b) => a - b);
+                if (dates.length === 0) dates = [new Date(now)];
+            }
+
+            const sleepHistory = JSON.parse(localStorage.getItem('sleep-history') || '{}');
+            const waterHistory = JSON.parse(localStorage.getItem('water-history') || '{}');
+            const exerciseHistory = JSON.parse(localStorage.getItem('exercise-history') || '[]');
+            const moodHistory = JSON.parse(localStorage.getItem('mood-history') || '{}');
+
+            let data = [];
+            if (metric === 'sleep') {
+                data = dates.map(date => {
+                    const dateStr = date.toISOString().split('T')[0];
+                    return sleepHistory[dateStr] ? parseFloat(sleepHistory[dateStr].split(' ')[0]) : 0;
+                });
+            } else if (metric === 'water') {
+                data = dates.map(date => {
+                    const dateStr = date.toISOString().split('T')[0];
+                    return waterHistory[dateStr] ? parseFloat(waterHistory[dateStr].match(/\d+\.\d+|\d+/)[0]) : 0;
+                });
+            } else if (metric === 'exercise') {
+                data = dates.map(date => {
+                    const dateStr = date.toISOString().split('T')[0];
+                    const dayExercises = exerciseHistory.filter(e => e.date === dateStr);
+                    return dayExercises.reduce((sum, e) => sum + (e.minutes || 0), 0);
+                });
+            }
+
+            const maxValue = Math.max(...data, 10) || 10; // Minimum 10 for scaling
+            const barWidth = Math.min(40, (canvas.width - 40) / dates.length - 10);
+            const barSpacing = 10;
+            const barHeight = (canvas.height - 100) / maxValue;
+
+            // Grid
+            ctx.strokeStyle = '#e0e0e0';
+            ctx.lineWidth = 0.5;
+            for (let i = 0; i <= maxValue; i += 5) {
+                const y = canvas.height - 50 - (i * barHeight);
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(canvas.width, y);
+                ctx.stroke();
+                ctx.fillStyle = '#666';
+                ctx.font = '12px Poppins';
+                ctx.fillText(i, 5, y - 5);
+            }
+
+            // Bars
+            ctx.lineWidth = 1;
+            data.forEach((value, index) => {
+                const x = index * (barWidth + barSpacing);
+                const height = value * barHeight;
+                let gradient;
+                if (metric === 'sleep') gradient = ctx.createLinearGradient(x, canvas.height - 50, x, canvas.height - 50 - height);
+                else if (metric === 'water') gradient = ctx.createLinearGradient(x, canvas.height - 50, x, canvas.height - 50 - height);
+                else gradient = ctx.createLinearGradient(x, canvas.height - 50, x, canvas.height - 50 - height);
+                gradient.addColorStop(0, metric === 'sleep' ? '#4A90E2' : metric === 'water' ? '#6BCB77' : '#E74C3C');
+                gradient.addColorStop(1, metric === 'sleep' ? '#85C1E9' : metric === 'water' ? '#A9DFBF' : '#F1948A');
+                ctx.fillStyle = gradient;
+                ctx.fillRect(x, canvas.height - 50 - height, barWidth, height);
+                ctx.fillStyle = '#333';
+                ctx.font = '12px Poppins';
+                ctx.textAlign = 'center';
+                if (metric === 'exercise') {
+                    ctx.fillText(`Total: ${value} min`, x + barWidth / 2, canvas.height - 60 - height);
+                } else {
+                    ctx.fillText(value.toFixed(1), x + barWidth / 2, canvas.height - 60 - height);
+                }
+                const dateStr = dates[index].toISOString().split('T')[0];
+                if (moodHistory[dateStr]) {
+                    const moodIcon = getMoodIcon(moodHistory[dateStr]);
+                    ctx.fillText(moodIcon, x + barWidth / 2, canvas.height - 40);
+                }
+                ctx.fillText(dates[index].toLocaleDateString('en-US', { weekday: 'short', day: 'numeric' }), x + barWidth / 2, canvas.height - 20);
+            });
+
+            // Legend
+            ctx.fillStyle = '#4A90E2';
+            ctx.fillRect(10, 10, 20, 10);
+            ctx.fillStyle = '#333';
+            ctx.fillText('Sleep', 35, 18);
+            ctx.fillStyle = '#6BCB77';
+            ctx.fillRect(90, 10, 20, 10);
+            ctx.fillStyle = '#333';
+            ctx.fillText('Water', 115, 18);
+            ctx.fillStyle = '#E74C3C';
+            ctx.fillRect(170, 10, 20, 10);
+            ctx.fillStyle = '#333';
+            ctx.fillText('Exercise', 195, 18);
+        }
+
+        function getMoodIcon(mood) {
+            const moodIcons = {
+                Sad: '😔',
+                Angry: '😠',
+                Frustrated: '😣',
+                Anxious: '😰',
+                Stressed: '😓',
+                Tired: '😴',
+                Bored: '😐',
+                Excited: '😃',
+                Relaxed: '😌',
+                Happy: '😊'
+            };
+            return moodIcons[mood] || '';
+        }
+
+        function updateTrackingCards() {
+            const today = new Date('2025-05-01').toISOString().split('T')[0];
+            document.getElementById('lastMusic').textContent = localStorage.getItem(`music-last-${today}`) || 'Not listened yet.';
+            document.getElementById('firstActivity').textContent = localStorage.getItem(`activity-first-${today}`) || 'None today.';
+            document.getElementById('sleepDuration').textContent = localStorage.getItem(`sleep-${today}`) || 'Not logged.';
+            document.getElementById('waterIntake').textContent = localStorage.getItem(`water-${today}`) || '0 oz (0 ml)';
+            const exerciseHistory = JSON.parse(localStorage.getItem('exercise-history') || '[]');
+            const currentDayExercises = exerciseHistory.filter(entry => entry.date === today)
+                .map(entry => `${entry.duration} - ${entry.type}`).join(', ');
+            document.getElementById('exerciseDetails').textContent = currentDayExercises || 'Not logged.';
+            const uniqueDays = new Set(exerciseHistory.map(entry => entry.date));
+            document.getElementById('exerciseDays').textContent = `Days exercised: ${uniqueDays.size}`;
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
-            console.log('DOM fully loaded');
             const navLinks = document.querySelectorAll('.nav-bar .nav-links a');
             const mainContent = document.querySelector('.main-content');
             const hamburger = document.getElementById('hamburger');
 
-            if (!mainContent) {
-                console.error('Main content not found');
-                return;
-            }
+            if (!mainContent) return;
 
             mainContent.classList.add('fade-in');
             adjustMainContentPadding();
-            resetDailyTrackers(); // Check and reset if needed
-            generateCalendar();
+            resetDailyTrackers();
+            updateTrackingCards();
+            drawGraph();
 
             navLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
@@ -1032,7 +998,10 @@
                 hamburger.addEventListener('click', toggleNavMenu);
             }
 
-            window.addEventListener('resize', adjustMainContentPadding);
+            window.addEventListener('resize', () => {
+                adjustMainContentPadding();
+                drawGraph();
+            });
         });
     </script>
 </body>
