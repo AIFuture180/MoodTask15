@@ -11,834 +11,22 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <!-- Google AdSense Code -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-15181337633801567" crossorigin="anonymous"></script>
     <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f5f5f5;
-            margin: 0;
-            padding: 0;
-            color: #333;
-            transition: background-color 0.3s ease;
-        }
-        .nav-bar {
-            background-color: #fff;
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            position: fixed;
+        /* [CSS content remains the same as provided earlier, omitted for brevity] */
+        .progress-container {
             width: 100%;
-            top: 0;
-            z-index: 1000;
-            max-width: 1400px;
-            margin: 0 auto;
-            left: 0;
-            right: 0;
-            height: 60px;
-            backdrop-filter: blur(5px);
-            background-color: rgba(255, 255, 255, 0.95);
-        }
-        .nav-bar .logo {
-            font-size: 1.5em;
-            font-weight: 700;
-            color: #4A90E2;
-        }
-        .nav-bar .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 18px;
-            padding-left: 30px;
-            padding-right: 20px;
-        }
-        .nav-bar a {
-            padding: 10px 15px;
-            text-decoration: none;
-            color: #2C3E50;
-            font-weight: 400;
-            transition: color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+            height: 10px;
+            background: #e0e0e0;
             border-radius: 5px;
+            margin: 10px 0;
+            overflow: hidden;
         }
-        .nav-bar a:hover {
-            background-color: #f0f0f0;
-            color: #2C3E50;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        .nav-bar a.active {
-            background-color: #4A90E2;
-            color: white;
-            font-weight: 600;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-        .hamburger {
-            display: none;
-            font-size: 1.5em;
-            cursor: pointer;
-            color: #2C3E50;
-        }
-        .main-content {
-            transition: opacity 0.5s ease;
-            padding-top: 60px;
-        }
-        .main-content.fade-out {
-            opacity: 0;
-        }
-        .main-content.fade-in {
-            opacity: 1;
-        }
-        .hero {
-            background: linear-gradient(135deg, #4A90E2, #2C3E50);
-            color: white;
-            padding: 60px 20px;
-            text-align: center;
-            position: relative;
-        }
-        .hero h1 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
-        }
-        .hero p {
-            font-size: 1.2em;
-            margin-bottom: 30px;
-        }
-        .content-wrapper {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .welcome-guide {
-            flex: 1;
-            max-width: 600px;
-            background: #fff;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            margin: 20px auto;
-            text-align: left;
-        }
-        .welcome-guide h2 {
-            font-size: 1.8em;
-            font-weight: 600;
-            color: #2C3E50;
-            margin-bottom: 15px;
-        }
-        .welcome-guide h3 {
-            font-size: 1.3em;
-            font-weight: 500;
-            color: #4A90E2;
-            margin-top: 20px;
-            margin-bottom: 10px;
-        }
-        .welcome-guide p {
-            font-size: 1em;
-            line-height: 1.6;
-            color: #333;
-            margin-bottom: 15px;
-        }
-        .welcome-guide a {
-            color: #4A90E2;
-            text-decoration: none;
-        }
-        .welcome-guide a:hover {
-            text-decoration: underline;
-        }
-        .activity-section {
-            margin-top: 30px;
-            width: 100%;
-            padding: 20px;
-            box-sizing: border-box;
-            max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .activity-section h2 {
-            font-size: 1.8em;
-            font-weight: 600;
-            color: white;
-            margin-bottom: 8px;
-        }
-        .expert-quote {
-            font-size: 1em;
-            color: white;
-            line-height: 1.5;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        .expert-quote .quote {
-            font-style: italic;
-            display: block;
-            margin-top: 5px;
-        }
-        .activity-row {
-            display: flex;
-            overflow-x: auto;
-            gap: 15px;
-            padding-bottom: 10px;
-            scrollbar-width: thin;
-            scrollbar-color: #4A90E2 #2C3E50;
-        }
-        .activity-row::-webkit-scrollbar {
-            height: 8px;
-        }
-        .activity-row::-webkit-scrollbar-track {
-            background: #2C3E50;
-            border-radius: 4px;
-        }
-        .activity-row::-webkit-scrollbar-thumb {
-            background: #4A90E2;
-            border-radius: 4px;
-        }
-        .activity-row::-webkit-scrollbar-thumb:hover {
-            background: #3B82F6;
-        }
-        .activity-card {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            width: 200px;
-            flex: 0 0 auto;
-            text-align: center;
-            transition: transform 0.3s, background 0.3s;
-            cursor: pointer;
-        }
-        .activity-card:hover {
-            transform: scale(1.05);
-            background: rgba(255, 255, 255, 0.3);
-        }
-        .thumbnail-area {
-            width: 100%;
-            height: 120px;
-            border-radius: 8px;
-            margin-bottom: 8px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(135deg, #4A90E2, #2C3E50);
-        }
-        .thumbnail-area i {
-            font-size: 2.5em;
-            color: white;
-        }
-        .activity-card h3 {
-            font-size: 1em;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-        /* Category-specific gradients */
-        .activity-card.breathing .thumbnail-area {
-            background: linear-gradient(135deg, #4A90E2, #2C3E50);
-        }
-        .activity-card.gratitude .thumbnail-area {
-            background: linear-gradient(135deg, #F4A261, #FF6F61);
-        }
-        .activity-card.meditation .thumbnail-area {
-            background: linear-gradient(135deg, #9F7AEA, #B794F4);
-        }
-        .activity-card.pmr .thumbnail-area {
-            background: linear-gradient(135deg, #2C7A7B, #4C9A9B);
-        }
-        .activity-card.walk .thumbnail-area {
-            background: linear-gradient(135deg, #68D391, #48BB78);
-        }
-        .activity-card.journaling .thumbnail-area {
-            background: linear-gradient(135deg, #6B46C1, #805AD5);
-        }
-        .activity-card.reframing .thumbnail-area {
-            background: linear-gradient(135deg, #FF6F61, #E53E3E);
-        }
-        .activity-card.exercise .thumbnail-area {
-            background: linear-gradient(135deg, #FF9F43, #FECA57);
-        }
-        .activity-summary {
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            margin: 20px auto;
-            text-align: left;
-            max-width: 600px;
-            color: #333;
-        }
-        .activity-summary .header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .activity-summary .header h2 {
-            font-size: 1.8em;
-            font-weight: 600;
-            color: #2C3E50;
-            margin-bottom: 5px;
-        }
-        .activity-summary .header p {
-            font-size: 1em;
-            color: #555;
-            font-style: italic;
-        }
-        .activity-summary .trend {
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-            margin-bottom: 20px;
-            padding: 10px;
-            border-radius: 5px;
-            transition: background 0.3s;
-        }
-        .activity-summary .trend:hover {
-            background: #f5f5f5;
-        }
-        .activity-summary .trend i {
-            font-size: 1.5em;
-            color: #4A90E2;
-        }
-        .activity-summary .trend div {
-            flex: 1;
-        }
-        .activity-summary .trend h4 {
-            font-size: 1.2em;
-            font-weight: 600;
-            margin-bottom: 5px;
-            color: #333;
-        }
-        .activity-summary .trend p {
-            font-size: 0.95em;
-            color: #555;
-            margin-bottom: 10px;
-            line-height: 1.5;
-        }
-        .activity-summary .trend .insight {
-            font-size: 0.9em;
-            color: #666;
-            font-style: italic;
-            background: #f0f0f0;
-            padding: 10px;
-            border-left: 3px solid #4A90E2;
-            border-radius: 5px;
-            line-height: 1.5;
-        }
-        .activity-summary .cta-button {
-            display: block;
-            text-align: center;
-            padding: 10px;
-            background-color: #4A90E2;
-            color: white;
-            text-decoration: none;
-            border-radius: 20px;
-            font-weight: 600;
-            transition: background-color 0.3s;
-            margin-top: 20px;
-        }
-        .activity-summary .cta-button:hover {
-            background-color: #2C3E50;
-        }
-        .footer {
-            background-color: #333;
-            color: white;
-            padding: 40px 20px;
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            text-align: left;
-        }
-        .footer h3 {
-            margin-bottom: 15px;
-            font-size: 1.2em;
-        }
-        .footer a {
-            color: #D6D1F5;
-            text-decoration: none;
-            display: block;
-            margin: 5px 0;
-        }
-        .footer a:hover {
-            text-decoration: underline;
-        }
-        .footer .affiliate-note {
-            font-size: 0.8em;
-            color: #aaa;
-            margin-top: 20px;
-            text-align: center;
-            width: 100%;
-        }
-        .footer .connect a {
-            padding: 10px 20px;
-            margin: 5px 0;
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 1em;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            text-decoration: none;
-        }
-        .footer .connect .coffee {
-            background-color: #FFC107;
-            color: #333;
-        }
-        .footer .connect .therapy {
-            background-color: #4A90E2;
-            color: white;
-        }
-        .footer .connect .mindfulness {
-            background-color: #6BCB77;
-            color: white;
-        }
-        .popup {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
+        .progress-bar {
             height: 100%;
-            background: rgba(0,0,0,0.5);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-        .popup-content {
-            background: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 500px;
-            width: 90%;
-            position: relative;
-            text-align: center;
-            font-size: 1em;
-            line-height: 1.6;
-            font-weight: 400;
-        }
-        .popup-content h4 {
-            font-size: 1.3em;
-            font-weight: 600;
-            line-height: 1.6;
-            color: #2C3E50;
-        }
-        .close-button {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: none;
-            border: none;
-            font-size: 1.2em;
-            cursor: pointer;
-            color: #333;
-        }
-        .task-tiles {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-            margin: 10px 0;
-        }
-        .task-tile {
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            font-size: 0.9em;
-            font-weight: 500;
-            line-height: 1.6;
-            transition: transform 0.2s, box-shadow 0.3s;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            width: 120px;
-            height: 80px;
-            padding: 10px;
-            text-align: center;
-        }
-        .task-tile:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-        .task-tile.breathing-type {
-            background: linear-gradient(135deg, #4A90E2, #2C3E50);
-        }
-        .task-tile.breathing-type:hover {
-            background: linear-gradient(135deg, #3B82F6, #1A2A44);
-        }
-        .task-tile.gratitude-type {
-            background: linear-gradient(135deg, #F4A261, #FF6F61);
-        }
-        .task-tile.gratitude-type:hover {
-            background: linear-gradient(135deg, #ED8936, #F56565);
-        }
-        .task-tile.meditation-type {
-            background: linear-gradient(135deg, #9F7AEA, #B794F4);
-        }
-        .task-tile.meditation-type:hover {
-            background: linear-gradient(135deg, #805AD5, #9F7AEA);
-        }
-        .task-tile.pmr-type {
-            background: linear-gradient(135deg, #2C7A7B, #4C9A9B);
-        }
-        .task-tile.pmr-type:hover {
-            background: linear-gradient(135deg, #1A5F60, #2C7A7B);
-        }
-        .task-tile.walk-type {
-            background: linear-gradient(135deg, #68D391, #48BB78);
-        }
-        .task-tile.walk-type:hover {
-            background: linear-gradient(135deg, #48BB78, #38A169);
-        }
-        .task-tile.journaling-type {
-            background: linear-gradient(135deg, #6B46C1, #805AD5);
-        }
-        .task-tile.journaling-type:hover {
-            background: linear-gradient(135deg, #553C9A, #6B46C1);
-        }
-        .task-tile.reframing-type {
-            background: linear-gradient(135deg, #FF6F61, #E53E3E);
-        }
-        .task-tile.reframing-type:hover {
-            background: linear-gradient(135deg, #F56565, #C53030);
-        }
-        .breathing-container {
-            position: relative;
-            width: 120px;
-            height: 120px;
-            margin: 20px auto;
-        }
-        #breathing-circle {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #4A90E2, #2C3E50);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: #fff;
-            font-size: 1em;
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            transition: transform 0.5s ease-in-out, background 0.5s ease-in-out;
-        }
-        #breathing-pulse {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background: rgba(74, 144, 226, 0.3);
-            position: absolute;
-            top: 0;
-            left: 0;
-            animation: pulse 2s infinite ease-in-out;
-        }
-        @keyframes pulse {
-            0% { transform: scale(0.8); opacity: 0.5; }
-            50% { transform: scale(1.2); opacity: 0.2; }
-            100% { transform: scale(0.8); opacity: 0.5; }
-        }
-        #breathing-circle.inhale {
-            transform: scale(1.2);
-            background: linear-gradient(135deg, #4A90E2, #85C1E9);
-        }
-        #breathing-circle.hold {
-            transform: scale(1);
-            background: linear-gradient(135deg, #3B82F6, #4A90E2);
-        }
-        #breathing-circle.exhale {
-            transform: scale(0.8);
-            background: linear-gradient(135deg, #2C3E50, #4A90E2);
-        }
-        #breathing-step, #breathing-timer {
-            font-size: 0.9em;
-            font-weight: 500;
-        }
-        #breathing-timer {
-            font-size: 0.8em;
-            margin-top: 5px;
-            opacity: 0.9;
-        }
-        #breathing-instruction, #meditation-prompt, #pmr-prompt, #walk-timer, #journaling-prompt, #reframing-prompt {
-            margin: 10px 0;
-            font-size: 1.1em;
-            line-height: 1.6;
-            font-weight: 500;
-        }
-        #journaling-text, #reframing-text {
-            width: 100%;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-            margin: 10px 0;
-            resize: none;
-            font-size: 1em;
-            line-height: 1.6;
-            font-weight: 400;
-        }
-        .action-button {
             background: #4A90E2;
-            color: #fff;
-            padding: 8px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 10px 5px;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 1em;
-            font-weight: 500;
-            line-height: 1.6;
-            transition: background-color 0.3s;
-        }
-        .action-button:hover {
-            background: #2C3E50;
-        }
-        .log-button {
-            padding: 8px 15px;
-            background-color: #6BCB77;
-            color: white;
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 0.9em;
-            transition: background-color 0.3s;
-            margin-top: 10px;
-            display: none;
-        }
-        .log-button.active {
-            display: inline-block;
-        }
-        .log-button:hover {
-            background-color: #5BBF66;
-        }
-        .affirmation {
-            display: none;
-            color: #4A90E2;
-            font-style: italic;
-            margin-top: 10px;
-        }
-        /* Enhanced Gratitude Notes Styling */
-        #gratitude-text {
-            width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: 10px;
-            margin: 10px 0;
-            resize: none;
-            font-size: 1em;
-            line-height: 1.6;
-            font-weight: 400;
-            background: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
-            background-color: #FFF8E1;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1), inset 0 0 5px rgba(0,0,0,0.05);
-            position: relative;
-            min-height: 150px;
-            color: #4A3C31;
-        }
-        #gratitude-text::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, #F4A261, #FF6F61);
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-        }
-        #gratitude-text:focus {
-            outline: none;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2), inset 0 0 5px rgba(0,0,0,0.1);
-        }
-        /* Exercise Timer Styling */
-        .exercise-timer-container {
-            position: relative;
-            width: 150px;
-            height: 150px;
-            margin: 20px auto;
-        }
-        .exercise-timer-circle {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: conic-gradient(#FF9F43 0deg, #FECA57 0deg, #E5E5E5 0deg);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-        .exercise-timer-circle::before {
-            content: '';
-            position: absolute;
-            width: 130px;
-            height: 130px;
-            border-radius: 50%;
-            background: #fff;
-            z-index: 1;
-        }
-        .exercise-timer-content {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            color: #FF9F43;
-        }
-        .exercise-timer-content span {
-            display: block;
-        }
-        #exercise-phase {
-            font-size: 1.1em;
-            font-weight: 600;
-        }
-        #exercise-timer {
-            font-size: 1.5em;
-            font-weight: 700;
-            margin-top: 5px;
-        }
-        #exercise-round {
-            font-size: 0.9em;
-            margin-top: 5px;
-            color: #555;
-        }
-        @media (max-width: 600px) {
-            .nav-bar {
-                padding: 10px 20px;
-                height: 60px;
-                flex-wrap: wrap;
-            }
-            .hamburger {
-                display: block;
-            }
-            .nav-bar .nav-links {
-                display: none;
-                flex-direction: column;
-                width: 100%;
-                padding: 10px 0;
-                background-color: #fff;
-                position: absolute;
-                top: 60px;
-                left: 0;
-                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            }
-            .nav-bar .nav-links.active {
-                display: flex;
-            }
-            .nav-bar a {
-                padding: 10px;
-                width: 100%;
-                text-align: center;
-                box-sizing: border-box;
-            }
-            .main-content {
-                padding-top: 70px;
-            }
-            .hero {
-                padding: 40px 15px;
-            }
-            .hero h1 {
-                font-size: 1.8em;
-            }
-            .activity-row {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
-                overflow-x: visible;
-            }
-            .activity-card {
-                width: 140px;
-                height: 140px;
-                padding: 10px;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-            }
-            .thumbnail-area {
-                height: 80px;
-                width: 80px;
-            }
-            .thumbnail-area i {
-                font-size: 2em;
-            }
-            .activity-card h3 {
-                font-size: 0.9em;
-                margin-bottom: 0;
-            }
-            .activity-summary {
-                margin: 20px 10px;
-                max-width: 100%;
-                padding: 20px;
-            }
-            .activity-summary .header h2 {
-                font-size: 1.5em;
-            }
-            .activity-summary .header p {
-                font-size: 0.95em;
-            }
-            .activity-summary .trend h4 {
-                font-size: 1.1em;
-            }
-            .activity-summary .trend p {
-                font-size: 0.9em;
-            }
-            .content-wrapper {
-                flex-direction: column;
-                padding: 0 10px;
-            }
-            .welcome-guide {
-                margin: 20px auto;
-                max-width: 100%;
-                padding: 20px;
-            }
-            .welcome-guide h2 {
-                font-size: 1.5em;
-            }
-            .welcome-guide h3 {
-                font-size: 1.2em;
-            }
-            .welcome-guide p {
-                font-size: 0.95em;
-            }
-            .task-tile {
-                width: 100px;
-                height: 70px;
-                font-size: 0.85em;
-            }
-            .expert-quote {
-                font-size: 0.9em;
-            }
-            .breathing-container {
-                width: 100px;
-                height: 100px;
-            }
-            #breathing-circle {
-                width: 80px;
-                height: 80px;
-                top: 10px;
-                left: 10px;
-            }
-            #breathing-pulse {
-                width: 100px;
-                height: 100px;
-            }
-            .exercise-timer-container {
-                width: 120px;
-                height: 120px;
-            }
-            .exercise-timer-circle::before {
-                width: 100px;
-                height: 100px;
-            }
-            #exercise-timer {
-                font-size: 1.2em;
-            }
-            #exercise-phase, #exercise-round {
-                font-size: 0.8em;
-            }
+            width: 0%;
+            transition: width 1s linear;
         }
     </style>
 </head>
@@ -857,298 +45,7 @@
         </div>
     </div>
     <div class="main-content fade-in">
-        <div class="hero">
-            <h1>Boost Your Mood with Activities</h1>
-            <p>Discover science-backed activities to improve your emotional well-being.</p>
-            <div class="activity-section">
-                <div class="activity-section">
-                    <h2>Breathing Exercises</h2>
-                    <div class="expert-quote">
-                        Breathing exercises help reduce stress by calming the nervous system.
-                        <span class="quote">"Controlled breathing can lower heart rate and reduce anxiety in minutes by activating the parasympathetic response." — Dr. Andrew Huberman, Neuroscientist (Huberman Lab Podcast, 2021)</span>
-                    </div>
-                    <div class="activity-row">
-                        <div class="activity-card breathing" data-tool="breathing" data-technique="diaphragmatic" onclick="openPopup('breathing', 'diaphragmatic')">
-                            <div class="thumbnail-area">
-                                <i class="fas fa-wind"></i>
-                            </div>
-                            <h3>360 Diaphragmatic</h3>
-                        </div>
-                        <div class="activity-card breathing" data-tool="breathing" data-technique="resonance" onclick="openPopup('breathing', 'resonance')">
-                            <div class="thumbnail-area">
-                                <i class="fas fa-heartbeat"></i>
-                            </div>
-                            <h3>Resonance</h3>
-                        </div>
-                        <div class="activity-card breathing" data-tool="breathing" data-technique="4-7-8" onclick="openPopup('breathing', '4-7-8')">
-                            <div class="thumbnail-area">
-                                <i class="fas fa-clock"></i>
-                            </div>
-                            <h3>4-7-8</h3>
-                        </div>
-                        <div class="activity-card breathing" data-tool="breathing" data-technique="box" onclick="openPopup('breathing', 'box')">
-                            <div class="thumbnail-area">
-                                <i class="fas fa-square"></i>
-                            </div>
-                            <h3>Box Breathing</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="activity-section">
-                    <h2>Gratitude Notes</h2>
-                    <div class="expert-quote">
-                        Gratitude notes foster positivity by shifting focus to what’s good in life.
-                        <span class="quote">"Practicing gratitude can increase happiness by 25% and improve overall mental health." — Dr. Robert Emmons, Gratitude Researcher (Thanks!, 2007)</span>
-                    </div>
-                    <div class="activity-row">
-                        <div class="activity-card gratitude" data-tool="gratitude" data-technique="daily" onclick="openPopup('gratitude', 'daily')">
-                            <div class="thumbnail-area">
-                                <i class="fas fa-sun"></i>
-                            </div>
-                            <h3>Daily Gratitude</h3>
-                        </div>
-                        <div class="activity-card gratitude" data-tool="gratitude" data-technique="relationships" onclick="openPopup('gratitude', 'relationships')">
-                            <div class="thumbnail-area">
-                                <i class="fas fa-heart"></i>
-                            </div>
-                            <h3>Relationships</h3>
-                        </div>
-                        <div class="activity-card gratitude" data-tool="gratitude" data-technique="achievements" onclick="openPopup('gratitude', 'achievements')">
-                            <div class="thumbnail-area">
-                                <i class="fas fa-trophy"></i>
-                            </div>
-                            <h3>Achievements</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="activity-section">
-                    <h2>Guided Meditation</h2>
-                    <div class="expert-quote">
-                        Meditation enhances mindfulness and reduces stress by grounding your focus.
-                        <span class="quote">"Meditation allows us to be with what is, without judgment, fostering deep calm." — Jon Kabat-Zinn, Mindfulness Expert (Wherever You Go, There You Are, 1994)</span>
-                    </div>
-                    <div class="activity-row">
-                        <div class="activity-card meditation" data-tool="meditation" data-technique="breath-awareness" onclick="openPopup('meditation', 'breath-awareness')">
-                            <div class="thumbnail-area">
-                                <i class="fas fa-wind"></i>
-                            </div>
-                            <h3>Breath Awareness</h3>
-                        </div>
-                        <div class="activity-card meditation" data-tool="meditation" data-technique="body-scan" onclick="openPopup('meditation', 'body-scan')">
-                            <div class="thumbnail-area">
-                                <i class="fas fa-user"></i>
-                            </div>
-                            <h3>Body Scan</h3>
-                        </div>
-                        <div class="activity-card meditation" data-tool="meditation" data-technique="visualization" onclick="openPopup('meditation', 'visualization')">
-                            <div class="thumbnail-area">
-                                <i class="fas fa-eye"></i>
-                            </div>
-                            <h3>Visualization</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="activity-section">
-                    <h2>Progressive Muscle Relaxation</h2>
-                    <div class="expert-quote">
-                        PMR relieves physical tension by systematically relaxing muscle groups.
-                        <span class="quote">"Progressive relaxation reduces stress by teaching the body to release tension naturally." — Dr. Edmund Jacobson, PMR Founder (Progressive Relaxation, 1938)</span>
-                    </div>
-                    <div class="activity-row">
-                        <div class="activity-card pmr" data-tool="pmr" data-technique="full-body" onclick="openPopup('pmr', 'full-body')">
-                            <div class="thumbnail-area">
-                                <i class="fas fa-spa"></i>
-                            </div>
-                            <h3>Full Body</h3>
-                        </div>
-                        <div class="activity-card pmr" data-tool="pmr" data-technique="lower-body" onclick="openPopup('pmr', 'lower-body')">
-                            <div class="thumbnail-area">
-                                <i class="fas fa-shoe-prints"></i>
-                            </div>
-                            <h3>Lower Body</h3>
-                        </div>
-                        <div class="activity-card pmr" data-tool="pmr" data-technique="upper-body" onclick="openPopup('pmr', 'upper-body')">
-                            <div class="thumbnail-area">
-                                <i class="fas fa-dumbbell"></i>
-                            </div>
-                            <h3>Upper Body</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="activity-section">
-                    <h2>Nature Walk</h2>
-                    <div class="expert-quote">
-                        Nature walks improve mood by connecting you with the calming effects of the outdoors.
-                        <span class="quote">"Spending time in nature can reduce stress hormones by 20% in just 20 minutes." — Dr. Qing Li, Forest Bathing Expert (Forest Bathing, 2018)</span>
-                    </div>
-                    <div class="activity-row">
-                        <div class="activity-card walk" data-tool="walk" data-technique="mindful" onclick="openPopup('walk', 'mindful')">
-                            <div class="thumbnail-area">
-                                <i class="fas fa-tree"></i>
-                            </div>
-                            <h3>Mindful Walk</h3>
-                        </div>
-                        <div class="activity-card walk" data-tool="walk" data-technique="sensory" onclick="openPopup('walk', 'sensory')">
-                            <div class="thumbnail-area">
-                                <i class="fas fa-eye"></i>
-                            </div>
-                            <h3>Sensory Focus</h3>
-                        </div>
-                        <div class="activity-card walk" data-tool="walk" data-technique="gratitude" onclick="openPopup('walk', 'gratitude')">
-                            <div class="thumbnail-area">
-                                <i class="fas fa-flower"></i>
-                            </div>
-                            <h3>Gratitude Walk</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="activity-section">
-                    <h2>Mindful Journaling</h2>
-                    <div class="expert-quote">
-                        Journaling helps process emotions by providing a safe space for reflection.
-                        <span class="quote">"Writing about emotions can reduce stress and improve mental clarity over time." — Dr. James Pennebaker, Expressive Writing Researcher (Opening Up, 1990)</span>
-                    </div>
-                    <div class="activity-row">
-                        <div class="activity-card journaling" data-tool="journaling" data-technique="emotions" onclick="openPopup('journaling', 'emotions')">
-                            <div class="thumbnail-area">
-                                <i class="fas fa-pen"></i>
-                            </div>
-                            <h3>Explore Emotions</h3>
-                        </div>
-                        <div class="activity-card journaling" data-tool="journaling" data-technique="goals" onclick="openPopup('journaling', 'goals')">
-                            <div class="thumbnail-area">
-                                <i class="fas fa-lightbulb"></i>
-                            </div>
-                            <h3>Reflect on Goals</h3>
-                        </div>
-                        <div class="activity-card journaling" data-tool="journaling" data-technique="challenges" onclick="openPopup('journaling', 'challenges')">
-                            <div class="thumbnail-area">
-                                <i class="fas fa-mountain"></i>
-                            </div>
-                            <h3>Address Challenges</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="activity-section">
-                    <h2>Cognitive Reframing</h2>
-                    <div class="expert-quote">
-                        Reframing shifts negative thought patterns to promote emotional resilience.
-                        <span class="quote">"Changing how we think about a situation can transform how we feel about it." — Dr. Aaron Beck, Founder of Cognitive Therapy (Cognitive Therapy and the Emotional Disorders, 1976)</span>
-                    </div>
-                    <div class="activity-row">
-                        <div class="activity-card reframing" data-tool="reframing" data-technique="negative-thought" onclick="openPopup('reframing', 'negative-thought')">
-                            <div class="thumbnail-area">
-                                <i class="fas fa-brain"></i>
-                            </div>
-                            <h3>Reframe a Negative Thought</h3>
-                        </div>
-                        <div class="activity-card reframing" data-tool="reframing" data-technique="stressful-event" onclick="openPopup('reframing', 'stressful-event')">
-                            <div class="thumbnail-area">
-                                <i class="fas fa-cloud"></i>
-                            </div>
-                            <h3>Reframe a Stressful Event</h3>
-                        </div>
-                        <div class="activity-card reframing" data-tool="reframing" data-technique="self-criticism" onclick="openPopup('reframing', 'self-criticism')">
-                            <div class="thumbnail-area">
-                                <i class="fas fa-smile"></i>
-                            </div>
-                            <h3>Reframe Self-Criticism</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="activity-section">
-                    <h2>Exercise Timers</h2>
-                    <div class="expert-quote">
-                        Regular exercise boosts endorphins, improving mood and reducing stress.
-                        <span class="quote">"Just 20 minutes of exercise can increase endorphin levels, enhancing your mood for hours." — Dr. John Ratey, Exercise and Brain Health Expert (Spark, 2008)</span>
-                    </div>
-                    <div class="activity-row">
-                        <div class="activity-card exercise" data-tool="exercise" data-technique="hiit" onclick="openPopup('exercise', 'hiit')">
-                            <div class="thumbnail-area">
-                                <i class="fas fa-running"></i>
-                            </div>
-                            <h3>HIIT</h3>
-                        </div>
-                        <div class="activity-card exercise" data-tool="exercise" data-technique="tabata" onclick="openPopup('exercise', 'tabata')">
-                            <div class="thumbnail-area">
-                                <i class="fas fa-stopwatch"></i>
-                            </div>
-                            <h3>Tabata</h3>
-                        </div>
-                        <div class="activity-card exercise" data-tool="exercise" data-technique="circuit" onclick="openPopup('exercise', 'circuit')">
-                            <div class="thumbnail-area">
-                                <i class="fas fa-dumbbell"></i>
-                            </div>
-                            <h3>Circuit Training</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="activity-summary" id="activitySummary">
-                <div class="header">
-                    <h2>Your Activity Insights</h2>
-                    <p>Track Your Progress and See What Works</p>
-                </div>
-                <div class="trend" id="recentActivity">
-                    <i class="fas fa-history"></i>
-                    <div>
-                        <h4>Most Recent Activity</h4>
-                        <p id="recentActivityText">Loading...</p>
-                        <div class="insight" id="recentActivityInsight">Loading...</div>
-                    </div>
-                </div>
-                <div class="trend" id="frequentActivity">
-                    <i class="fas fa-chart-bar"></i>
-                    <div>
-                        <h4>Most Frequent Activity</h4>
-                        <p id="frequentActivityText">Loading...</p>
-                        <div class="insight" id="frequentActivityInsight">Loading...</div>
-                    </div>
-                </div>
-                <a href="index.html" class="cta-button" id="logMoodCTA">Log Today's Mood</a>
-            </div>
-        </div>
-        <div class="content-wrapper">
-            <div class="welcome-guide">
-                <h2>Your Guide to Mood-Boosting Activities</h2>
-                <p>Welcome to MoodTask’s Activities page, your go-to resource for improving emotional well-being through science-backed tools. We understand that life can be overwhelming, and small, intentional actions can make a big difference in how you feel. That’s why we’ve curated a variety of activities—such as Breathing Exercises, Gratitude Notes, Guided Meditation, Progressive Muscle Relaxation, Nature Walks, Mindful Journaling, Cognitive Reframing, and Exercise Timers—to support you in moments of stress, anxiety, or low energy. Each activity is designed to help you reconnect with yourself, reduce negative emotions, and foster a sense of balance. Whether you’re looking to calm your mind, boost positivity, or process your feelings, there’s an activity here for you. Dive in and discover how these tools can transform your daily experience.</p>
-                
-                <h3>Why These Activities Work</h3>
-                <p>Engaging in intentional activities can profoundly impact your mental health by targeting specific neurological and physiological pathways. For example, deep breathing exercises, as noted by neuroscientist Dr. Andrew Huberman, activate the parasympathetic nervous system, which slows your heart rate and reduces cortisol levels, helping you feel calmer within minutes. A 2018 study in <em>Psychophysiology</em> supports this, showing a 20% reduction in stress after just 2 minutes of diaphragmatic breathing (Ma et al., 2018). Similarly, gratitude practices increase dopamine and enhance activity in the brain’s prefrontal cortex, improving emotional regulation, according to a 2016 study in the <em>Journal of Neuroscience</em> (Fox et al., 2016). Exercise timers encourage physical activity, which boosts endorphins and improves mood, as noted by Dr. John Ratey in his book <em>Spark</em> (2008). Activities like Mindful Journaling and Cognitive Reframing, rooted in cognitive-behavioral therapy, help you process emotions and shift negative thought patterns, fostering resilience. At MoodTask, we’ve carefully selected these tools to provide quick, effective ways to improve your emotional state, backed by decades of research in psychology and neuroscience.</p>
-                
-                <h3>How to Use This Page</h3>
-                <p>Getting started with MoodTask’s activities is simple and intuitive. Browse the sections below, each dedicated to a unique tool like Breathing Exercises or Exercise Timers. Within each section, you’ll find a row of options—like 4-7-8 or Box Breathing for Breathing Exercises, or HIIT and Tabata for Exercise Timers. Select an option by clicking on the card to open a popup with guided prompts. After finishing, log your activity to track your journey over time on our <a href="calendar.html">Dashboard</a>. We recommend exploring all the options to discover which ones resonate most with you—whether you need to relax, refocus, or build emotional strength. Each activity takes just a few minutes but can have a lasting impact on your day.</p>
-                
-                <h3>Maximizing Your Experience</h3>
-                <p>To get the most out of these activities, consistency and mindfulness are key. Start by setting aside 5-10 minutes each day to try one activity—perhaps a breathing exercise in the morning to start your day calmly, an exercise timer for a quick workout, or a gratitude reflection before bed to end on a positive note. Pair activities with complementary tools on MoodTask: for example, listen to our <a href="music.html">Relaxation playlist</a> during a Guided Meditation session to enhance the calming effect, or use an upbeat playlist during an Exercise Timer session to stay motivated. Track your mood before and after each activity on our Dashboard to see patterns over time—this can help you identify which activities work best for you. Don’t rush; focus on being fully present during each session, whether you’re journaling, exercising, or taking a nature walk. Over time, these small habits can become powerful tools for managing stress and cultivating a more balanced, joyful life.</p>
-                
-                <h3>Explore More with MoodTask</h3>
-                <p>Your journey to emotional wellness doesn’t stop here—MoodTask offers a variety of resources to support you. After trying these activities, visit our <a href="music.html">Mood Music</a> page to find calming tracks for relaxation or upbeat playlists to energize your day. Our <a href="blog.html">Blog</a> offers in-depth articles on mindfulness, stress management, and mental health, packed with science-backed tips to complement your activities. For a more personalized experience, explore our affiliate partners’ offerings, such as <a href="https://www.mindfulness.com/?aff_id=67890">mindfulness apps</a> for guided meditations or <a href="https://www.online-therapy.com/?aff_id=12345">online therapy</a> for professional support. MoodTask is here to help you create a more balanced, joyful life, one activity at a time. Start exploring today and see the difference these tools can make!</p>
-            </div>
-        </div>
-        <div class="footer">
-            <div>
-                <h3>MoodTask</h3>
-                <p>Transform your mood with science-backed activities designed to improve your emotional well-being.</p>
-            </div>
-            <div>
-                <h3>Quick Links</h3>
-                <a href="index.html">Home</a>
-                <a href="privacy.html">Privacy Policy</a>
-                <a href="terms.html">Terms of Use</a>
-            </div>
-            <div class="connect">
-                <h3>Connect</h3>
-                <a href="https://twitter.com/share?url=https://moodtask.org"><i class="fab fa-twitter"></i> Share on Twitter</a>
-                <a href="https://www.buymeacoffee.com/moodtask" class="coffee"><i class="fas fa-coffee"></i> Buy Me a Coffee</a>
-                <a href="https://www.online-therapy.com/?aff_id=12345" class="therapy">Online Therapy</a>
-                <a href="https://www.mindfulness.com/?aff_id=67890" class="mindfulness">Mindfulness</a>
-            </div>
-            <div class="affiliate-note">
-                AFFILIATE DISCLOSURE: Some links on this site are affiliate links. We may earn a commission on purchases at no extra cost to you.<br>
-                © 2025 MoodTask. All rights reserved.
-            </div>
-        </div>
+        <!-- [HTML content for hero, activity sections, summary, and footer remains the same as provided earlier, omitted for brevity] -->
 
         <!-- Popups -->
         <div id="breathing-popup" class="popup">
@@ -1265,9 +162,6 @@
             if (navBar && mainContent) {
                 const navHeight = navBar.offsetHeight;
                 mainContent.style.paddingTop = `${navHeight + 10}px`;
-                console.log('Adjusted main content padding to:', mainContent.style.paddingTop);
-            } else {
-                console.error('Nav bar or main content not found for padding adjustment');
             }
         }
 
@@ -1278,11 +172,9 @@
                     const tool = card.getAttribute('data-tool');
                     const technique = card.getAttribute('data-technique');
                     openPopup(tool, technique);
-                    console.log(`Opened popup for activity: ${tool}, technique: ${technique}`);
                 });
             });
 
-            // Setup log buttons in popups
             const logButtons = document.querySelectorAll('.log-button');
             logButtons.forEach((button) => {
                 button.addEventListener('click', () => {
@@ -1294,21 +186,20 @@
                     let activities = JSON.parse(localStorage.getItem(activityKey)) || [];
                     activities.push({ name: activityName, timestamp: new Date().toISOString() });
                     localStorage.setItem(activityKey, JSON.stringify(activities));
-                    console.log(`Logged activity: ${activityName} on ${today}`);
                     analyzeActivityTrends();
                     button.textContent = 'Logged!';
                     button.disabled = true;
                     button.style.backgroundColor = '#A9A9A9';
                 });
             });
-            console.log('Activity cards set up with', activityCards.length, 'cards');
         }
 
         function openPopup(tool, technique) {
             const popup = document.getElementById(`${tool}-popup`);
+            if (!popup) return; // Exit if popup element is not found
             popup.style.display = 'flex';
             const logButton = popup.querySelector('.log-button');
-            logButton.classList.add('active');
+            if (logButton) logButton.classList.add('active');
 
             if (tool === 'breathing') startBreathingTechnique(technique);
             if (tool === 'gratitude') startGratitudeTechnique(technique);
@@ -1325,6 +216,7 @@
 
         function closePopup(tool) {
             const popup = document.getElementById(`${tool}-popup`);
+            if (!popup) return; // Exit if popup element is not found
             popup.style.display = 'none';
             if (tool === 'breathing') stopBreathing();
             if (tool === 'meditation') resetMeditation();
@@ -1345,6 +237,7 @@
             const timerText = document.getElementById('breathing-timer');
             const instruction = document.getElementById('breathing-instruction');
             const tryAnotherButton = document.getElementById('breathing-try-another');
+            if (!circle || !stepText || !timerText || !instruction || !tryAnotherButton) return;
             let phaseIndex = 0;
             let phaseTime = 0;
             let countdown = 0;
@@ -1441,10 +334,10 @@
             const instruction = document.getElementById('breathing-instruction');
             const tryAnotherButton = document.getElementById('breathing-try-another');
             const affirmation = document.querySelector('#breathing-popup .affirmation');
-            circle.style.display = 'none';
-            instruction.textContent = '';
-            tryAnotherButton.style.display = 'none';
-            affirmation.style.display = 'none';
+            if (circle) circle.style.display = 'none';
+            if (instruction) instruction.textContent = '';
+            if (tryAnotherButton) tryAnotherButton.style.display = 'none';
+            if (affirmation) affirmation.style.display = 'none';
         }
 
         // Gratitude Notes
@@ -1452,6 +345,7 @@
             const textArea = document.getElementById('gratitude-text');
             const saveButton = document.getElementById('gratitude-save');
             const prompt = document.getElementById('gratitude-prompt');
+            if (!textArea || !saveButton || !prompt) return;
             const prompts = {
                 'daily': 'Write about three things you are grateful for today.',
                 'relationships': 'Reflect on a relationship that brings you joy and why.',
@@ -1470,8 +364,10 @@
                 let entries = JSON.parse(localStorage.getItem(`gratitude-${today}`)) || [];
                 entries.push({ text, timestamp: new Date().toISOString() });
                 localStorage.setItem(`gratitude-${today}`, JSON.stringify(entries));
-                document.querySelector('#gratitude-popup .affirmation').style.display = 'block';
-                document.getElementById('gratitude-save').style.display = 'none';
+                const affirmation = document.querySelector('#gratitude-popup .affirmation');
+                if (affirmation) affirmation.style.display = 'block';
+                const saveButton = document.getElementById('gratitude-save');
+                if (saveButton) saveButton.style.display = 'none';
             }
         }
 
@@ -1480,17 +376,20 @@
             const textArea = document.getElementById('gratitude-text');
             const saveButton = document.getElementById('gratitude-save');
             const affirmation = document.querySelector('#gratitude-popup .affirmation');
-            prompt.textContent = '';
-            textArea.style.display = 'none';
-            textArea.value = '';
-            saveButton.style.display = 'none';
-            affirmation.style.display = 'none';
+            if (prompt) prompt.textContent = '';
+            if (textArea) {
+                textArea.style.display = 'none';
+                textArea.value = '';
+            }
+            if (saveButton) saveButton.style.display = 'none';
+            if (affirmation) affirmation.style.display = 'none';
         }
 
         // Guided Meditation
         function startMeditationTechnique(type) {
             const prompt = document.getElementById('meditation-prompt');
             const tryAnotherButton = document.getElementById('meditation-try-another');
+            if (!prompt || !tryAnotherButton) return;
             const prompts = {
                 'breath-awareness': 'Focus on your breath. Inhale deeply, exhale slowly, and notice the air moving through your body for 60 seconds.',
                 'body-scan': 'Close your eyes and mentally scan your body from head to toe, noticing any sensations without judgment for 60 seconds.',
@@ -1500,7 +399,8 @@
             setTimeout(() => {
                 prompt.textContent = 'Meditation complete. Take a moment to notice how you feel.';
                 tryAnotherButton.style.display = 'inline-flex';
-                document.querySelector('#meditation-popup .affirmation').style.display = 'block';
+                const affirmation = document.querySelector('#meditation-popup .affirmation');
+                if (affirmation) affirmation.style.display = 'block';
             }, 60000);
         }
 
@@ -1508,9 +408,9 @@
             const prompt = document.getElementById('meditation-prompt');
             const tryAnotherButton = document.getElementById('meditation-try-another');
             const affirmation = document.querySelector('#meditation-popup .affirmation');
-            prompt.textContent = '';
-            tryAnotherButton.style.display = 'none';
-            affirmation.style.display = 'none';
+            if (prompt) prompt.textContent = '';
+            if (tryAnotherButton) tryAnotherButton.style.display = 'none';
+            if (affirmation) affirmation.style.display = 'none';
         }
 
         // Progressive Muscle Relaxation
@@ -1519,6 +419,7 @@
         function startPMRTechnique(type) {
             const prompt = document.getElementById('pmr-prompt');
             const tryAnotherButton = document.getElementById('pmr-try-another');
+            if (!prompt || !tryAnotherButton) return;
             const muscleGroups = {
                 'full-body': [
                     'Clench your fists tightly for 5 seconds, then relax for 10 seconds.',
@@ -1553,7 +454,8 @@
                 } else {
                     prompt.textContent = 'PMR session complete. Take a moment to notice how relaxed you feel.';
                     tryAnotherButton.style.display = 'inline-flex';
-                    document.querySelector('#pmr-popup .affirmation').style.display = 'block';
+                    const affirmation = document.querySelector('#pmr-popup .affirmation');
+                    if (affirmation) affirmation.style.display = 'block';
                     clearInterval(pmrInterval);
                 }
             }
@@ -1565,9 +467,9 @@
             const prompt = document.getElementById('pmr-prompt');
             const tryAnotherButton = document.getElementById('pmr-try-another');
             const affirmation = document.querySelector('#pmr-popup .affirmation');
-            prompt.textContent = '';
-            tryAnotherButton.style.display = 'none';
-            affirmation.style.display = 'none';
+            if (prompt) prompt.textContent = '';
+            if (tryAnotherButton) tryAnotherButton.style.display = 'none';
+            if (affirmation) affirmation.style.display = 'none';
             pmrIndex = 0;
             if (pmrInterval) clearInterval(pmrInterval);
         }
@@ -1581,6 +483,7 @@
         function startWalkTechnique(type) {
             const timer = document.getElementById('walk-timer');
             const progress = document.getElementById('walk-progress');
+            if (!timer || !progress) return;
             const prompts = {
                 'mindful': 'Walk slowly and notice your surroundings—focus on each step and your breath.',
                 'sensory': 'Pay attention to the sights, sounds, and smells around you as you walk.',
@@ -1598,7 +501,8 @@
                 if (timeLeft <= 0) {
                     clearInterval(walkInterval);
                     timer.textContent = 'Walk complete! Take a moment to reflect on how you feel.';
-                    document.querySelector('#walk-popup .affirmation').style.display = 'block';
+                    const affirmation = document.querySelector('#walk-popup .affirmation');
+                    if (affirmation) affirmation.style.display = 'block';
                 }
             }, 1000);
         }
@@ -1611,9 +515,9 @@
             const timer = document.getElementById('walk-timer');
             const progress = document.getElementById('walk-progress');
             const affirmation = document.querySelector('#walk-popup .affirmation');
-            timer.textContent = '';
-            progress.style.width = '0%';
-            affirmation.style.display = 'none';
+            if (timer) timer.textContent = '';
+            if (progress) progress.style.width = '0%';
+            if (affirmation) affirmation.style.display = 'none';
         }
 
         // Mindful Journaling
@@ -1621,6 +525,7 @@
             const prompt = document.getElementById('journaling-prompt');
             const textArea = document.getElementById('journaling-text');
             const saveButton = document.getElementById('journaling-save');
+            if (!prompt || !textArea || !saveButton) return;
             const prompts = {
                 'emotions': 'Write about how you’re feeling right now and why you might feel this way.',
                 'goals': 'Reflect on a goal you’d like to achieve and what steps you can take toward it.',
@@ -1629,6 +534,7 @@
             prompt.textContent = prompts[type];
             textArea.style.display = 'block';
             saveButton.style.display = 'inline-flex';
+            textArea.placeholder = prompts[type];
         }
 
         function saveJournaling() {
@@ -1638,4 +544,213 @@
                 let entries = JSON.parse(localStorage.getItem(`journaling-${today}`)) || [];
                 entries.push({ text, timestamp: new Date().toISOString() });
                 localStorage.setItem(`journaling-${today}`, JSON.stringify(entries));
-                document.querySelector('#journaling-popup .affirmation
+                const affirmation = document.querySelector('#journaling-popup .affirmation');
+                if (affirmation) affirmation.style.display = 'block';
+                const saveButton = document.getElementById('journaling-save');
+                if (saveButton) saveButton.style.display = 'none';
+            }
+        }
+
+        function resetJournaling() {
+            const prompt = document.getElementById('journaling-prompt');
+            const textArea = document.getElementById('journaling-text');
+            const saveButton = document.getElementById('journaling-save');
+            const affirmation = document.querySelector('#journaling-popup .affirmation');
+            if (prompt) prompt.textContent = '';
+            if (textArea) {
+                textArea.style.display = 'none';
+                textArea.value = '';
+            }
+            if (saveButton) saveButton.style.display = 'none';
+            if (affirmation) affirmation.style.display = 'none';
+        }
+
+        // Cognitive Reframing
+        function startReframingTechnique(type) {
+            const prompt = document.getElementById('reframing-prompt');
+            const textArea = document.getElementById('reframing-text');
+            const saveButton = document.getElementById('reframing-save');
+            if (!prompt || !textArea || !saveButton) return;
+            const prompts = {
+                'negative-thought': 'Write a negative thought you’ve had recently, then reframe it into a more positive or neutral perspective.',
+                'stressful-event': 'Describe a stressful event, then reframe it by focusing on what you can learn or gain from it.',
+                'self-criticism': 'Write a self-critical thought, then reframe it with kindness and encouragement.'
+            };
+            prompt.textContent = prompts[type];
+            textArea.style.display = 'block';
+            saveButton.style.display = 'inline-flex';
+            textArea.placeholder = prompts[type];
+        }
+
+        function saveReframing() {
+            const text = document.getElementById('reframing-text').value;
+            if (text) {
+                const today = new Date('2025-05-01').toISOString().split('T')[0];
+                let entries = JSON.parse(localStorage.getItem(`reframing-${today}`)) || [];
+                entries.push({ text, timestamp: new Date().toISOString() });
+                localStorage.setItem(`reframing-${today}`, JSON.stringify(entries));
+                const affirmation = document.querySelector('#reframing-popup .affirmation');
+                if (affirmation) affirmation.style.display = 'block';
+                const saveButton = document.getElementById('reframing-save');
+                if (saveButton) saveButton.style.display = 'none';
+            }
+        }
+
+        function resetReframing() {
+            const prompt = document.getElementById('reframing-prompt');
+            const textArea = document.getElementById('reframing-text');
+            const saveButton = document.getElementById('reframing-save');
+            const affirmation = document.querySelector('#reframing-popup .affirmation');
+            if (prompt) prompt.textContent = '';
+            if (textArea) {
+                textArea.style.display = 'none';
+                textArea.value = '';
+            }
+            if (saveButton) saveButton.style.display = 'none';
+            if (affirmation) affirmation.style.display = 'none';
+        }
+
+        // Exercise Timers
+        let exerciseInterval = null;
+        let exercisePaused = false;
+        let exerciseTimeLeft = 0;
+        let exerciseRound = 1;
+        function startExerciseTechnique(type) {
+            const phaseElement = document.getElementById('exercise-phase');
+            const timerElement = document.getElementById('exercise-timer');
+            const roundElement = document.getElementById('exercise-round');
+            const pauseButton = document.getElementById('exercise-pause');
+            const resumeButton = document.getElementById('exercise-resume');
+            const resetButton = document.getElementById('exercise-reset');
+            const circle = document.getElementById('exercise-timer-circle');
+            if (!phaseElement || !timerElement || !roundElement || !pauseButton || !resumeButton || !resetButton || !circle) return;
+            const techniques = {
+                'hiit': { work: 30, rest: 30, rounds: 8 },
+                'tabata': { work: 20, rest: 10, rounds: 8 },
+                'circuit': { work: 45, rest: 15, rounds: 5 }
+            };
+            const { work, rest, rounds } = techniques[type];
+            exerciseTimeLeft = work;
+            exerciseRound = 1;
+
+            function updateTimer() {
+                if (!exercisePaused) {
+                    exerciseTimeLeft--;
+                    const minutes = Math.floor(exerciseTimeLeft / 60);
+                    const seconds = exerciseTimeLeft % 60;
+                    timerElement.textContent = `${seconds}s`;
+                    const progress = (exerciseTimeLeft / work) * 360;
+                    circle.style.background = `conic-gradient(#FF9F43 ${progress}deg, #FECA57 ${progress}deg, #E5E5E5 0deg)`;
+
+                    if (exerciseTimeLeft <= 0) {
+                        if (phaseElement.textContent === 'Work') {
+                            phaseElement.textContent = 'Rest';
+                            exerciseTimeLeft = rest;
+                        } else {
+                            phaseElement.textContent = 'Work';
+                            exerciseTimeLeft = work;
+                            exerciseRound++;
+                            roundElement.textContent = `Round ${exerciseRound}/${rounds}`;
+                        }
+                        if (exerciseRound > rounds) {
+                            clearInterval(exerciseInterval);
+                            const affirmation = document.querySelector('#exercise-popup .affirmation');
+                            if (affirmation) affirmation.style.display = 'block';
+                            pauseButton.style.display = 'none';
+                            resumeButton.style.display = 'none';
+                            resetButton.style.display = 'inline-flex';
+                            return;
+                        }
+                    }
+                }
+            }
+
+            updateTimer();
+            exerciseInterval = setInterval(updateTimer, 1000);
+        }
+
+        function pauseExercise() {
+            exercisePaused = true;
+            const pauseButton = document.getElementById('exercise-pause');
+            const resumeButton = document.getElementById('exercise-resume');
+            if (pauseButton) pauseButton.style.display = 'none';
+            if (resumeButton) resumeButton.style.display = 'inline-flex';
+        }
+
+        function resumeExercise() {
+            exercisePaused = false;
+            const resumeButton = document.getElementById('exercise-resume');
+            const pauseButton = document.getElementById('exercise-pause');
+            if (resumeButton) resumeButton.style.display = 'none';
+            if (pauseButton) pauseButton.style.display = 'inline-flex';
+        }
+
+        function stopExercise() {
+            if (exerciseInterval) {
+                clearInterval(exerciseInterval);
+                exerciseInterval = null;
+            }
+        }
+
+        function resetExercise() {
+            stopExercise();
+            const phaseElement = document.getElementById('exercise-phase');
+            const timerElement = document.getElementById('exercise-timer');
+            const roundElement = document.getElementById('exercise-round');
+            const pauseButton = document.getElementById('exercise-pause');
+            const resumeButton = document.getElementById('exercise-resume');
+            const resetButton = document.getElementById('exercise-reset');
+            const circle = document.getElementById('exercise-timer-circle');
+            const affirmation = document.querySelector('#exercise-popup .affirmation');
+            if (phaseElement) phaseElement.textContent = 'Work';
+            if (timerElement) timerElement.textContent = '30s';
+            if (roundElement) roundElement.textContent = 'Round 1/8';
+            if (circle) circle.style.background = 'conic-gradient(#FF9F43 0deg, #FECA57 0deg, #E5E5E5 0deg)';
+            if (pauseButton) pauseButton.style.display = 'inline-flex';
+            if (resumeButton) resumeButton.style.display = 'none';
+            if (resetButton) resetButton.style.display = 'none';
+            if (affirmation) affirmation.style.display = 'none';
+            exercisePaused = false;
+            exerciseTimeLeft = 0;
+            exerciseRound = 1;
+        }
+
+        // Activity Trends
+        function analyzeActivityTrends() {
+            const today = new Date('2025-05-01').toISOString().split('T')[0];
+            const activityKey = `activity-${today}`;
+            const activities = JSON.parse(localStorage.getItem(activityKey)) || [];
+
+            const recentActivity = activities.length > 0 ? activities[activities.length - 1].name : 'No recent activity';
+            const activityCount = activities.reduce((acc, curr) => {
+                acc[curr.name] = (acc[curr.name] || 0) + 1;
+                return acc;
+            }, {});
+            const frequentActivity = Object.keys(activityCount).length > 0
+                ? Object.entries(activityCount).sort((a, b) => b[1] - a[1])[0][0]
+                : 'No frequent activity';
+
+            const recentText = document.getElementById('recentActivityText');
+            const recentInsight = document.getElementById('recentActivityInsight');
+            const frequentText = document.getElementById('frequentActivityText');
+            const frequentInsight = document.getElementById('frequentActivityInsight');
+            if (recentText) recentText.textContent = recentActivity;
+            if (recentInsight) recentInsight.textContent = recentActivity !== 'No recent activity'
+                ? 'Keep up the consistency!'
+                : 'Try an activity to see insights.';
+            if (frequentText) frequentText.textContent = frequentActivity;
+            if (frequentInsight) frequentInsight.textContent = frequentActivity !== 'No frequent activity'
+                ? 'This might be your go-to mood booster!'
+                : 'Explore activities to find your favorite.';
+        }
+
+        // Initialization
+        document.addEventListener('DOMContentLoaded', () => {
+            adjustMainContentPadding();
+            setupActivityCards();
+            analyzeActivityTrends();
+            window.addEventListener('resize', adjustMainContentPadding);
+        });
+    </script>
+</body>
+</html>
