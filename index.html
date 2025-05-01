@@ -101,6 +101,12 @@
         .nav-bar .dropdown:hover .dropdown-content {
             display: block;
         }
+        .hamburger {
+            display: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: #2C3E50;
+        }
         .main-content {
             transition: opacity 0.5s ease;
             padding-top: 60px;
@@ -126,37 +132,7 @@
             font-size: 1.2em;
             margin-bottom: 30px;
         }
-        .mood-button {
-            padding: 15px 30px;
-            background-color: #FFC107;
-            color: #333;
-            border: none;
-            border-radius: 25px;
-            font-size: 1.2em;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
-            animation: pulse 2s infinite;
-            position: relative;
-            z-index: 10;
-        }
-        .mood-button.hidden {
-            display: none;
-        }
-        .mood-button:hover {
-            background-color: #FFB300;
-            transform: scale(1.05);
-        }
-        .mood-button:focus {
-            outline: 2px solid #FFD700;
-            outline-offset: 2px;
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 5px rgba(255, 193, 7, 0.5); }
-            50% { transform: scale(1.05); box-shadow: 0 0 15px rgba(255, 193, 7, 0.8); }
-            100% { transform: scale(1); box-shadow: 0 0 5px rgba(255, 193, 7, 0.5); }
-        }
         .mood-grid {
-            display: none;
             margin-top: 30px;
             width: 100%;
             padding: 20px;
@@ -169,8 +145,8 @@
             margin-left: auto;
             margin-right: auto;
         }
-        .mood-grid.active {
-            display: flex;
+        .mood-grid .mood-option {
+            animation: fadeIn 0.5s ease forwards;
         }
         .mood-option {
             background: rgba(255, 255, 255, 0.2);
@@ -192,9 +168,6 @@
             border: 2px solid transparent;
             transition: transform 0.3s, background 0.3s, border 0.3s;
             opacity: 0; /* Start hidden for fade-in */
-        }
-        .mood-grid.active .mood-option {
-            animation: fadeIn 0.5s ease forwards;
         }
         .mood-option:hover {
             transform: scale(1.05);
@@ -411,85 +384,6 @@
         .welcome-guide a:hover {
             text-decoration: underline;
         }
-        .ad-player {
-            flex: 0 0 450px;
-            margin: 20px;
-            text-align: left;
-            position: relative;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-            transition: transform 0.3s;
-            background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
-            border: 1px solid #4A90E2;
-        }
-        .ad-player:hover {
-            transform: scale(1.02);
-        }
-        .ad-player video {
-            width: 100%;
-            border-radius: 10px;
-            display: block;
-        }
-        .ad-content {
-            padding: 10px;
-        }
-        .ad-player-text {
-            margin: 10px 0;
-            font-size: 1.1em;
-            font-weight: 600;
-            color: #fff;
-            text-align: center;
-            text-decoration: none;
-            background-color: #00A651;
-            padding: 8px 12px;
-            border-radius: 5px;
-            display: block;
-            transition: background-color 0.3s;
-            position: relative;
-        }
-        .ad-player-text:hover {
-            background-color: #00843D;
-            text-decoration: none;
-        }
-        .ad-player-text:hover .benefit-tooltip {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .ad-player-text i {
-            margin-right: 5px;
-        }
-        .ad-player-text .highlight {
-            font-weight: 700;
-            color: #FFC107;
-        }
-        .benefit-tooltip {
-            position: absolute;
-            bottom: 100%;
-            left: 50%;
-            transform: translateX(-50%) translateY(10px);
-            background-color: #333;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 0.9em;
-            opacity: 0;
-            transition: opacity 0.3s, transform 0.3s;
-            white-space: nowrap;
-        }
-        .cta-button {
-            display: block;
-            text-align: center;
-            padding: 10px;
-            background-color: #00A651;
-            color: white;
-            text-decoration: none;
-            border-radius: 20px;
-            font-weight: 600;
-            transition: background-color 0.3s;
-        }
-        .cta-button:hover {
-            background-color: #00843D;
-        }
         .footer {
             background-color: #333;
             color: white;
@@ -545,22 +439,30 @@
         }
         @media (max-width: 600px) {
             .nav-bar {
-                flex-direction: column;
-                gap: 8px;
-                padding: 10px 20px;
-                height: auto;
-                min-height: 120px;
+                height: 50px;
+                padding: 5px 10px;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .nav-bar .logo {
+                font-size: 1.2em;
             }
             .nav-bar .nav-links {
+                display: none;
                 flex-direction: column;
-                gap: 8px;
-                align-items: center;
+                position: absolute;
+                top: 50px;
+                left: 0;
                 width: 100%;
-                padding-left: 0;
-                padding-right: 0;
+                background-color: #fff;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                padding: 10px 0;
+            }
+            .nav-bar .nav-links.active {
+                display: flex;
             }
             .nav-bar a {
-                padding: 8px 20px;
+                padding: 10px;
                 width: 100%;
                 text-align: center;
                 box-sizing: border-box;
@@ -571,15 +473,23 @@
             .nav-bar .dropdown-content {
                 width: 100%;
                 left: 0;
+                position: relative;
+                box-shadow: none;
+            }
+            .hamburger {
+                display: block;
             }
             .main-content {
-                padding-top: 130px;
+                padding-top: 60px;
             }
             .hero {
-                padding: 40px 15px;
+                padding: 30px 15px;
             }
             .hero h1 {
                 font-size: 1.8em;
+            }
+            .hero p {
+                font-size: 1em;
             }
             .mood-grid {
                 flex-direction: column;
@@ -626,25 +536,16 @@
             .welcome-guide p {
                 font-size: 0.95em;
             }
-            .ad-player {
-                flex: 0 0 450px;
-                margin: 20px auto;
-                text-align: center;
-            }
-            .ad-player video {
-                width: 100%;
-            }
-            .ad-player-text {
-                font-size: 0.95em;
-                padding: 6px 10px;
-            }
         }
     </style>
 </head>
 <body>
     <div class="nav-bar">
         <div class="logo">MoodTask</div>
-        <div class="nav-links">
+        <div class="hamburger" id="hamburger">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="nav-links" id="navLinks">
             <a href="index.html" class="active">Home</a>
             <a href="calendar.html">Dashboard</a>
             <a href="activities.html">Activities</a>
@@ -657,8 +558,7 @@
     <div class="main-content fade-in">
         <div class="hero">
             <h1>Transform Your Mood</h1>
-            <p>Discover science-backed activities tailored to how you feel right now.</p>
-            <button class="mood-button" id="moodButton" tabindex="0" aria-label="Open mood selection">How are you feeling?</button>
+            <p>How are you feeling? Select an option below for science-backed recommendations to improve or maintain your mood.</p>
             <div class="mood-grid" id="moodGrid">
                 <div class="mood-option" data-mood="Sad" tabindex="0" aria-label="Select Sad mood">
                     <i class="fas fa-frown"></i>
@@ -944,6 +844,7 @@
                         <div class="expert-explanation">
                             “Proper hydration supports energy levels, while limiting caffeine helps regulate sleep cycles.” – Dr. Matt Walker, Sleep Scientist
                         </div>
+                        <a href="https://amzn.to/4jbEB3h" target="_blank">Try AG1 for a nutrient boost to support energy</a>
                     </div>
                 </div>
             </div>
@@ -1115,28 +1016,14 @@
                 <h3>Why MoodTask Works</h3>
                 <p>Our activities are rooted in science, drawing on principles from neuroscience and psychology to help you feel better. For example, engaging in gratitude exercises can increase dopamine and serotonin levels, enhancing your mood naturally. Breathing techniques activate the parasympathetic nervous system to reduce stress, while creative tasks like doodling stimulate the brain’s reward centers. MoodTask offers a variety of tools to suit your needs, ensuring you have the right support for any emotional state.</p>
                 
+                <h3>The Benefits of Tracking Your Mood</h3>
+                <p>Tracking your mood daily helps you identify patterns in your emotional well-being, making it easier to understand what triggers certain feelings. By logging your mood on MoodTask, you can gain insights into how activities impact your emotions over time. This awareness empowers you to make informed decisions about your mental health, fostering long-term emotional resilience and balance.</p>
+                
                 <h3>How to Use This Page</h3>
-                <p>Start by clicking the “How are you feeling?” button above to reveal a grid of mood options. Select the mood that best matches your current state—whether it’s anxious, happy, or tired—and you’ll receive tailored recommendations for activities to try. Each suggestion links to our <a href="activities.html">Activities</a> page, where you can explore tools like breathing exercises, guided meditation, or gratitude notes. Your mood is saved for the day, so you can track your emotional journey over time on the <a href="calendar.html">Dashboard</a>.</p>
+                <p>Select the mood that best matches your current state—whether it’s anxious, happy, or tired—from the options above. You’ll receive tailored recommendations for activities to try, each designed to either improve or maintain your mood. Each suggestion links to our <a href="activities.html">Activities</a> page, where you can explore tools like breathing exercises, guided meditation, or gratitude notes. Your mood is saved for the day, so you can track your emotional journey over time on the <a href="calendar.html">Dashboard</a>.</p>
                 
                 <h3>Explore More Features</h3>
                 <p>MoodTask offers more than just activities! Check out our <a href="music.html">Mood Music</a> page for playlists to match or shift your mood, or visit our <a href="blog.html">Blog</a> for tips on mindfulness, stress management, and emotional wellness. Start your journey with MoodTask today and discover how small, intentional actions can lead to big improvements in how you feel!</p>
-            </div>
-            <div class="ad-player" id="adPlayer">
-                <a href="https://amzn.to/4jbEB3h" target="_blank">
-                    <video autoplay muted loop controls poster="https://via.placeholder.com/450x75?text=AG1+Product+Shot">
-                        <source src="./AG1 Clip.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
-                </a>
-                <div class="ad-content">
-                    <a href="https://amzn.to/4jbEB3h" target="_blank" class="ad-player-text">
-                        <i class="fas fa-leaf"></i> Discover <span class="highlight">AG1</span> – a daily health drink with <span class="highlight">75 nutrients</span> to help <span class="highlight">alleviate bloating</span> and support <span class="highlight">sustained energy</span>.
-                        <span class="benefit-tooltip">Also supports gut health!</span>
-                    </a>
-                    <a href="https://amzn.to/4jbEB3h" target="_blank" class="cta-button">
-                        Try AG1 Today
-                    </a>
-                </div>
             </div>
         </div>
         <div class="footer">
@@ -1173,19 +1060,6 @@
             }
         }
 
-        function toggleMoodGrid() {
-            const grid = document.getElementById('moodGrid');
-            const moodButton = document.getElementById('moodButton');
-            if (grid && moodButton) {
-                grid.classList.add('active');
-                moodButton.classList.add('hidden');
-                sessionStorage.setItem('moodButtonClicked', 'true');
-                console.log('Mood grid displayed and button hidden');
-            } else {
-                console.error('Mood grid or button element not found');
-            }
-        }
-
         function showRecommendation(mood) {
             document.querySelectorAll('.mood-option').forEach(option => {
                 option.classList.remove('selected');
@@ -1206,8 +1080,7 @@
                 console.error('Recommendation element not found for mood:', mood);
             }
 
-            // Save the mood to localStorage for tracking on the dashboard
-            const today = new Date().toISOString().split('T')[0]; // e.g., 2025-04-27
+            const today = new Date().toISOString().split('T')[0];
             const storedMood = localStorage.getItem(`mood-${today}`);
             if (!storedMood) {
                 localStorage.setItem(`mood-${today}`, mood);
@@ -1220,29 +1093,22 @@
         function scrollToMoodGrid() {
             const moodGrid = document.getElementById('moodGrid');
             if (moodGrid) {
-                moodGrid.classList.add('active'); // Ensure grid remains visible
                 moodGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
+        }
+
+        function toggleNavMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
         }
 
         document.addEventListener('DOMContentLoaded', () => {
             const navLinks = document.querySelectorAll('.nav-bar .nav-links a');
             const mainContent = document.querySelector('.main-content');
-            const moodButton = document.getElementById('moodButton');
-            const moodGrid = document.getElementById('moodGrid');
+            const hamburger = document.getElementById('hamburger');
 
             mainContent.classList.add('fade-in');
             adjustMainContentPadding();
-
-            // Check sessionStorage to determine initial state
-            const buttonClicked = sessionStorage.getItem('moodButtonClicked');
-            if (buttonClicked === 'true') {
-                moodButton.classList.add('hidden');
-                moodGrid.classList.add('active');
-                console.log('Mood grid shown on page load (sessionStorage flag present)');
-            } else {
-                console.log('Mood button shown on page load (no sessionStorage flag)');
-            }
 
             navLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
@@ -1254,19 +1120,6 @@
                     }, 500);
                 });
             });
-
-            if (moodButton) {
-                moodButton.addEventListener('click', toggleMoodGrid);
-                moodButton.addEventListener('keydown', (e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        toggleMoodGrid();
-                    }
-                });
-                console.log('Mood button event listener attached');
-            } else {
-                console.error('Mood button not found');
-            }
 
             const moodOptions = document.querySelectorAll('.mood-option');
             if (moodOptions.length > 0) {
@@ -1308,22 +1161,8 @@
                 });
             });
 
-            const adPlayer = document.getElementById('adPlayer');
-            if (adPlayer) {
-                console.log('Ad player initialized with autoplay and loop');
-                adPlayer.addEventListener('click', (e) => {
-                    if (e.target.tagName === 'VIDEO') {
-                        console.log('Ad player video clicked, redirecting to affiliate link');
-                    }
-                });
-                const video = adPlayer.querySelector('video');
-                if (video) {
-                    video.play().catch(error => {
-                        console.error('Autoplay failed:', error);
-                    });
-                }
-            } else {
-                console.error('Ad player element not found');
+            if (hamburger) {
+                hamburger.addEventListener('click', toggleNavMenu);
             }
 
             window.addEventListener('resize', adjustMainContentPadding);
