@@ -478,6 +478,7 @@
             }
             .hamburger {
                 display: block;
+                margin-right: 10px; /* Shift hamburger menu left */
             }
             .main-content {
                 padding-top: 60px;
@@ -492,14 +493,25 @@
                 font-size: 1em;
             }
             .mood-grid {
-                flex-direction: column;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+                gap: 10px;
                 align-items: center;
+                justify-items: center;
             }
             .mood-option {
-                width: 100%;
-                max-width: 300px;
-                height: auto;
-                padding: 15px;
+                width: 120px;
+                height: 120px;
+                padding: 10px;
+            }
+            .mood-option i {
+                font-size: 1.2em;
+            }
+            .mood-option span {
+                font-size: 0.9em;
+            }
+            .mood-option p {
+                font-size: 0.7em;
             }
             .recommendation {
                 margin: 20px 10px;
