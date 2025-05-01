@@ -10,7 +10,6 @@
     <title>MoodTask - Activities</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <!-- Google AdSense Code -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-15181337633801567" crossorigin="anonymous"></script>
@@ -202,6 +201,7 @@
             flex: 0 0 auto;
             text-align: center;
             transition: transform 0.3s, background 0.3s;
+            cursor: pointer;
         }
         .activity-card:hover {
             transform: scale(1.05);
@@ -215,7 +215,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, #4A90E2, #2C3E50); /* Default gradient */
+            background: linear-gradient(135deg, #4A90E2, #2C3E50);
         }
         .thumbnail-area i {
             font-size: 2.5em;
@@ -225,19 +225,6 @@
             font-size: 1em;
             font-weight: 600;
             margin-bottom: 8px;
-        }
-        .activity-card .try-button {
-            padding: 6px 12px;
-            background-color: #4A90E2;
-            color: white;
-            border: none;
-            border-radius: 15px;
-            cursor: pointer;
-            font-size: 0.8em;
-            transition: background-color 0.3s;
-        }
-        .activity-card .try-button:hover {
-            background-color: #2C3E50;
         }
         /* Category-specific gradients */
         .activity-card.breathing .thumbnail-area {
@@ -507,34 +494,63 @@
         .task-tile.reframing-type:hover {
             background: linear-gradient(135deg, #F56565, #C53030);
         }
+        .breathing-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 20px auto;
+        }
         #breathing-circle {
             width: 100px;
             height: 100px;
             border-radius: 50%;
-            background: #2C3E50;
+            background: linear-gradient(135deg, #4A90E2, #2C3E50);
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             color: #fff;
             font-size: 1em;
-            margin: 20px auto;
-            transition: all 0.3s;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            transition: transform 0.5s ease-in-out, background 0.5s ease-in-out;
         }
-        #breathing-circle.inhale { transform: scale(1.2); background: #4A90E2; }
-        #breathing-circle.hold { transform: scale(1); background: #3B82F6; }
-        #breathing-circle.exhale { transform: scale(0.8); background: #2C3E50; }
-        .progress-container {
-            width: 100%;
-            background: #ddd;
-            border-radius: 5px;
-            margin: 10px 0;
+        #breathing-pulse {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: rgba(74, 144, 226, 0.3);
+            position: absolute;
+            top: 0;
+            left: 0;
+            animation: pulse 2s infinite ease-in-out;
         }
-        .progress-bar {
-            width: 0;
-            height: 10px;
-            background: #4A90E2;
-            border-radius: 5px;
-            transition: width 1s linear;
+        @keyframes pulse {
+            0% { transform: scale(0.8); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 0.2; }
+            100% { transform: scale(0.8); opacity: 0.5; }
+        }
+        #breathing-circle.inhale {
+            transform: scale(1.2);
+            background: linear-gradient(135deg, #4A90E2, #85C1E9);
+        }
+        #breathing-circle.hold {
+            transform: scale(1);
+            background: linear-gradient(135deg, #3B82F6, #4A90E2);
+        }
+        #breathing-circle.exhale {
+            transform: scale(0.8);
+            background: linear-gradient(135deg, #2C3E50, #4A90E2);
+        }
+        #breathing-step, #breathing-timer {
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+        #breathing-timer {
+            font-size: 0.8em;
+            margin-top: 5px;
+            opacity: 0.9;
         }
         #breathing-instruction, #meditation-prompt, #pmr-prompt, #walk-timer, #journaling-prompt, #reframing-prompt {
             margin: 10px 0;
@@ -552,32 +568,6 @@
             font-size: 1em;
             line-height: 1.6;
             font-weight: 400;
-        }
-        #gratitude-text {
-            width: 100%;
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid #E8D8C3;
-            margin: 10px 0;
-            resize: none;
-            font-family: 'Lora', Georgia, serif;
-            font-size: 1.1em;
-            line-height: 1.8;
-            letter-spacing: 0.5px;
-            background-color: #FDF6E3;
-            background-image: repeating-linear-gradient(#FDF6E3, #FDF6E3 29px, #E8D8C3 30px);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            transition: box-shadow 0.3s ease, background-color 0.3s ease;
-        }
-        #gratitude-text:focus {
-            outline: none;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            background-color: #FFF8E1;
-        }
-        #gratitude-text::placeholder {
-            color: #8B7D47;
-            font-family: 'Lora', Georgia, serif;
-            font-style: italic;
         }
         .action-button {
             background: #4A90E2;
@@ -653,14 +643,31 @@
             .hero h1 {
                 font-size: 1.8em;
             }
+            .activity-row {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+                overflow-x: visible;
+            }
             .activity-card {
-                width: 150px;
+                width: 140px;
+                height: 140px;
+                padding: 10px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
             }
             .thumbnail-area {
-                height: 90px;
+                height: 80px;
+                width: 80px;
             }
             .thumbnail-area i {
                 font-size: 2em;
+            }
+            .activity-card h3 {
+                font-size: 0.9em;
+                margin-bottom: 0;
             }
             .activity-summary {
                 margin: 20px 10px;
@@ -705,6 +712,20 @@
             .expert-quote {
                 font-size: 0.9em;
             }
+            .breathing-container {
+                width: 100px;
+                height: 100px;
+            }
+            #breathing-circle {
+                width: 80px;
+                height: 80px;
+                top: 10px;
+                left: 10px;
+            }
+            #breathing-pulse {
+                width: 100px;
+                height: 100px;
+            }
         }
     </style>
 </head>
@@ -733,33 +754,29 @@
                         <span class="quote">"Controlled breathing can lower heart rate and reduce anxiety in minutes by activating the parasympathetic response." — Dr. Andrew Huberman, Neuroscientist (Huberman Lab Podcast, 2021)</span>
                     </div>
                     <div class="activity-row">
-                        <div class="activity-card breathing" data-tool="breathing" data-technique="diaphragmatic">
+                        <div class="activity-card breathing" data-tool="breathing" data-technique="diaphragmatic" onclick="openPopup('breathing', 'diaphragmatic')">
                             <div class="thumbnail-area">
                                 <i class="fas fa-wind"></i>
                             </div>
                             <h3>360 Diaphragmatic</h3>
-                            <button class="try-button">Try Now</button>
                         </div>
-                        <div class="activity-card breathing" data-tool="breathing" data-technique="resonance">
+                        <div class="activity-card breathing" data-tool="breathing" data-technique="resonance" onclick="openPopup('breathing', 'resonance')">
                             <div class="thumbnail-area">
                                 <i class="fas fa-heartbeat"></i>
                             </div>
                             <h3>Resonance</h3>
-                            <button class="try-button">Try Now</button>
                         </div>
-                        <div class="activity-card breathing" data-tool="breathing" data-technique="4-7-8">
+                        <div class="activity-card breathing" data-tool="breathing" data-technique="4-7-8" onclick="openPopup('breathing', '4-7-8')">
                             <div class="thumbnail-area">
                                 <i class="fas fa-clock"></i>
                             </div>
                             <h3>4-7-8</h3>
-                            <button class="try-button">Try Now</button>
                         </div>
-                        <div class="activity-card breathing" data-tool="breathing" data-technique="box">
+                        <div class="activity-card breathing" data-tool="breathing" data-technique="box" onclick="openPopup('breathing', 'box')">
                             <div class="thumbnail-area">
                                 <i class="fas fa-square"></i>
                             </div>
                             <h3>Box Breathing</h3>
-                            <button class="try-button">Try Now</button>
                         </div>
                     </div>
                 </div>
@@ -770,26 +787,23 @@
                         <span class="quote">"Practicing gratitude can increase happiness by 25% and improve overall mental health." — Dr. Robert Emmons, Gratitude Researcher (Thanks!, 2007)</span>
                     </div>
                     <div class="activity-row">
-                        <div class="activity-card gratitude" data-tool="gratitude" data-technique="daily">
+                        <div class="activity-card gratitude" data-tool="gratitude" data-technique="daily" onclick="openPopup('gratitude', 'daily')">
                             <div class="thumbnail-area">
                                 <i class="fas fa-sun"></i>
                             </div>
                             <h3>Daily Gratitude</h3>
-                            <button class="try-button">Try Now</button>
                         </div>
-                        <div class="activity-card gratitude" data-tool="gratitude" data-technique="relationships">
+                        <div class="activity-card gratitude" data-tool="gratitude" data-technique="relationships" onclick="openPopup('gratitude', 'relationships')">
                             <div class="thumbnail-area">
                                 <i class="fas fa-heart"></i>
                             </div>
                             <h3>Relationships</h3>
-                            <button class="try-button">Try Now</button>
                         </div>
-                        <div class="activity-card gratitude" data-tool="gratitude" data-technique="achievements">
+                        <div class="activity-card gratitude" data-tool="gratitude" data-technique="achievements" onclick="openPopup('gratitude', 'achievements')">
                             <div class="thumbnail-area">
                                 <i class="fas fa-trophy"></i>
                             </div>
                             <h3>Achievements</h3>
-                            <button class="try-button">Try Now</button>
                         </div>
                     </div>
                 </div>
@@ -800,26 +814,23 @@
                         <span class="quote">"Meditation allows us to be with what is, without judgment, fostering deep calm." — Jon Kabat-Zinn, Mindfulness Expert (Wherever You Go, There You Are, 1994)</span>
                     </div>
                     <div class="activity-row">
-                        <div class="activity-card meditation" data-tool="meditation" data-technique="breath-awareness">
+                        <div class="activity-card meditation" data-tool="meditation" data-technique="breath-awareness" onclick="openPopup('meditation', 'breath-awareness')">
                             <div class="thumbnail-area">
                                 <i class="fas fa-wind"></i>
                             </div>
                             <h3>Breath Awareness</h3>
-                            <button class="try-button">Try Now</button>
                         </div>
-                        <div class="activity-card meditation" data-tool="meditation" data-technique="body-scan">
+                        <div class="activity-card meditation" data-tool="meditation" data-technique="body-scan" onclick="openPopup('meditation', 'body-scan')">
                             <div class="thumbnail-area">
                                 <i class="fas fa-user"></i>
                             </div>
                             <h3>Body Scan</h3>
-                            <button class="try-button">Try Now</button>
                         </div>
-                        <div class="activity-card meditation" data-tool="meditation" data-technique="visualization">
+                        <div class="activity-card meditation" data-tool="meditation" data-technique="visualization" onclick="openPopup('meditation', 'visualization')">
                             <div class="thumbnail-area">
                                 <i class="fas fa-eye"></i>
                             </div>
                             <h3>Visualization</h3>
-                            <button class="try-button">Try Now</button>
                         </div>
                     </div>
                 </div>
@@ -830,26 +841,23 @@
                         <span class="quote">"Progressive relaxation reduces stress by teaching the body to release tension naturally." — Dr. Edmund Jacobson, PMR Founder (Progressive Relaxation, 1938)</span>
                     </div>
                     <div class="activity-row">
-                        <div class="activity-card pmr" data-tool="pmr" data-technique="full-body">
+                        <div class="activity-card pmr" data-tool="pmr" data-technique="full-body" onclick="openPopup('pmr', 'full-body')">
                             <div class="thumbnail-area">
                                 <i class="fas fa-hand"></i>
                             </div>
                             <h3>Full Body</h3>
-                            <button class="try-button">Try Now</button>
                         </div>
-                        <div class="activity-card pmr" data-tool="pmr" data-technique="lower-body">
+                        <div class="activity-card pmr" data-tool="pmr" data-technique="lower-body" onclick="openPopup('pmr', 'lower-body')">
                             <div class="thumbnail-area">
                                 <i class="fas fa-shoe-prints"></i>
                             </div>
                             <h3>Lower Body</h3>
-                            <button class="try-button">Try Now</button>
                         </div>
-                        <div class="activity-card pmr" data-tool="pmr" data-technique="upper-body">
+                        <div class="activity-card pmr" data-tool="pmr" data-technique="upper-body" onclick="openPopup('pmr', 'upper-body')">
                             <div class="thumbnail-area">
                                 <i class="fas fa-dumbbell"></i>
                             </div>
                             <h3>Upper Body</h3>
-                            <button class="try-button">Try Now</button>
                         </div>
                     </div>
                 </div>
@@ -860,26 +868,23 @@
                         <span class="quote">"Spending time in nature can reduce stress hormones by 20% in just 20 minutes." — Dr. Qing Li, Forest Bathing Expert (Forest Bathing, 2018)</span>
                     </div>
                     <div class="activity-row">
-                        <div class="activity-card walk" data-tool="walk" data-technique="mindful">
+                        <div class="activity-card walk" data-tool="walk" data-technique="mindful" onclick="openPopup('walk', 'mindful')">
                             <div class="thumbnail-area">
                                 <i class="fas fa-tree"></i>
                             </div>
                             <h3>Mindful Walk</h3>
-                            <button class="try-button">Try Now</button>
                         </div>
-                        <div class="activity-card walk" data-tool="walk" data-technique="sensory">
+                        <div class="activity-card walk" data-tool="walk" data-technique="sensory" onclick="openPopup('walk', 'sensory')">
                             <div class="thumbnail-area">
                                 <i class="fas fa-eye"></i>
                             </div>
                             <h3>Sensory Focus</h3>
-                            <button class="try-button">Try Now</button>
                         </div>
-                        <div class="activity-card walk" data-tool="walk" data-technique="gratitude">
+                        <div class="activity-card walk" data-tool="walk" data-technique="gratitude" onclick="openPopup('walk', 'gratitude')">
                             <div class="thumbnail-area">
                                 <i class="fas fa-flower"></i>
                             </div>
                             <h3>Gratitude Walk</h3>
-                            <button class="try-button">Try Now</button>
                         </div>
                     </div>
                 </div>
@@ -890,26 +895,23 @@
                         <span class="quote">"Writing about emotions can reduce stress and improve mental clarity over time." — Dr. James Pennebaker, Expressive Writing Researcher (Opening Up, 1990)</span>
                     </div>
                     <div class="activity-row">
-                        <div class="activity-card journaling" data-tool="journaling" data-technique="emotions">
+                        <div class="activity-card journaling" data-tool="journaling" data-technique="emotions" onclick="openPopup('journaling', 'emotions')">
                             <div class="thumbnail-area">
                                 <i class="fas fa-pen"></i>
                             </div>
                             <h3>Explore Emotions</h3>
-                            <button class="try-button">Try Now</button>
                         </div>
-                        <div class="activity-card journaling" data-tool="journaling" data-technique="goals">
+                        <div class="activity-card journaling" data-tool="journaling" data-technique="goals" onclick="openPopup('journaling', 'goals')">
                             <div class="thumbnail-area">
                                 <i class="fas fa-lightbulb"></i>
                             </div>
                             <h3>Reflect on Goals</h3>
-                            <button class="try-button">Try Now</button>
                         </div>
-                        <div class="activity-card journaling" data-tool="journaling" data-technique="challenges">
+                        <div class="activity-card journaling" data-tool="journaling" data-technique="challenges" onclick="openPopup('journaling', 'challenges')">
                             <div class="thumbnail-area">
                                 <i class="fas fa-mountain"></i>
                             </div>
                             <h3>Address Challenges</h3>
-                            <button class="try-button">Try Now</button>
                         </div>
                     </div>
                 </div>
@@ -920,26 +922,23 @@
                         <span class="quote">"Changing how we think about a situation can transform how we feel about it." — Dr. Aaron Beck, Founder of Cognitive Therapy (Cognitive Therapy and the Emotional Disorders, 1976)</span>
                     </div>
                     <div class="activity-row">
-                        <div class="activity-card reframing" data-tool="reframing" data-technique="negative-thought">
+                        <div class="activity-card reframing" data-tool="reframing" data-technique="negative-thought" onclick="openPopup('reframing', 'negative-thought')">
                             <div class="thumbnail-area">
                                 <i class="fas fa-brain"></i>
                             </div>
                             <h3>Reframe a Negative Thought</h3>
-                            <button class="try-button">Try Now</button>
                         </div>
-                        <div class="activity-card reframing" data-tool="reframing" data-technique="stressful-event">
+                        <div class="activity-card reframing" data-tool="reframing" data-technique="stressful-event" onclick="openPopup('reframing', 'stressful-event')">
                             <div class="thumbnail-area">
                                 <i class="fas fa-cloud"></i>
                             </div>
                             <h3>Reframe a Stressful Event</h3>
-                            <button class="try-button">Try Now</button>
                         </div>
-                        <div class="activity-card reframing" data-tool="reframing" data-technique="self-criticism">
+                        <div class="activity-card reframing" data-tool="reframing" data-technique="self-criticism" onclick="openPopup('reframing', 'self-criticism')">
                             <div class="thumbnail-area">
                                 <i class="fas fa-smile"></i>
                             </div>
                             <h3>Reframe Self-Criticism</h3>
-                            <button class="try-button">Try Now</button>
                         </div>
                     </div>
                 </div>
@@ -977,7 +976,7 @@
                 <p>Engaging in intentional activities can profoundly impact your mental health by targeting specific neurological and physiological pathways. For example, deep breathing exercises, as noted by neuroscientist Dr. Andrew Huberman, activate the parasympathetic nervous system, which slows your heart rate and reduces cortisol levels, helping you feel calmer within minutes. A 2018 study in <em>Psychophysiology</em> supports this, showing a 20% reduction in stress after just 2 minutes of diaphragmatic breathing (Ma et al., 2018). Similarly, gratitude practices increase dopamine and enhance activity in the brain’s prefrontal cortex, improving emotional regulation, according to a 2016 study in the <em>Journal of Neuroscience</em> (Fox et al., 2016). Activities like Mindful Journaling and Cognitive Reframing, rooted in cognitive-behavioral therapy, help you process emotions and shift negative thought patterns, fostering resilience. At MoodTask, we’ve carefully selected these tools to provide quick, effective ways to improve your emotional state, backed by decades of research in psychology and neuroscience.</p>
                 
                 <h3>How to Use This Page</h3>
-                <p>Getting started with MoodTask’s activities is simple and intuitive. Browse the sections below, each dedicated to a unique tool like Breathing Exercises or Gratitude Notes. Within each section, you’ll find a row of options—like 4-7-8 or Box Breathing for Breathing Exercises. Select an option by clicking "Try Now" to open a popup with guided prompts. After finishing, log your activity to track your journey over time on our <a href="calendar.html">Dashboard</a>. We recommend exploring all the options to discover which ones resonate most with you—whether you need to relax, refocus, or build emotional strength. Each activity takes just a few minutes but can have a lasting impact on your day.</p>
+                <p>Getting started with MoodTask’s activities is simple and intuitive. Browse the sections below, each dedicated to a unique tool like Breathing Exercises or Gratitude Notes. Within each section, you’ll find a row of options—like 4-7-8 or Box Breathing for Breathing Exercises. Select an option by clicking on the card to open a popup with guided prompts. After finishing, log your activity to track your journey over time on our <a href="calendar.html">Dashboard</a>. We recommend exploring all the options to discover which ones resonate most with you—whether you need to relax, refocus, or build emotional strength. Each activity takes just a few minutes but can have a lasting impact on your day.</p>
                 
                 <h3>Maximizing Your Experience</h3>
                 <p>To get the most out of these activities, consistency and mindfulness are key. Start by setting aside 5-10 minutes each day to try one activity—perhaps a breathing exercise in the morning to start your day calmly, or a gratitude reflection before bed to end on a positive note. Pair activities with complementary tools on MoodTask: for example, listen to our <a href="music.html">Relaxation playlist</a> during a Guided Meditation session to enhance the calming effect. Track your mood before and after each activity on our Dashboard to see patterns over time—this can help you identify which activities work best for you. Don’t rush; focus on being fully present during each session, whether you’re journaling or taking a nature walk. Over time, these small habits can become powerful tools for managing stress and cultivating a more balanced, joyful life.</p>
@@ -1015,7 +1014,13 @@
             <div class="popup-content">
                 <h4>Breathing Exercises</h4>
                 <p id="breathing-instruction"></p>
-                <div id="breathing-circle" style="display: none;"><span id="breathing-step">Inhale</span></div>
+                <div class="breathing-container">
+                    <div id="breathing-pulse"></div>
+                    <div id="breathing-circle" style="display: none;">
+                        <span id="breathing-step">Inhale</span>
+                        <span id="breathing-timer">4s</span>
+                    </div>
+                </div>
                 <button class="action-button" id="breathing-try-another" style="display: none;" onclick="resetBreathing()">Try Another</button>
                 <button class="log-button" id="breathing-log">Log Activity</button>
                 <p class="affirmation">Well done completing the breathing exercise.</p>
@@ -1100,10 +1105,9 @@
         }
 
         function setupActivityCards() {
-            const tryButtons = document.querySelectorAll('.try-button');
-            tryButtons.forEach((button) => {
-                button.addEventListener('click', () => {
-                    const card = button.closest('.activity-card');
+            const activityCards = document.querySelectorAll('.activity-card');
+            activityCards.forEach((card) => {
+                card.addEventListener('click', () => {
                     const tool = card.getAttribute('data-tool');
                     const technique = card.getAttribute('data-technique');
                     openPopup(tool, technique);
@@ -1118,7 +1122,7 @@
                     const popup = button.closest('.popup');
                     const tool = popup.id.split('-')[0];
                     const activityName = popup.querySelector('h4').textContent;
-                    const today = new Date('2025-04-27').toISOString().split('T')[0];
+                    const today = new Date('2025-05-01').toISOString().split('T')[0];
                     const activityKey = `activity-${today}`;
                     let activities = JSON.parse(localStorage.getItem(activityKey)) || [];
                     activities.push({ name: activityName, timestamp: new Date().toISOString() });
@@ -1130,7 +1134,7 @@
                     button.style.backgroundColor = '#A9A9A9';
                 });
             });
-            console.log('Activity cards set up with', tryButtons.length, 'try buttons');
+            console.log('Activity cards set up with', activityCards.length, 'cards');
         }
 
         function openPopup(tool, technique) {
@@ -1139,7 +1143,6 @@
             const logButton = popup.querySelector('.log-button');
             logButton.classList.add('active');
 
-            // Automatically start the technique
             if (tool === 'breathing') startBreathingTechnique(technique);
             if (tool === 'gratitude') startGratitudeTechnique(technique);
             if (tool === 'meditation') startMeditationTechnique(technique);
@@ -1166,13 +1169,16 @@
 
         // Breathing Exercises
         let breathingInterval = null;
+        let countdownInterval = null;
         function startBreathingTechnique(type) {
             const circle = document.getElementById('breathing-circle');
             const stepText = document.getElementById('breathing-step');
+            const timerText = document.getElementById('breathing-timer');
             const instruction = document.getElementById('breathing-instruction');
             const tryAnotherButton = document.getElementById('breathing-try-another');
             let phaseIndex = 0;
             let phaseTime = 0;
+            let countdown = 0;
 
             const techniques = {
                 'diaphragmatic': {
@@ -1216,6 +1222,10 @@
             tryAnotherButton.style.display = 'inline-flex';
 
             if (breathingInterval) clearInterval(breathingInterval);
+            if (countdownInterval) clearInterval(countdownInterval);
+
+            countdown = phases[phaseIndex].duration;
+            timerText.textContent = `${countdown}s`;
 
             breathingInterval = setInterval(() => {
                 phaseTime++;
@@ -1227,6 +1237,15 @@
                     stepText.textContent = nextPhase.text;
                     circle.className = 'inhale hold exhale';
                     circle.classList.add(nextPhase.name);
+                    countdown = nextPhase.duration;
+                    timerText.textContent = `${countdown}s`;
+                }
+            }, 1000);
+
+            countdownInterval = setInterval(() => {
+                countdown--;
+                if (countdown >= 0) {
+                    timerText.textContent = `${countdown}s`;
                 }
             }, 1000);
 
@@ -1240,6 +1259,10 @@
             if (breathingInterval) {
                 clearInterval(breathingInterval);
                 breathingInterval = null;
+            }
+            if (countdownInterval) {
+                clearInterval(countdownInterval);
+                countdownInterval = null;
             }
         }
 
@@ -1274,7 +1297,7 @@
         function saveGratitude() {
             const text = document.getElementById('gratitude-text').value;
             if (text) {
-                const today = new Date('2025-04-27').toISOString().split('T')[0];
+                const today = new Date('2025-05-01').toISOString().split('T')[0];
                 let entries = JSON.parse(localStorage.getItem(`gratitude-${today}`)) || [];
                 entries.push({ text, timestamp: new Date().toISOString() });
                 localStorage.setItem(`gratitude-${today}`, JSON.stringify(entries));
@@ -1442,7 +1465,7 @@
         function saveJournaling() {
             const text = document.getElementById('journaling-text').value;
             if (text) {
-                const today = new Date('2025-04-27').toISOString().split('T')[0];
+                const today = new Date('2025-05-01').toISOString().split('T')[0];
                 let entries = JSON.parse(localStorage.getItem(`journaling-${today}`)) || [];
                 entries.push({ text, timestamp: new Date().toISOString() });
                 localStorage.setItem(`journaling-${today}`, JSON.stringify(entries));
@@ -1481,7 +1504,7 @@
         function saveReframing() {
             const text = document.getElementById('reframing-text').value;
             if (text) {
-                const today = new Date('2025-04-27').toISOString().split('T')[0];
+                const today = new Date('2025-05-01').toISOString().split('T')[0];
                 let entries = JSON.parse(localStorage.getItem(`reframing-${today}`)) || [];
                 entries.push({ text, timestamp: new Date().toISOString() });
                 localStorage.setItem(`reframing-${today}`, JSON.stringify(entries));
@@ -1503,10 +1526,10 @@
         }
 
         function analyzeActivityTrends() {
-            const today = new Date('2025-04-27').toISOString().split('T')[0];
+            const today = new Date('2025-05-01').toISOString().split('T')[0];
             const allActivities = [];
-            for (let day = 1; day <= 27; day++) {
-                const dateStr = `2025-04-${String(day).padStart(2, '0')}`;
+            for (let day = 1; day <= 1; day++) {
+                const dateStr = `2025-05-${String(day).padStart(2, '0')}`;
                 const activities = JSON.parse(localStorage.getItem(`activity-${dateStr}`)) || [];
                 activities.forEach(activity => {
                     allActivities.push({ date: dateStr, ...activity });
@@ -1526,4 +1549,56 @@
 
             const activityCounts = {};
             allActivities.forEach(activity => {
-                activityCounts[activity.name] =
+                activityCounts[activity.name] = (activityCounts[activity.name] || 0) + 1;
+            });
+            const mostFrequentActivity = Object.keys(activityCounts).reduce((a, b) => activityCounts[a] > activityCounts[b] ? a : b, null);
+            const frequentActivityText = document.getElementById('frequentActivityText');
+            const frequentActivityInsight = document.getElementById('frequentActivityInsight');
+            if (mostFrequentActivity) {
+                frequentActivityText.textContent = `${mostFrequentActivity} (${activityCounts[mostFrequentActivity]} times)`;
+                if (mostFrequentActivity === 'Breathing Exercises') {
+                    frequentActivityInsight.textContent = 'Breathing exercises are great for reducing stress – keep it up!';
+                } else if (mostFrequentActivity === 'Gratitude Notes') {
+                    frequentActivityInsight.textContent = 'Gratitude notes boost positivity – nice choice!';
+                } else {
+                    frequentActivityInsight.textContent = `${mostFrequentActivity} is working well for you – great job!`;
+                }
+            } else {
+                frequentActivityText.textContent = 'No activities logged yet.';
+                frequentActivityInsight.textContent = 'Try an activity to see trends.';
+            }
+
+            const logMoodCTA = document.getElementById('logMoodCTA');
+            const todayMood = localStorage.getItem(`mood-${today}`);
+            if (todayMood) {
+                logMoodCTA.textContent = `Today's Mood: ${todayMood}`;
+                logMoodCTA.style.backgroundColor = '#A9A9A9';
+                logMoodCTA.removeAttribute('href');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const navLinks = document.querySelectorAll('.nav-bar .nav-links a');
+            const mainContent = document.querySelector('.main-content');
+
+            mainContent.classList.add('fade-in');
+            adjustMainContentPadding();
+            setupActivityCards();
+            analyzeActivityTrends();
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    mainContent.classList.remove('fade-in');
+                    mainContent.classList.add('fade-out');
+                    setTimeout(() => {
+                        window.location.href = link.href;
+                    }, 500);
+                });
+            });
+
+            window.addEventListener('resize', adjustMainContentPadding);
+        });
+    </script>
+</body>
+</html>
