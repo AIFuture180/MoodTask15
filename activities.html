@@ -10,6 +10,7 @@
     <title>MoodTask - Activities</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <!-- Google AdSense Code -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-15181337633801567" crossorigin="anonymous"></script>
@@ -551,6 +552,32 @@
             font-size: 1em;
             line-height: 1.6;
             font-weight: 400;
+        }
+        #gratitude-text {
+            width: 100%;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #E8D8C3;
+            margin: 10px 0;
+            resize: none;
+            font-family: 'Lora', Georgia, serif;
+            font-size: 1.1em;
+            line-height: 1.8;
+            letter-spacing: 0.5px;
+            background-color: #FDF6E3;
+            background-image: repeating-linear-gradient(#FDF6E3, #FDF6E3 29px, #E8D8C3 30px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+        #gratitude-text:focus {
+            outline: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            background-color: #FFF8E1;
+        }
+        #gratitude-text::placeholder {
+            color: #8B7D47;
+            font-family: 'Lora', Georgia, serif;
+            font-style: italic;
         }
         .action-button {
             background: #4A90E2;
@@ -1499,56 +1526,4 @@
 
             const activityCounts = {};
             allActivities.forEach(activity => {
-                activityCounts[activity.name] = (activityCounts[activity.name] || 0) + 1;
-            });
-            const mostFrequentActivity = Object.keys(activityCounts).reduce((a, b) => activityCounts[a] > activityCounts[b] ? a : b, null);
-            const frequentActivityText = document.getElementById('frequentActivityText');
-            const frequentActivityInsight = document.getElementById('frequentActivityInsight');
-            if (mostFrequentActivity) {
-                frequentActivityText.textContent = `${mostFrequentActivity} (${activityCounts[mostFrequentActivity]} times)`;
-                if (mostFrequentActivity === 'Breathing Exercises') {
-                    frequentActivityInsight.textContent = 'Breathing exercises are great for reducing stress – keep it up!';
-                } else if (mostFrequentActivity === 'Gratitude Notes') {
-                    frequentActivityInsight.textContent = 'Gratitude notes boost positivity – nice choice!';
-                } else {
-                    frequentActivityInsight.textContent = `${mostFrequentActivity} is working well for you – great job!`;
-                }
-            } else {
-                frequentActivityText.textContent = 'No activities logged yet.';
-                frequentActivityInsight.textContent = 'Try an activity to see trends.';
-            }
-
-            const logMoodCTA = document.getElementById('logMoodCTA');
-            const todayMood = localStorage.getItem(`mood-${today}`);
-            if (todayMood) {
-                logMoodCTA.textContent = `Today's Mood: ${todayMood}`;
-                logMoodCTA.style.backgroundColor = '#A9A9A9';
-                logMoodCTA.removeAttribute('href');
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const navLinks = document.querySelectorAll('.nav-bar .nav-links a');
-            const mainContent = document.querySelector('.main-content');
-
-            mainContent.classList.add('fade-in');
-            adjustMainContentPadding();
-            setupActivityCards();
-            analyzeActivityTrends();
-
-            navLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    mainContent.classList.remove('fade-in');
-                    mainContent.classList.add('fade-out');
-                    setTimeout(() => {
-                        window.location.href = link.href;
-                    }, 500);
-                });
-            });
-
-            window.addEventListener('resize', adjustMainContentPadding);
-        });
-    </script>
-</body>
-</html>
+                activityCounts[activity.name] =
