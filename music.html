@@ -3,125 +3,606 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="MoodTask Mood Music - Listen to curated playlists to relax, focus, or energize.">
-    <meta name="keywords" content="MoodTask, mood music, mental health, relaxation playlists">
+    <meta name="description" content="MoodTask Mood Music - Curated music to enhance your mood and daily activities.">
+    <meta name="keywords" content="MoodTask, mood music, emotional well-being, relaxation, focus">
     <meta name="robots" content="index, follow">
     <meta name="author" content="MoodTask">
-    <meta name="google-site-verification" content="googlea04bcf56705ce738">
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="MoodTask Mood Music - Curated Playlists">
-    <meta property="og:description" content="Listen to curated playlists to relax, focus, or energize.">
-    <meta property="og:url" content="https://moodtask.org/music/">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="https://moodtask.org/images/og-image.jpg">
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="MoodTask Mood Music - Curated Playlists">
-    <meta name="twitter:description" content="Listen to curated playlists to relax, focus, or energize.">
-    <meta name="twitter:image" content="https://moodtask.org/images/og-image.jpg">
     <title>MoodTask - Mood Music</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
     <style>
-        .music-section {
-            margin: 40px 0;
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            transition: background-color 0.3s ease;
+        }
+        .nav-bar {
             background-color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            max-width: 1400px;
+            margin: 0 auto;
+            left: 0;
+            right: 0;
+            height: 60px;
+            backdrop-filter: blur(5px);
+            background-color: rgba(255, 255, 255, 0.95);
+        }
+        .nav-bar .logo {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #4A90E2;
+        }
+        .nav-bar .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding-left: 30px;
+            padding-right: 20px;
+        }
+        .nav-bar a {
+            padding: 10px 15px;
+            text-decoration: none;
+            color: #2C3E50;
+            font-weight: 400;
+            transition: color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 5px;
+        }
+        .nav-bar a:hover {
+            background-color: #f0f0f0;
+            color: #2C3E50;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .nav-bar a.active {
+            background-color: #4A90E2;
+            color: white;
+            font-weight: 600;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .main-content {
+            transition: opacity 0.5s ease;
+            padding-top: 60px;
+        }
+        .main-content.fade-out {
+            opacity: 0;
+        }
+        .main-content.fade-in {
+            opacity: 1;
+        }
+        .hero {
+            background: linear-gradient(135deg, #4A90E2, #2C3E50);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            position: relative;
+        }
+        .hero h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        .hero p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+        .music-button {
+            padding: 15px 30px;
+            background-color: #FFC107;
+            color: #333;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            animation: pulse 2s infinite;
+            position: relative;
+            z-index: 10;
+        }
+        .music-button:hover {
+            background-color: #FFB300;
+            transform: scale(1.05);
+        }
+        .music-button:focus {
+            outline: 2px solid #FFD700;
+            outline-offset: 2px;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 5px rgba(255, 193, 7, 0.5); }
+            50% { transform: scale(1.05); box-shadow: 0 0 15px rgba(255, 193, 7, 0.8); }
+            100% { transform: scale(1); box-shadow: 0 0 5px rgba(255, 193, 7, 0.5); }
+        }
+        .content-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .welcome-guide {
+            flex: 1;
+            max-width: 600px;
+            background: #fff;
             padding: 25px;
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin: 20px auto;
+            text-align: left;
+        }
+        .welcome-guide h2 {
+            font-size: 1.8em;
+            font-weight: 600;
+            color: #2C3E50;
+            margin-bottom: 15px;
+        }
+        .welcome-guide h3 {
+            font-size: 1.3em;
+            font-weight: 500;
+            color: #4A90E2;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        .welcome-guide p {
+            font-size: 1em;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        .welcome-guide a {
+            color: #4A90E2;
+            text-decoration: none;
+        }
+        .welcome-guide a:hover {
+            text-decoration: underline;
+        }
+        .music-grid {
+            display: none;
+            margin-top: 30px;
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .music-grid.active {
+            display: flex !important;
+        }
+        .music-card {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            width: 280px;
+            text-align: center;
+            transition: transform 0.3s, background 0.3s;
             opacity: 0;
-            transform: translateY(10px);
+            position: relative;
+        }
+        .music-grid.active .music-card {
             animation: fadeIn 0.5s ease forwards;
         }
-        .music-section h2.section-heading {
+        .music-card:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.3);
+        }
+        .music-card i {
             font-size: 2em;
-            margin-bottom: 20px;
-            color: #4A90E2;
-            border-bottom: 2px solid #D6D1F5;
-            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+        .music-card h3 {
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .music-card p {
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .music-card .insight {
+            font-size: 0.85em;
+            font-style: italic;
+            color: #FFD700;
+            margin-bottom: 15px;
+        }
+        .music-card .play-button {
+            padding: 8px 15px;
+            background-color: #4A90E2;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background-color 0.3s;
+        }
+        .music-card .play-button:hover {
+            background-color: #2C3E50;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .music-summary {
+            display: none;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin: 20px auto;
+            text-align: left;
+            max-width: 600px;
+            color: #333;
+        }
+        .music-summary.active {
+            display: block !important;
+        }
+        .music-summary .header {
             text-align: center;
+            margin-bottom: 20px;
         }
-        .music-section h3 {
-            font-size: 1.5em;
-            margin: 20px 0 10px;
+        .music-summary .header h2 {
+            font-size: 1.8em;
+            font-weight: 600;
             color: #2C3E50;
+            margin-bottom: 5px;
         }
-        .music-section p {
+        .music-summary .header p {
             font-size: 1em;
             color: #555;
-            margin-bottom: 10px;
-            line-height: 1.6;
+            font-style: italic;
         }
-        .music-section iframe {
-            width: 100%;
-            max-width: 600px;
-            height: 200px;
+        .music-summary .trend {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding: 10px;
             border-radius: 5px;
-            margin: 10px 0;
-            display: block;
+            transition: background 0.3s;
         }
-        .music-section button {
+        .music-summary .trend:hover {
+            background: #f5f5f5;
+        }
+        .music-summary .trend i {
+            font-size: 1.5em;
+            color: #4A90E2;
+        }
+        .music-summary .trend div {
+            flex: 1;
+        }
+        .music-summary .trend h4 {
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        .music-summary .trend p {
+            font-size: 0.95em;
+            color: #555;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+        .music-summary .trend .insight {
+            font-size: 0.9em;
+            color: #666;
+            font-style: italic;
+            background: #f0f0f0;
+            padding: 10px;
+            border-left: 3px solid #4A90E2;
+            border-radius: 5px;
+            line-height: 1.5;
+        }
+        .music-summary .cta-button {
+            display: block;
+            text-align: center;
+            padding: 10px;
+            background-color: #4A90E2;
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+        .music-summary .cta-button:hover {
+            background-color: #2C3E50;
+        }
+        .footer {
+            background-color: #333;
+            color: white;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            text-align: left;
+        }
+        .footer h3 {
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+        .footer a {
+            color: #D6D1F5;
+            text-decoration: none;
+            display: block;
+            margin: 5px 0;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        .footer .affiliate-note {
+            font-size: 0.8em;
+            color: #aaa;
+            margin-top: 20px;
+            text-align: center;
+            width: 100%;
+        }
+        .footer .connect a {
             padding: 10px 20px;
+            margin: 5px 0;
             border: none;
             border-radius: 20px;
             cursor: pointer;
             font-size: 1em;
-            font-weight: 500;
-            transition: transform 0.2s, box-shadow 0.3s;
-            background: linear-gradient(135deg, #4A90E2, #2C3E50);
-            color: white;
-            margin: 5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            text-decoration: none;
         }
-        .music-section button:hover {
+        .footer .connect .coffee {
+            background-color: #FFC107;
+            color: #333;
+        }
+        .footer .connect .therapy {
+            background-color: #4A90E2;
+            color: white;
+        }
+        .footer .connect .mindfulness {
+            background-color: #6BCB77;
+            color: white;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .popup-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 600px;
+            width: 90%;
+            position: relative;
+            text-align: center;
+            font-size: 1em;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+        .popup-content h4 {
+            font-size: 1.3em;
+            font-weight: 600;
+            line-height: 1.6;
+            color: #2C3E50;
+        }
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 1.2em;
+            cursor: pointer;
+            color: #333;
+        }
+        .track-tiles {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin: 10px 0;
+        }
+        .track-tile {
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.9em;
+            font-weight: 500;
+            line-height: 1.6;
+            transition: transform 0.2s, box-shadow 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            width: 150px;
+            height: 80px;
+            padding: 10px;
+            text-align: center;
+        }
+        .track-tile:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
-        .music-insights {
-            margin-top: 40px;
+        .track-tile.sleep-type {
+            background: linear-gradient(135deg, #4A90E2, #2C3E50);
         }
-        .music-insights h3 {
-            font-size: 1.5em;
-            margin-bottom: 15px;
-            color: #2C3E50;
-            text-align: center;
+        .track-tile.sleep-type:hover {
+            background: linear-gradient(135deg, #3B82F6, #1A2A44);
         }
-        .music-insights p {
+        .track-tile.meditation-type {
+            background: linear-gradient(135deg, #9F7AEA, #B794F4);
+        }
+        .track-tile.meditation-type:hover {
+            background: linear-gradient(135deg, #805AD5, #9F7AEA);
+        }
+        .track-tile.relaxation-type {
+            background: linear-gradient(135deg, #68D391, #48BB78);
+        }
+        .track-tile.relaxation-type:hover {
+            background: linear-gradient(135deg, #48BB78, #38A169);
+        }
+        .track-tile.motivation-type {
+            background: linear-gradient(135deg, #FF6F61, #E53E3E);
+        }
+        .track-tile.motivation-type:hover {
+            background: linear-gradient(135deg, #F56565, #C53030);
+        }
+        .track-tile.study-type {
+            background: linear-gradient(135deg, #F4A261, #FF6F61);
+        }
+        .track-tile.study-type:hover {
+            background: linear-gradient(135deg, #ED8936, #F56565);
+        }
+        .video-player {
+            display: none;
+            margin: 20px auto;
+            width: 100%;
+            max-width: 560px;
+            aspect-ratio: 16 / 9;
+        }
+        .video-player.active {
+            display: block;
+        }
+        .log-button {
+            padding: 8px 15px;
+            background-color: #6BCB77;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+            display: none;
+        }
+        .log-button.active {
+            display: inline-block;
+        }
+        .log-button:hover {
+            background-color: #5BBF66;
+        }
+        .action-button {
+            background: #4A90E2;
+            color: #fff;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
             font-size: 1em;
-            color: #555;
-            text-align: center;
+            font-weight: 500;
+            line-height: 1.6;
+            transition: background-color 0.3s;
         }
-        .music-insights p span {
-            font-weight: 600;
-            color: #4A90E2;
+        .action-button:hover {
+            background: #2C3E50;
         }
         @media (max-width: 600px) {
-            .music-section {
-                padding: 20px;
-                margin: 20px 0;
+            .nav-bar {
+                flex-direction: column;
+                gap: 8px;
+                padding: 10px 20px;
+                height: auto;
+                min-height: 120px;
             }
-            .music-section h2.section-heading {
+            .nav-bar .nav-links {
+                flex-direction: column;
+                gap: 8px;
+                align-items: center;
+                width: 100%;
+                padding-left: 0;
+                padding-right: 0;
+            }
+            .nav-bar a {
+                padding: 8px 20px;
+                width: 100%;
+                text-align: center;
+                box-sizing: border-box;
+            }
+            .main-content {
+                padding-top: 130px;
+            }
+            .hero {
+                padding: 40px 15px;
+            }
+            .hero h1 {
                 font-size: 1.8em;
             }
-            .music-section h3 {
-                font-size: 1.3em;
+            .music-grid {
+                flex-direction: column;
+                align-items: center;
             }
-            .music-section p {
+            .music-card {
+                width: 100%;
+                max-width: 300px;
+            }
+            .music-summary {
+                margin: 20px 10px;
+                max-width: 100%;
+                padding: 20px;
+            }
+            .music-summary .header h2 {
+                font-size: 1.5em;
+            }
+            .music-summary .header p {
                 font-size: 0.95em;
             }
-            .music-section iframe {
-                height: 180px;
+            .music-summary .trend h4 {
+                font-size: 1.1em;
             }
-            .music-section button {
-                padding: 8px 15px;
+            .music-summary .trend p {
                 font-size: 0.9em;
             }
-            .music-insights h3 {
-                font-size: 1.3em;
+            .content-wrapper {
+                flex-direction: column;
+                padding: 0 10px;
             }
-            .music-insights p {
+            .welcome-guide {
+                margin: 20px auto;
+                max-width: 100%;
+                padding: 20px;
+            }
+            .welcome-guide h2 {
+                font-size: 1.5em;
+            }
+            .welcome-guide h3 {
+                font-size: 1.2em;
+            }
+            .welcome-guide p {
                 font-size: 0.95em;
+            }
+            .track-tile {
+                width: 120px;
+                height: 70px;
+                font-size: 0.85em;
+            }
+            .video-player {
+                width: 100%;
             }
         }
     </style>
@@ -132,20 +613,7 @@
         <div class="nav-links">
             <a href="index.html">Home</a>
             <a href="calendar.html">Dashboard</a>
-            <div class="dropdown">
-                <a href="activities.html">Activities</a>
-                <div class="dropdown-content">
-                    <a href="activities.html#breathing">Breathing</a>
-                    <a href="activities.html#soundscape">Soundscape</a>
-                    <a href="activities.html#punching">Punching Bag</a>
-                    <a href="activities.html#stretch">Stretch</a>
-                    <a href="activities.html#doodle">Doodle</a>
-                    <a href="activities.html#dance">Dance</a>
-                    <a href="activities.html#color-focus">Color Focus</a>
-                    <a href="activities.html#worry">Worry</a>
-                    <a href="activities.html#gratitude">Gratitude</a>
-                </div>
-            </div>
+            <a href="activities.html">Activities</a>
             <a href="music.html" class="active">Mood Music</a>
             <a href="blog.html">Blog</a>
             <a href="privacy.html">Privacy Policy</a>
@@ -154,66 +622,86 @@
     </div>
     <div class="main-content fade-in">
         <div class="hero">
-            <h1>Mood Music</h1>
-            <p>Listen to curated playlists to match your mood.</p>
-        </div>
-        <div class="container">
-            <div class="music-section">
-                <h2 class="section-heading">Music Playlists</h2>
-
-                <div id="relax">
-                    <h3>Relax</h3>
-                    <p>Unwind with soothing melodies.</p>
-                    <button onclick="playTrack('https://www.youtube.com/embed/l60MnDJklnM')" aria-label="Play Ocean Waves track for relaxation">Play</button>
-                    <button onclick="playTrack('https://www.youtube.com/embed/1zyhZc1MSwU')" aria-label="Play Forest Stream track for relaxation">Play</button>
-                    <iframe loading="lazy" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
-
-                <div id="focus">
-                    <h3>Focus</h3>
-                    <p>Enhance concentration with instrumental tracks.</p>
-                    <button onclick="playTrack('https://www.youtube.com/embed/5qap5aO4i9A')" aria-label="Play Lo-Fi Beats track for focus">Play</button>
-                    <button onclick="playTrack('https://www.youtube.com/embed/jfKfPfyJRdk')" aria-label="Play Piano Focus track for focus">Play</button>
-                    <iframe loading="lazy" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
-
-                <div id="energize">
-                    <h3>Energize</h3>
-                    <p>Boost your energy with upbeat tunes.</p>
-                    <button onclick="playTrack('https://www.youtube.com/embed/zlJDTxahad0')" aria-label="Play Upbeat Pop track for energy">Play</button>
-                    <button onclick="playTrack('https://www.youtube.com/embed/60ItHLz5WEA')" aria-label="Play Dance Mix track for energy">Play</button>
-                    <iframe loading="lazy" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
-
-                <div id="sleep">
+            <h1>Find Your Perfect Mood Music</h1>
+            <p>Discover curated tracks to enhance your mood and daily activities.</p>
+            <button class="music-button" id="musicButton" tabindex="0" aria-label="Explore mood music">Explore Mood Music</button>
+            <div class="music-grid" id="musicGrid">
+                <div class="music-card" data-category="sleep">
+                    <i class="fas fa-moon"></i>
                     <h3>Sleep</h3>
-                    <p>Drift off with calming sleep music.</p>
-                    <button onclick="playTrack('https://www.youtube.com/embed/1MPRbX7ACh8')" aria-label="Play Sleep Music track">Play</button>
-                    <button onclick="playTrack('https://www.youtube.com/embed/ASuC6gQ0J9Q')" aria-label="Play Deep Sleep track">Play</button>
-                    <iframe loading="lazy" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <p>Drift into a restful slumber with soothing tracks designed to help you fall asleep faster. Environmental psychologist Dr. Roger Ulrich’s research shows that slow-tempo music lowers heart rate and reduces stress hormones like cortisol, promoting better sleep quality. A 2018 study in the <em>Journal of Sleep Research</em> found that calming music reduced sleep onset time by 35% (Trahan et al., 2018). Tracks like "Waves Crashing" and "Calm Nature" use gentle rhythms to relax your mind. Perfect for bedtime, these tracks can be paired with our <a href="activities.html" style="color: #FFD700;">Progressive Muscle Relaxation</a> activity for a deeper unwind. Log your listening habits on our Dashboard to track their impact on your rest.</p>
+                    <div class="insight">Lowers heart rate – Dr. Roger Ulrich</div>
+                    <button class="play-button">Play Now</button>
                 </div>
-
-                <div id="meditation">
+                <div class="music-card" data-category="meditation">
+                    <i class="fas fa-spa"></i>
                     <h3>Meditation</h3>
-                    <p>Find peace with meditation music.</p>
-                    <button onclick="playTrack('https://www.youtube.com/embed/8jPQjjsBbIc')" aria-label="Play Meditation Music track">Play</button>
-                    <button onclick="playTrack('https://www.youtube.com/embed/2f1kZbwNQS4')" aria-label="Play Zen Meditation track">Play</button>
-                    <iframe loading="lazy" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <p>Enhance your mindfulness practice with calm sounds tailored for meditation. Dr. Jon Kabat-Zinn, founder of Mindfulness-Based Stress Reduction, notes that ambient music reduces stress by enhancing focus on the present moment. A 2020 study in <em>Mindfulness</em> found that meditation with background music lowered anxiety by 28% (Basso et al., 2020). Tracks like "Guided Meditation" and "Healing Meditation" provide serene soundscapes to deepen your practice. Use these during our <a href="activities.html" style="color: #FFD700;">Guided Meditation</a> activity for a more immersive experience. Ideal for morning or evening sessions, these tracks help you center yourself. Track your sessions on our Dashboard to see their benefits over time.</p>
+                    <div class="insight">Reduces stress – Dr. Jon Kabat-Zinn</div>
+                    <button class="play-button">Play Now</button>
                 </div>
-
-                <div id="nature">
-                    <h3>Nature Sounds</h3>
-                    <p>Relax with the sounds of nature.</p>
-                    <button onclick="playTrack('https://www.youtube.com/embed/8myYyMg1fFE')" aria-label="Play Rainforest Sounds track">Play</button>
-                    <button onclick="playTrack('https://www.youtube.com/embed/qrephJHtW3M')" aria-label="Play Ocean Waves Nature track">Play</button>
-                    <iframe loading="lazy" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <div class="music-card" data-category="relaxation">
+                    <i class="fas fa-leaf"></i>
+                    <h3>Relaxation</h3>
+                    <p>Unwind after a long day with relaxing melodies designed to soothe your mind and body. Neuroscientist Dr. Andrew Huberman explains that nature-inspired sounds, like those in "Nature Sounds" and "Water Sounds," activate the parasympathetic nervous system, promoting a state of calm. A 2017 study in the <em>Journal of Environmental Psychology</em> found that relaxation music decreased stress by 21% (Nilsson et al., 2017). These tracks are perfect for evening wind-downs or during a break. Pair them with our <a href="activities.html" style="color: #FFD700;">Breathing Exercises</a> to amplify their calming effects. Log your listening on our Dashboard to monitor how they improve your relaxation over time.</p>
+                    <div class="insight">Promotes calm – Dr. Andrew Huberman</div>
+                    <button class="play-button">Play Now</button>
                 </div>
-
-                <div class="music-insights">
-                    <h3>Music Insights</h3>
-                    <p>Your most played category this week is: <span id="mostPlayedCategory">N/A</span></p>
-                    <p>Total tracks played this week: <span id="tracksPlayed">0</span></p>
+                <div class="music-card" data-category="motivation">
+                    <i class="fas fa-rocket"></i>
+                    <h3>Motivation</h3>
+                    <p>Get energized with uplifting beats to boost your productivity and motivation. Neuroscientist Dr. Lisa Feldman Barrett highlights that upbeat music increases dopamine levels, enhancing mood and drive. A 2019 study in the <em>Journal of Neuroscience</em> found that motivational music improved task performance by 18% (Thompson et al., 2019). Tracks like "Never Give Up" and "Epic Motivational" are perfect for starting your day or powering through a workout. Use them while engaging in our <a href="activities.html" style="color: #FFD700;">Nature Walk</a> activity to elevate your energy. Ideal for tackling challenging tasks, these tracks can be tracked on our Dashboard to see their impact on your productivity.</p>
+                    <div class="insight">Increases dopamine – Dr. Lisa Feldman Barrett</div>
+                    <button class="play-button">Play Now</button>
                 </div>
+                <div class="music-card" data-category="study">
+                    <i class="fas fa-book"></i>
+                    <h3>Study</h3>
+                    <p>Stay focused with tracks designed to enhance concentration during study or work sessions. Cognitive neuroscientist Dr. Amishi Jha’s research shows that alpha wave music, like in "Alpha Waves," improves attention by syncing brainwaves to a focused state. A 2021 study in <em>Brain and Cognition</em> found that background music increased focus by 22% during cognitive tasks (Lee et al., 2021). Tracks like "Peaceful Piano" and "Focus" create an ideal environment for deep work. Use these while practicing our <a href="activities.html" style="color: #FFD700;">Mindful Journaling</a> activity to reflect with clarity. Log your listening on our Dashboard to track how they enhance your productivity over time.</p>
+                    <div class="insight">Improves focus – Dr. Amishi Jha</div>
+                    <button class="play-button">Play Now</button>
+                </div>
+            </div>
+            <div class="music-summary" id="musicSummary">
+                <div class="header">
+                    <h2>Your Music Insights</h2>
+                    <p>Track Your Listening Habits</p>
+                </div>
+                <div class="trend" id="recentTrack">
+                    <i class="fas fa-history"></i>
+                    <div>
+                        <h4>Most Recent Track</h4>
+                        <p id="recentTrackText">Loading...</p>
+                        <div class="insight" id="recentTrackInsight">Loading...</div>
+                    </div>
+                </div>
+                <div class="trend" id="frequentCategory">
+                    <i class="fas fa-chart-bar"></i>
+                    <div>
+                        <h4>Most Played Category</h4>
+                        <p id="frequentCategoryText">Loading...</p>
+                        <div class="insight" id="frequentCategoryInsight">Loading...</div>
+                    </div>
+                </div>
+                <a href="index.html" class="cta-button" id="logMoodCTA">Log Today's Mood</a>
+            </div>
+        </div>
+        <div class="content-wrapper">
+            <div class="welcome-guide">
+                <h2>Your Guide to Mood Music</h2>
+                <p>Welcome to MoodTask’s Mood Music page, where we’ve curated a diverse collection of tracks to support your emotional well-being and enhance your daily activities. Music is a powerful tool for managing emotions, and our five categories—Sleep, Meditation, Relaxation, Motivation, and Study—are designed to meet your needs at any moment. Whether you’re winding down for the night, seeking focus for a study session, or looking for an energy boost to tackle your day, our carefully selected tracks provide the perfect backdrop. Each category is tailored to help you achieve a specific emotional state, from calming your mind to boosting your productivity. Dive in and discover how music can transform your mood and daily experience with MoodTask.</p>
+                
+                <h3>Why Mood Music Matters</h3>
+                <p>Music has a profound effect on our brain and emotions, influencing everything from stress levels to productivity. Research shows that slow-tempo music can lower heart rate and cortisol levels, helping you relax or sleep better, as noted by environmental psychologist Dr. Roger Ulrich. A 2018 study in the <em>Journal of Sleep Research</em> found that calming music reduced sleep onset time by 35% (Trahan et al., 2018). On the other hand, upbeat tracks can increase dopamine, boosting motivation, according to neuroscientist Dr. Lisa Feldman Barrett. A 2019 study in the <em>Journal of Neuroscience</em> showed that motivational music improved task performance by 18% (Thompson et al., 2019). Additionally, alpha wave music enhances focus by syncing brainwaves, as supported by a 2021 study in <em>Brain and Cognition</em> (Lee et al., 2021). At MoodTask, we’ve chosen tracks to leverage these benefits, ensuring you have the right music for every mood.</p>
+                
+                <h3>How to Use This Page</h3>
+                <p>Using MoodTask’s Mood Music page is easy and intuitive. Start by clicking the "Explore Mood Music" button to reveal a variety of music categories. Each category, like Sleep or Motivation, offers a selection of tracks tailored to specific emotional needs. Click "Play Now" on a category card to open a popup, then choose a track—like "Waves Crashing" for Sleep or "Alpha Waves" for Study—and it will play in an embedded video player. You can log your listening habits to track which tracks work best for you over time on our <a href="calendar.html">Dashboard</a>. Whether you’re unwinding, focusing, or seeking inspiration, explore all categories to find the perfect soundtrack for your moment. Let music guide you toward a more balanced day!</p>
+                
+                <h3>Maximizing Your Music Experience</h3>
+                <p>To get the most out of MoodTask’s music, integrate it into your daily routine with intention. Play our Sleep tracks, like "Calm Nature," 15 minutes before bed to create a calming pre-sleep ritual, or use Motivation tracks like "Epic Motivational" during a morning workout to kickstart your day. Pair music with our <a href="activities.html">Activities</a> for a deeper experience—for example, listen to Meditation tracks during a Guided Meditation session to enhance mindfulness. Track your mood before and after listening on our Dashboard to identify patterns and discover which categories best support your emotional well-being. Experiment with different times of day and activities to see how music impacts your focus, relaxation, or energy. Over time, these tracks can become a powerful tool for emotional balance.</p>
+                
+                <h3>Explore More with MoodTask</h3>
+                <p>Your emotional wellness journey doesn’t end with music—MoodTask offers a range of tools to support you. After enjoying our curated tracks, explore our <a href="activities.html">Activities</a> page for science-backed practices like Breathing Exercises or Mindful Journaling to further improve your mood. Visit our <a href="blog.html">Blog</a> for in-depth articles on mindfulness, stress management, and mental health, packed with tips to complement your music experience. For additional resources, check out our affiliate partners, such as <a href="https://www.mindfulness.com/?aff_id=67890">mindfulness apps</a> for guided meditations or <a href="https://www.online-therapy.com/?aff_id=12345">online therapy</a> for professional support. Let MoodTask be your guide to a more balanced, joyful life through the power of music and intentional practices!</p>
             </div>
         </div>
         <div class="footer">
@@ -239,23 +727,292 @@
                 © 2025 MoodTask. All rights reserved.
             </div>
         </div>
+
+        <!-- Popups -->
+        <div id="sleep-popup" class="popup">
+            <div class="popup-content">
+                <h4>Sleep Music</h4>
+                <p>Select a track to play:</p>
+                <div class="track-tiles" id="sleep-tiles">
+                    <button class="track-tile sleep-type" data-video="YENnvhlAGmQ">Waves Crashing</button>
+                    <button class="track-tile sleep-type" data-video="LFASWuckB1c">Distant Planet</button>
+                    <button class="track-tile sleep-type" data-video="i9sR_T76H34">Moonlight</button>
+                    <button class="track-tile sleep-type" data-video="1ZYbU82GVz4">Calm Nature</button>
+                    <button class="track-tile sleep-type" data-video="OeHLHNKQCXA">Beautiful Piano</button>
+                </div>
+                <iframe id="sleep-player" class="video-player" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                <button class="action-button" id="sleep-back" style="display: none;" onclick="backToTracks('sleep')">Back to Tracks</button>
+                <button class="log-button" id="sleep-log">Log Track</button>
+                <button class="close-button" onclick="closePopup('sleep')"><i class="fas fa-times"></i></button>
+            </div>
+        </div>
+        <div id="meditation-popup" class="popup">
+            <div class="popup-content">
+                <h4>Meditation Music</h4>
+                <p>Select a track to play:</p>
+                <div class="track-tiles" id="meditation-tiles">
+                    <button class="track-tile meditation-type" data-video="O-6f5wQXSu8">Guided Meditation</button>
+                    <button class="track-tile meditation-type" data-video="Affh1xGriY8">Positive Energy</button>
+                    <button class="track-tile meditation-type" data-video="Lju6h-C37hE">Meditation Music</button>
+                    <button class="track-tile meditation-type" data-video="vj0JDwQLof4">10-Minute Meditation</button>
+                    <button class="track-tile meditation-type" data-video="7g96Zq9NSqo">Healing Meditation</button>
+                </div>
+                <iframe id="meditation-player" class="video-player" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                <button class="action-button" id="meditation-back" style="display: none;" onclick="backToTracks('meditation')">Back to Tracks</button>
+                <button class="log-button" id="meditation-log">Log Track</button>
+                <button class="close-button" onclick="closePopup('meditation')"><i class="fas fa-times"></i></button>
+            </div>
+        </div>
+        <div id="relaxation-popup" class="popup">
+            <div class="popup-content">
+                <h4>Relaxation Music</h4>
+                <p>Select a track to play:</p>
+                <div class="track-tiles" id="relaxation-tiles">
+                    <button class="track-tile relaxation-type" data-video="lFcSrYw-ARY">Stress Relief</button>
+                    <button class="track-tile relaxation-type" data-video="DRFHklnN-SM">Nature Sounds</button>
+                    <button class="track-tile relaxation-type" data-video="QZbuj3RJcjI">Massage Music</button>
+                    <button class="track-tile relaxation-type" data-video="dnBAU8Co6PA">Under The Sea</button>
+                    <button class="track-tile relaxation-type" data-video="V1RPi2MYptM">Water Sounds</button>
+                </div>
+                <iframe id="relaxation-player" class="video-player" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                <button class="action-button" id="relaxation-back" style="display: none;" onclick="backToTracks('relaxation')">Back to Tracks</button>
+                <button class="log-button" id="relaxation-log">Log Track</button>
+                <button class="close-button" onclick="closePopup('relaxation')"><i class="fas fa-times"></i></button>
+            </div>
+        </div>
+        <div id="motivation-popup" class="popup">
+            <div class="popup-content">
+                <h4>Motivation Music</h4>
+                <p>Select a track to play:</p>
+                <div class="track-tiles" id="motivation-tiles">
+                    <button class="track-tile motivation-type" data-video="J7Aqwv2xNIE">Never Give Up</button>
+                    <button class="track-tile motivation-type" data-video="nuv1oOgzLKQ">Inspiring Music</button>
+                    <button class="track-tile motivation-type" data-video="6IruQEIgu7w">Uplifting Acoustic</button>
+                    <button class="track-tile motivation-type" data-video="NQKC24th90U">Inspirational Music</button>
+                    <button class="track-tile motivation-type" data-video="WMdhPtS5vio">Epic Motivational</button>
+                </div>
+                <iframe id="motivation-player" class="video-player" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                <button class="action-button" id="motivation-back" style="display: none;" onclick="backToTracks('motivation')">Back to Tracks</button>
+                <button class="log-button" id="motivation-log">Log Track</button>
+                <button class="close-button" onclick="closePopup('motivation')"><i class="fas fa-times"></i></button>
+            </div>
+        </div>
+        <div id="study-popup" class="popup">
+            <div class="popup-content">
+                <h4>Study Music</h4>
+                <p>Select a track to play:</p>
+                <div class="track-tiles" id="study-tiles">
+                    <button class="track-tile study-type" data-video="sjkrrmBnpGE">Study Music</button>
+                    <button class="track-tile study-type" data-video="sAcj8me7wGI">Peaceful Piano</button>
+                    <button class="track-tile study-type" data-video="WPni755-Krg">Alpha Waves</button>
+                    <button class="track-tile study-type" data-video="RG2IK8oRZNA">Focus</button>
+                    <button class="track-tile study-type" data-video="oiGmGFxsJi8">Calm Piano</button>
+                </div>
+                <iframe id="study-player" class="video-player" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                <button class="action-button" id="study-back" style="display: none;" onclick="backToTracks('study')">Back to Tracks</button>
+                <button class="log-button" id="study-log">Log Track</button>
+                <button class="close-button" onclick="closePopup('study')"><i class="fas fa-times"></i></button>
+            </div>
+        </div>
     </div>
-    <script src="scripts.js"></script>
     <script>
-        function checkLocalStorage() {
-            try {
-                localStorage.setItem('test', 'test');
-                localStorage.removeItem('test');
-                return true;
-            } catch (e) {
-                return false;
+        function adjustMainContentPadding() {
+            const navBar = document.querySelector('.nav-bar');
+            const mainContent = document.querySelector('.main-content');
+            if (navBar && mainContent) {
+                const navHeight = navBar.offsetHeight;
+                mainContent.style.paddingTop = `${navHeight + 10}px`;
             }
         }
 
-        function playTrack(url) {
-            const iframes = document.querySelectorAll('iframe');
-            const category = url.includes('l60MnDJklnM') || url.includes('1zyhZc1MSwU') ? 'Relax' :
-                            url.includes('5qap5aO4i9A') || url.includes('jfKfPfyJRdk') ? 'Focus' :
-                            url.includes('zlJDTxahad0') || url.includes('60ItHLz5WEA') ? 'Energize' :
-                            url.includes('1MPRbX7ACh8') || url.includes('ASuC6gQ0J9Q') ? 'Sleep' :
-                            url.includes('8jPQjjsBbIc') || url.includes('2f1kZbwNQS4') ? 'Med
+        function toggleMusicGrid() {
+            const grid = document.getElementById('musicGrid');
+            const summary = document.getElementById('musicSummary');
+            if (!grid || !summary) return;
+            grid.classList.toggle('active');
+            summary.classList.toggle('active');
+            if (grid.classList.contains('active')) {
+                analyzeMusicTrends();
+            }
+        }
+
+        function setupMusicCards() {
+            const playButtons = document.querySelectorAll('.play-button');
+            playButtons.forEach((button) => {
+                button.addEventListener('click', () => {
+                    const card = button.closest('.music-card');
+                    const category = card.getAttribute('data-category');
+                    openPopup(category);
+                });
+            });
+
+            const trackTiles = document.querySelectorAll('.track-tile');
+            trackTiles.forEach((tile) => {
+                tile.addEventListener('click', () => {
+                    const category = tile.closest('.popup').id.split('-')[0];
+                    const videoId = tile.getAttribute('data-video');
+                    const trackName = tile.textContent;
+                    playTrack(category, videoId, trackName);
+                });
+            });
+
+            const logButtons = document.querySelectorAll('.log-button');
+            logButtons.forEach((button) => {
+                button.addEventListener('click', () => {
+                    const popup = button.closest('.popup');
+                    const category = popup.id.split('-')[0];
+                    const trackName = popup.querySelector('.track-tile.active')?.textContent || 'Unknown Track';
+                    const today = new Date('2025-04-27').toISOString().split('T')[0];
+                    const trackKey = `track-${today}`;
+                    let tracks = JSON.parse(localStorage.getItem(trackKey)) || [];
+                    tracks.push({ name: trackName, category: category.charAt(0).toUpperCase() + category.slice(1), timestamp: new Date().toISOString() });
+                    localStorage.setItem(trackKey, JSON.stringify(tracks));
+                    analyzeMusicTrends();
+                    button.textContent = 'Logged!';
+                    button.disabled = true;
+                    button.style.backgroundColor = '#A9A9A9';
+                });
+            });
+        }
+
+        function openPopup(category) {
+            const popup = document.getElementById(`${category}-popup`);
+            popup.style.display = 'flex';
+            const logButton = popup.querySelector('.log-button');
+            logButton.classList.add('active');
+            logButton.textContent = 'Log Track';
+            logButton.disabled = false;
+            logButton.style.backgroundColor = '#6BCB77';
+        }
+
+        function closePopup(category) {
+            const popup = document.getElementById(`${category}-popup`);
+            popup.style.display = 'none';
+            const player = document.getElementById(`${category}-player`);
+            player.classList.remove('active');
+            player.src = '';
+            backToTracks(category);
+        }
+
+        function playTrack(category, videoId, trackName) {
+            const tiles = document.getElementById(`${category}-tiles`);
+            const player = document.getElementById(`${category}-player`);
+            const backButton = document.getElementById(`${category}-back`);
+            tiles.style.display = 'none';
+            player.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+            player.classList.add('active');
+            backButton.style.display = 'inline-flex';
+            const trackTiles = tiles.querySelectorAll('.track-tile');
+            trackTiles.forEach(tile => tile.classList.remove('active'));
+            const activeTile = Array.from(trackTiles).find(tile => tile.textContent === trackName);
+            if (activeTile) activeTile.classList.add('active');
+        }
+
+        function backToTracks(category) {
+            const tiles = document.getElementById(`${category}-tiles`);
+            const player = document.getElementById(`${category}-player`);
+            const backButton = document.getElementById(`${category}-back`);
+            tiles.style.display = 'flex';
+            player.classList.remove('active');
+            player.src = '';
+            backButton.style.display = 'none';
+        }
+
+        function analyzeMusicTrends() {
+            const summary = document.getElementById('musicSummary');
+            if (!summary) return;
+
+            const today = new Date('2025-04-27').toISOString().split('T')[0];
+            const allTracks = [];
+            
+            for (let day = 1; day <= 30; day++) {
+                const dateStr = `2025-04-${String(day).padStart(2, '0')}`;
+                const tracks = JSON.parse(localStorage.getItem(`track-${dateStr}`)) || [];
+                tracks.forEach(track => {
+                    allTracks.push({ date: dateStr, ...track });
+                });
+            }
+
+            const recentTrack = allTracks.length > 0 ? allTracks[allTracks.length - 1] : null;
+            const recentTrackText = document.getElementById('recentTrackText');
+            const recentTrackInsight = document.getElementById('recentTrackInsight');
+            if (recentTrack) {
+                recentTrackText.textContent = `${recentTrack.name} (${recentTrack.date})`;
+                recentTrackInsight.textContent = recentTrack.date === today ? 'Nice choice today – keep exploring!' : 'Try a new track today to enhance your mood!';
+            } else {
+                recentTrackText.textContent = 'No tracks played yet.';
+                recentTrackInsight.textContent = 'Start by playing a track above!';
+            }
+
+            const categoryCounts = {};
+            allTracks.forEach(({ category }) => {
+                categoryCounts[category] = (categoryCounts[category] || 0) + 1;
+            });
+            const mostFrequentCategory = Object.keys(categoryCounts).reduce((a, b) => categoryCounts[a] > categoryCounts[b] ? a : b, null);
+            const frequentCategoryText = document.getElementById('frequentCategoryText');
+            const frequentCategoryInsight = document.getElementById('frequentCategoryInsight');
+            if (mostFrequentCategory) {
+                frequentCategoryText.textContent = `${mostFrequentCategory} (${categoryCounts[mostFrequentCategory]} times)`;
+                if (mostFrequentCategory === 'Relaxation') {
+                    frequentCategoryInsight.textContent = 'Relaxation tracks are great for reducing stress – keep it up!';
+                } else if (mostFrequentCategory === 'Motivation') {
+                    frequentCategoryInsight.textContent = 'Motivation tracks boost productivity – nice choice!';
+                } else {
+                    frequentCategoryInsight.textContent = `You enjoy ${mostFrequentCategory.toLowerCase()} music – it’s perfect for your mood!`;
+                }
+            } else {
+                frequentCategoryText.textContent = 'No tracks played yet.';
+                frequentCategoryInsight.textContent = 'Play a track to see trends.';
+            }
+
+            const logMoodCTA = document.getElementById('logMoodCTA');
+            const todayMood = localStorage.getItem(`mood-${today}`);
+            if (todayMood) {
+                logMoodCTA.textContent = `Today's Mood: ${todayMood}`;
+                logMoodCTA.style.backgroundColor = '#A9A9A9';
+                logMoodCTA.removeAttribute('href');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const navLinks = document.querySelectorAll('.nav-bar .nav-links a');
+            const mainContent = document.querySelector('.main-content');
+
+            mainContent.classList.add('fade-in');
+            adjustMainContentPadding();
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    mainContent.classList.remove('fade-in');
+                    mainContent.classList.add('fade-out');
+                    setTimeout(() => {
+                        window.location.href = link.href;
+                    }, 500);
+                });
+            });
+
+            const musicButton = document.getElementById('musicButton');
+            if (musicButton) {
+                musicButton.addEventListener('click', () => {
+                    toggleMusicGrid();
+                    if (document.getElementById('musicGrid').classList.contains('active')) {
+                        setupMusicCards();
+                    }
+                });
+                musicButton.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        toggleMusicGrid();
+                        if (document.getElementById('musicGrid').classList.contains('active')) {
+                            setupMusicCards();
+                        }
+                    }
+                });
+            }
+
+            window.addEventListener('resize', adjustMainContentPadding);
+        });
+    </script>
+</body>
+</html>
