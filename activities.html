@@ -193,9 +193,19 @@
             transform: scale(1.05);
             background: rgba(255, 255, 255, 0.3);
         }
-        .activity-card i {
-            font-size: 1.5em;
+        .thumbnail-area {
+            width: 100%;
+            height: 120px;
+            border-radius: 8px;
             margin-bottom: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #4A90E2, #2C3E50); /* Default gradient */
+        }
+        .thumbnail-area i {
+            font-size: 2.5em;
+            color: white;
         }
         .activity-card h3 {
             font-size: 1em;
@@ -214,6 +224,28 @@
         }
         .activity-card .try-button:hover {
             background-color: #2C3E50;
+        }
+        /* Category-specific gradients */
+        .activity-card.breathing .thumbnail-area {
+            background: linear-gradient(135deg, #4A90E2, #2C3E50);
+        }
+        .activity-card.gratitude .thumbnail-area {
+            background: linear-gradient(135deg, #F4A261, #FF6F61);
+        }
+        .activity-card.meditation .thumbnail-area {
+            background: linear-gradient(135deg, #9F7AEA, #B794F4);
+        }
+        .activity-card.pmr .thumbnail-area {
+            background: linear-gradient(135deg, #2C7A7B, #4C9A9B);
+        }
+        .activity-card.walk .thumbnail-area {
+            background: linear-gradient(135deg, #68D391, #48BB78);
+        }
+        .activity-card.journaling .thumbnail-area {
+            background: linear-gradient(135deg, #6B46C1, #805AD5);
+        }
+        .activity-card.reframing .thumbnail-area {
+            background: linear-gradient(135deg, #FF6F61, #E53E3E);
         }
         .activity-summary {
             background-color: rgba(255, 255, 255, 0.9);
@@ -584,6 +616,12 @@
             .activity-card {
                 width: 150px;
             }
+            .thumbnail-area {
+                height: 90px;
+            }
+            .thumbnail-area i {
+                font-size: 2em;
+            }
             .activity-summary {
                 margin: 20px 10px;
                 max-width: 100%;
@@ -648,23 +686,31 @@
                 <div class="activity-section">
                     <h2>Breathing Exercises</h2>
                     <div class="activity-row">
-                        <div class="activity-card" data-tool="breathing" data-technique="diaphragmatic">
-                            <i class="fas fa-wind"></i>
+                        <div class="activity-card breathing" data-tool="breathing" data-technique="diaphragmatic">
+                            <div class="thumbnail-area">
+                                <i class="fas fa-wind"></i>
+                            </div>
                             <h3>360 Diaphragmatic</h3>
                             <button class="try-button">Try Now</button>
                         </div>
-                        <div class="activity-card" data-tool="breathing" data-technique="resonance">
-                            <i class="fas fa-wind"></i>
+                        <div class="activity-card breathing" data-tool="breathing" data-technique="resonance">
+                            <div class="thumbnail-area">
+                                <i class="fas fa-heartbeat"></i>
+                            </div>
                             <h3>Resonance</h3>
                             <button class="try-button">Try Now</button>
                         </div>
-                        <div class="activity-card" data-tool="breathing" data-technique="4-7-8">
-                            <i class="fas fa-wind"></i>
+                        <div class="activity-card breathing" data-tool="breathing" data-technique="4-7-8">
+                            <div class="thumbnail-area">
+                                <i class="fas fa-clock"></i>
+                            </div>
                             <h3>4-7-8</h3>
                             <button class="try-button">Try Now</button>
                         </div>
-                        <div class="activity-card" data-tool="breathing" data-technique="box">
-                            <i class="fas fa-wind"></i>
+                        <div class="activity-card breathing" data-tool="breathing" data-technique="box">
+                            <div class="thumbnail-area">
+                                <i class="fas fa-square"></i>
+                            </div>
                             <h3>Box Breathing</h3>
                             <button class="try-button">Try Now</button>
                         </div>
@@ -673,18 +719,24 @@
                 <div class="activity-section">
                     <h2>Gratitude Notes</h2>
                     <div class="activity-row">
-                        <div class="activity-card" data-tool="gratitude" data-technique="daily">
-                            <i class="fas fa-heart"></i>
+                        <div class="activity-card gratitude" data-tool="gratitude" data-technique="daily">
+                            <div class="thumbnail-area">
+                                <i class="fas fa-sun"></i>
+                            </div>
                             <h3>Daily Gratitude</h3>
                             <button class="try-button">Try Now</button>
                         </div>
-                        <div class="activity-card" data-tool="gratitude" data-technique="relationships">
-                            <i class="fas fa-heart"></i>
+                        <div class="activity-card gratitude" data-tool="gratitude" data-technique="relationships">
+                            <div class="thumbnail-area">
+                                <i class="fas fa-heart"></i>
+                            </div>
                             <h3>Relationships</h3>
                             <button class="try-button">Try Now</button>
                         </div>
-                        <div class="activity-card" data-tool="gratitude" data-technique="achievements">
-                            <i class="fas fa-heart"></i>
+                        <div class="activity-card gratitude" data-tool="gratitude" data-technique="achievements">
+                            <div class="thumbnail-area">
+                                <i class="fas fa-trophy"></i>
+                            </div>
                             <h3>Achievements</h3>
                             <button class="try-button">Try Now</button>
                         </div>
@@ -693,18 +745,24 @@
                 <div class="activity-section">
                     <h2>Guided Meditation</h2>
                     <div class="activity-row">
-                        <div class="activity-card" data-tool="meditation" data-technique="breath-awareness">
-                            <i class="fas fa-spa"></i>
+                        <div class="activity-card meditation" data-tool="meditation" data-technique="breath-awareness">
+                            <div class="thumbnail-area">
+                                <i class="fas fa-wind"></i>
+                            </div>
                             <h3>Breath Awareness</h3>
                             <button class="try-button">Try Now</button>
                         </div>
-                        <div class="activity-card" data-tool="meditation" data-technique="body-scan">
-                            <i class="fas fa-spa"></i>
+                        <div class="activity-card meditation" data-tool="meditation" data-technique="body-scan">
+                            <div class="thumbnail-area">
+                                <i class="fas fa-user"></i>
+                            </div>
                             <h3>Body Scan</h3>
                             <button class="try-button">Try Now</button>
                         </div>
-                        <div class="activity-card" data-tool="meditation" data-technique="visualization">
-                            <i class="fas fa-spa"></i>
+                        <div class="activity-card meditation" data-tool="meditation" data-technique="visualization">
+                            <div class="thumbnail-area">
+                                <i class="fas fa-eye"></i>
+                            </div>
                             <h3>Visualization</h3>
                             <button class="try-button">Try Now</button>
                         </div>
@@ -713,18 +771,24 @@
                 <div class="activity-section">
                     <h2>Progressive Muscle Relaxation</h2>
                     <div class="activity-row">
-                        <div class="activity-card" data-tool="pmr" data-technique="full-body">
-                            <i class="fas fa-hand-holding-heart"></i>
+                        <div class="activity-card pmr" data-tool="pmr" data-technique="full-body">
+                            <div class="thumbnail-area">
+                                <i class="fas fa-hand"></i>
+                            </div>
                             <h3>Full Body</h3>
                             <button class="try-button">Try Now</button>
                         </div>
-                        <div class="activity-card" data-tool="pmr" data-technique="lower-body">
-                            <i class="fas fa-hand-holding-heart"></i>
+                        <div class="activity-card pmr" data-tool="pmr" data-technique="lower-body">
+                            <div class="thumbnail-area">
+                                <i class="fas fa-shoe-prints"></i>
+                            </div>
                             <h3>Lower Body</h3>
                             <button class="try-button">Try Now</button>
                         </div>
-                        <div class="activity-card" data-tool="pmr" data-technique="upper-body">
-                            <i class="fas fa-hand-holding-heart"></i>
+                        <div class="activity-card pmr" data-tool="pmr" data-technique="upper-body">
+                            <div class="thumbnail-area">
+                                <i class="fas fa-dumbbell"></i>
+                            </div>
                             <h3>Upper Body</h3>
                             <button class="try-button">Try Now</button>
                         </div>
@@ -733,18 +797,24 @@
                 <div class="activity-section">
                     <h2>Nature Walk</h2>
                     <div class="activity-row">
-                        <div class="activity-card" data-tool="walk" data-technique="mindful">
-                            <i class="fas fa-walking"></i>
+                        <div class="activity-card walk" data-tool="walk" data-technique="mindful">
+                            <div class="thumbnail-area">
+                                <i class="fas fa-tree"></i>
+                            </div>
                             <h3>Mindful Walk</h3>
                             <button class="try-button">Try Now</button>
                         </div>
-                        <div class="activity-card" data-tool="walk" data-technique="sensory">
-                            <i class="fas fa-walking"></i>
+                        <div class="activity-card walk" data-tool="walk" data-technique="sensory">
+                            <div class="thumbnail-area">
+                                <i class="fas fa-eye"></i>
+                            </div>
                             <h3>Sensory Focus</h3>
                             <button class="try-button">Try Now</button>
                         </div>
-                        <div class="activity-card" data-tool="walk" data-technique="gratitude">
-                            <i class="fas fa-walking"></i>
+                        <div class="activity-card walk" data-tool="walk" data-technique="gratitude">
+                            <div class="thumbnail-area">
+                                <i class="fas fa-flower"></i>
+                            </div>
                             <h3>Gratitude Walk</h3>
                             <button class="try-button">Try Now</button>
                         </div>
@@ -753,18 +823,24 @@
                 <div class="activity-section">
                     <h2>Mindful Journaling</h2>
                     <div class="activity-row">
-                        <div class="activity-card" data-tool="journaling" data-technique="emotions">
-                            <i class="fas fa-pen"></i>
+                        <div class="activity-card journaling" data-tool="journaling" data-technique="emotions">
+                            <div class="thumbnail-area">
+                                <i class="fas fa-pen"></i>
+                            </div>
                             <h3>Explore Emotions</h3>
                             <button class="try-button">Try Now</button>
                         </div>
-                        <div class="activity-card" data-tool="journaling" data-technique="goals">
-                            <i class="fas fa-pen"></i>
+                        <div class="activity-card journaling" data-tool="journaling" data-technique="goals">
+                            <div class="thumbnail-area">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
                             <h3>Reflect on Goals</h3>
                             <button class="try-button">Try Now</button>
                         </div>
-                        <div class="activity-card" data-tool="journaling" data-technique="challenges">
-                            <i class="fas fa-pen"></i>
+                        <div class="activity-card journaling" data-tool="journaling" data-technique="challenges">
+                            <div class="thumbnail-area">
+                                <i class="fas fa-mountain"></i>
+                            </div>
                             <h3>Address Challenges</h3>
                             <button class="try-button">Try Now</button>
                         </div>
@@ -773,18 +849,24 @@
                 <div class="activity-section">
                     <h2>Cognitive Reframing</h2>
                     <div class="activity-row">
-                        <div class="activity-card" data-tool="reframing" data-technique="negative-thought">
-                            <i class="fas fa-lightbulb"></i>
+                        <div class="activity-card reframing" data-tool="reframing" data-technique="negative-thought">
+                            <div class="thumbnail-area">
+                                <i class="fas fa-brain"></i>
+                            </div>
                             <h3>Reframe a Negative Thought</h3>
                             <button class="try-button">Try Now</button>
                         </div>
-                        <div class="activity-card" data-tool="reframing" data-technique="stressful-event">
-                            <i class="fas fa-lightbulb"></i>
+                        <div class="activity-card reframing" data-tool="reframing" data-technique="stressful-event">
+                            <div class="thumbnail-area">
+                                <i class="fas fa-cloud"></i>
+                            </div>
                             <h3>Reframe a Stressful Event</h3>
                             <button class="try-button">Try Now</button>
                         </div>
-                        <div class="activity-card" data-tool="reframing" data-technique="self-criticism">
-                            <i class="fas fa-lightbulb"></i>
+                        <div class="activity-card reframing" data-tool="reframing" data-technique="self-criticism">
+                            <div class="thumbnail-area">
+                                <i class="fas fa-smile"></i>
+                            </div>
                             <h3>Reframe Self-Criticism</h3>
                             <button class="try-button">Try Now</button>
                         </div>
