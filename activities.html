@@ -97,32 +97,6 @@
             font-size: 1.2em;
             margin-bottom: 30px;
         }
-        .activity-button {
-            padding: 15px 30px;
-            background-color: #FFC107;
-            color: #333;
-            border: none;
-            border-radius: 25px;
-            font-size: 1.2em;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
-            animation: pulse 2s infinite;
-            position: relative;
-            z-index: 10;
-        }
-        .activity-button:hover {
-            background-color: #FFB300;
-            transform: scale(1.05);
-        }
-        .activity-button:focus {
-            outline: 2px solid #FFD700;
-            outline-offset: 2px;
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 5px rgba(255, 193, 7, 0.5); }
-            50% { transform: scale(1.05); box-shadow: 0 0 15px rgba(255, 193, 7, 0.8); }
-            100% { transform: scale(1); box-shadow: 0 0 5px rgba(255, 193, 7, 0.5); }
-        }
         .content-wrapper {
             display: flex;
             flex-wrap: wrap;
@@ -168,7 +142,6 @@
             text-decoration: underline;
         }
         .activities-grid {
-            display: none;
             margin-top: 30px;
             width: 100%;
             padding: 20px;
@@ -181,9 +154,6 @@
             margin-left: auto;
             margin-right: auto;
         }
-        .activities-grid.active {
-            display: flex !important;
-        }
         .activity-card {
             background: rgba(255, 255, 255, 0.2);
             color: white;
@@ -195,8 +165,6 @@
             transition: transform 0.3s, background 0.3s;
             opacity: 0;
             position: relative;
-        }
-        .activities-grid.active .activity-card {
             animation: fadeIn 0.5s ease forwards;
         }
         .activity-card:hover {
@@ -240,7 +208,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
         .activity-summary {
-            display: none;
             background-color: rgba(255, 255, 255, 0.9);
             padding: 25px;
             border-radius: 10px;
@@ -249,9 +216,6 @@
             text-align: left;
             max-width: 600px;
             color: #333;
-        }
-        .activity-summary.active {
-            display: block !important;
         }
         .activity-summary .header {
             text-align: center;
@@ -677,7 +641,6 @@
         <div class="hero">
             <h1>Boost Your Mood with Activities</h1>
             <p>Discover science-backed activities to improve your emotional well-being.</p>
-            <button class="activity-button" id="activityButton" tabindex="0" aria-label="Explore activities">Explore Activities</button>
             <div class="activities-grid" id="activitiesGrid">
                 <div class="activity-card" data-tool="breathing">
                     <i class="fas fa-wind"></i>
@@ -762,7 +725,7 @@
                 <p>Engaging in intentional activities can profoundly impact your mental health by targeting specific neurological and physiological pathways. For example, deep breathing exercises, as noted by neuroscientist Dr. Andrew Huberman, activate the parasympathetic nervous system, which slows your heart rate and reduces cortisol levels, helping you feel calmer within minutes. A 2018 study in <em>Psychophysiology</em> supports this, showing a 20% reduction in stress after just 2 minutes of diaphragmatic breathing (Ma et al., 2018). Similarly, gratitude practices increase dopamine and enhance activity in the brain’s prefrontal cortex, improving emotional regulation, according to a 2016 study in the <em>Journal of Neuroscience</em> (Fox et al., 2016). Activities like Mindful Journaling and Cognitive Reframing, rooted in cognitive-behavioral therapy, help you process emotions and shift negative thought patterns, fostering resilience. At MoodTask, we’ve carefully selected these tools to provide quick, effective ways to improve your emotional state, backed by decades of research in psychology and neuroscience.</p>
                 
                 <h3>How to Use This Page</h3>
-                <p>Getting started with MoodTask’s activities is simple and intuitive. Begin by clicking the "Explore Activities" button above to reveal a variety of activity cards. Each card represents a unique tool, such as Breathing Exercises or Gratitude Notes, with a brief description and scientific insight. Select an activity by clicking "Try Now" to open a popup with guided prompts. For instance, if you choose Breathing Exercises, you’ll select a technique like 4-7-8 or Box Breathing, then follow the visual timer to complete the session. After finishing, log your activity to track your journey over time on our <a href="calendar.html">Dashboard</a>. We recommend exploring all the options to discover which ones resonate most with you—whether you need to relax, refocus, or build emotional strength. Each activity takes just a few minutes but can have a lasting impact on your day.</p>
+                <p>Getting started with MoodTask’s activities is simple and intuitive. Browse the activity cards below, each representing a unique tool like Breathing Exercises or Gratitude Notes, with a brief description and scientific insight. Select an activity by clicking "Try Now" to open a popup with guided prompts. For instance, if you choose Breathing Exercises, you’ll select a technique like 4-7-8 or Box Breathing, then follow the visual timer to complete the session. After finishing, log your activity to track your journey over time on our <a href="calendar.html">Dashboard</a>. We recommend exploring all the options to discover which ones resonate most with you—whether you need to relax, refocus, or build emotional strength. Each activity takes just a few minutes but can have a lasting impact on your day.</p>
                 
                 <h3>Maximizing Your Experience</h3>
                 <p>To get the most out of these activities, consistency and mindfulness are key. Start by setting aside 5-10 minutes each day to try one activity—perhaps a breathing exercise in the morning to start your day calmly, or a gratitude reflection before bed to end on a positive note. Pair activities with complementary tools on MoodTask: for example, listen to our <a href="music.html">Relaxation playlist</a> during a Guided Meditation session to enhance the calming effect. Track your mood before and after each activity on our Dashboard to see patterns over time—this can help you identify which activities work best for you. Don’t rush; focus on being fully present during each session, whether you’re journaling or taking a nature walk. Over time, these small habits can become powerful tools for managing stress and cultivating a more balanced, joyful life.</p>
@@ -926,28 +889,6 @@
             }
         }
 
-        function toggleActivitiesGrid() {
-            const grid = document.getElementById('activitiesGrid');
-            const summary = document.getElementById('activitySummary');
-            if (!grid || !summary) {
-                console.error('Activities grid or summary element not found:', { grid, summary });
-                return;
-            }
-            console.log('Before toggle - Grid display:', window.getComputedStyle(grid).display);
-            console.log('Before toggle - Summary display:', window.getComputedStyle(summary).display);
-            
-            grid.classList.toggle('active');
-            summary.classList.toggle('active');
-            
-            console.log('After toggle - Grid display:', window.getComputedStyle(grid).display);
-            console.log('After toggle - Summary display:', window.getComputedStyle(summary).display);
-            console.log('Activities grid toggled:', grid.classList.contains('active') ? 'Visible' : 'Hidden');
-            
-            if (grid.classList.contains('active')) {
-                analyzeActivityTrends();
-            }
-        }
-
         function setupActivityCards() {
             const tryButtons = document.querySelectorAll('.try-button');
             tryButtons.forEach((button, index) => {
@@ -1061,3 +1002,381 @@
                 const currentPhase = phases[phaseIndex];
                 if (phaseTime >= currentPhase.duration) {
                     phaseTime = 0;
+                    phaseIndex = (phaseIndex + 1) % phases.length;
+                    const nextPhase = phases[phaseIndex];
+                    stepText.textContent = nextPhase.text;
+                    circle.className = 'inhale hold exhale';
+                    circle.classList.add(nextPhase.name);
+                }
+            }, 1000);
+
+            setTimeout(() => {
+                stopBreathing();
+                document.querySelector('#breathing-popup .affirmation').style.display = 'block';
+            }, 60000);
+        }
+
+        function stopBreathing() {
+            if (breathingInterval) {
+                clearInterval(breathingInterval);
+                breathingInterval = null;
+            }
+        }
+
+        function resetBreathing() {
+            stopBreathing();
+            const circle = document.getElementById('breathing-circle');
+            const instruction = document.getElementById('breathing-instruction');
+            const tiles = document.getElementById('breathing-tiles');
+            const tryAnotherButton = document.getElementById('breathing-try-another');
+            const affirmation = document.querySelector('#breathing-popup .affirmation');
+            circle.style.display = 'none';
+            instruction.textContent = '';
+            tiles.style.display = 'flex';
+            tryAnotherButton.style.display = 'none';
+            affirmation.style.display = 'none';
+        }
+
+        // Gratitude Notes
+        function startGratitudeTechnique(type) {
+            const tiles = document.getElementById('gratitude-tiles');
+            const textArea = document.getElementById('gratitude-text');
+            const saveButton = document.getElementById('gratitude-save');
+            const prompts = {
+                'daily': 'Write about three things you are grateful for today.',
+                'relationships': 'Reflect on a relationship that brings you joy and why.',
+                'achievements': 'Describe a recent achievement you’re proud of and how it made you feel.'
+            };
+            tiles.style.display = 'none';
+            textArea.style.display = 'block';
+            saveButton.style.display = 'inline-flex';
+            textArea.placeholder = prompts[type];
+        }
+
+        function saveGratitude() {
+            const text = document.getElementById('gratitude-text').value;
+            if (text) {
+                const today = new Date('2025-04-27').toISOString().split('T')[0];
+                let entries = JSON.parse(localStorage.getItem(`gratitude-${today}`)) || [];
+                entries.push({ text, timestamp: new Date().toISOString() });
+                localStorage.setItem(`gratitude-${today}`, JSON.stringify(entries));
+                document.querySelector('#gratitude-popup .affirmation').style.display = 'block';
+                document.getElementById('gratitude-save').style.display = 'none';
+            }
+        }
+
+        function resetGratitude() {
+            const tiles = document.getElementById('gratitude-tiles');
+            const textArea = document.getElementById('gratitude-text');
+            const saveButton = document.getElementById('gratitude-save');
+            const affirmation = document.querySelector('#gratitude-popup .affirmation');
+            tiles.style.display = 'flex';
+            textArea.style.display = 'none';
+            textArea.value = '';
+            saveButton.style.display = 'none';
+            affirmation.style.display = 'none';
+        }
+
+        // Guided Meditation
+        function startMeditationTechnique(type) {
+            const prompt = document.getElementById('meditation-prompt');
+            const tiles = document.getElementById('meditation-tiles');
+            const tryAnotherButton = document.getElementById('meditation-try-another');
+            const prompts = {
+                'breath-awareness': 'Focus on your breath. Inhale deeply, exhale slowly, and notice the air moving through your body for 60 seconds.',
+                'body-scan': 'Close your eyes and mentally scan your body from head to toe, noticing any sensations without judgment for 60 seconds.',
+                'visualization': 'Imagine a peaceful place—like a beach or forest. Picture the details and immerse yourself for 60 seconds.'
+            };
+            tiles.style.display = 'none';
+            prompt.textContent = prompts[type];
+            setTimeout(() => {
+                prompt.textContent = 'Meditation complete. Take a moment to notice how you feel.';
+                tryAnotherButton.style.display = 'inline-flex';
+                document.querySelector('#meditation-popup .affirmation').style.display = 'block';
+            }, 60000);
+        }
+
+        function resetMeditation() {
+            const prompt = document.getElementById('meditation-prompt');
+            const tiles = document.getElementById('meditation-tiles');
+            const tryAnotherButton = document.getElementById('meditation-try-another');
+            const affirmation = document.querySelector('#meditation-popup .affirmation');
+            tiles.style.display = 'flex';
+            prompt.textContent = '';
+            tryAnotherButton.style.display = 'none';
+            affirmation.style.display = 'none';
+        }
+
+        // Progressive Muscle Relaxation
+        let pmrIndex = 0;
+        let pmrInterval = null;
+        function startPMRTechnique(type) {
+            const prompt = document.getElementById('pmr-prompt');
+            const tiles = document.getElementById('pmr-tiles');
+            const tryAnotherButton = document.getElementById('pmr-try-another');
+            const muscleGroups = {
+                'full-body': [
+                    'Clench your fists tightly for 5 seconds, then relax for 10 seconds.',
+                    'Tense your arms by flexing your biceps for 5 seconds, then relax for 10 seconds.',
+                    'Shrug your shoulders up to your ears for 5 seconds, then relax for 10 seconds.',
+                    'Tense your stomach muscles for 5 seconds, then relax for 10 seconds.',
+                    'Clench your thighs for 5 seconds, then relax for 10 seconds.',
+                    'Point your toes upward to tense your calves for 5 seconds, then relax for 10 seconds.'
+                ],
+                'lower-body': [
+                    'Clench your thighs for 5 seconds, then relax for 10 seconds.',
+                    'Point your toes upward to tense your calves for 5 seconds, then relax for 10 seconds.',
+                    'Curl your toes under to tense your feet for 5 seconds, then relax for 10 seconds.'
+                ],
+                'upper-body': [
+                    'Clench your fists tightly for 5 seconds, then relax for 10 seconds.',
+                    'Tense your arms by flexing your biceps for 5 seconds, then relax for 10 seconds.',
+                    'Shrug your shoulders up to your ears for 5 seconds, then relax for 10 seconds.'
+                ]
+            };
+            const selectedGroups = muscleGroups[type];
+            tiles.style.display = 'none';
+            pmrIndex = 0;
+
+            function nextStep() {
+                if (pmrIndex < selectedGroups.length) {
+                    prompt.textContent = selectedGroups[pmrIndex];
+                    pmrIndex++;
+                    setTimeout(() => {
+                        prompt.textContent = 'Relax and breathe deeply...';
+                        setTimeout(nextStep, 10000);
+                    }, 5000);
+                } else {
+                    prompt.textContent = 'PMR session complete. Take a moment to notice how relaxed you feel.';
+                    tryAnotherButton.style.display = 'inline-flex';
+                    document.querySelector('#pmr-popup .affirmation').style.display = 'block';
+                    clearInterval(pmrInterval);
+                }
+            }
+
+            nextStep();
+        }
+
+        function resetPMR() {
+            const prompt = document.getElementById('pmr-prompt');
+            const tiles = document.getElementById('pmr-tiles');
+            const tryAnotherButton = document.getElementById('pmr-try-another');
+            const affirmation = document.querySelector('#pmr-popup .affirmation');
+            tiles.style.display = 'flex';
+            prompt.textContent = '';
+            tryAnotherButton.style.display = 'none';
+            affirmation.style.display = 'none';
+            pmrIndex = 0;
+            if (pmrInterval) clearInterval(pmrInterval);
+        }
+
+        // Nature Walk
+        let walkInterval = null;
+        function initWalk() {
+            const tiles = document.getElementById('walk-tiles');
+            tiles.style.display = 'flex';
+        }
+
+        function startWalkTechnique(type) {
+            const tiles = document.getElementById('walk-tiles');
+            const timer = document.getElementById('walk-timer');
+            const progress = document.getElementById('walk-progress');
+            const prompts = {
+                'mindful': 'Walk slowly and notice your surroundings—focus on each step and your breath.',
+                'sensory': 'Pay attention to the sights, sounds, and smells around you as you walk.',
+                'gratitude': 'Reflect on things you’re grateful for in your environment as you walk.'
+            };
+            tiles.style.display = 'none';
+            timer.textContent = prompts[type];
+            let timeLeft = 300;
+            progress.style.width = '100%';
+
+            walkInterval = setInterval(() => {
+                timeLeft--;
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                progress.style.width = `${(timeLeft / 300) * 100}%`;
+                if (timeLeft <= 0) {
+                    clearInterval(walkInterval);
+                    timer.textContent = 'Walk complete! Take a moment to reflect on how you feel.';
+                    document.querySelector('#walk-popup .affirmation').style.display = 'block';
+                }
+            }, 1000);
+        }
+
+        function stopWalk() {
+            if (walkInterval) {
+                clearInterval(walkInterval);
+                walkInterval = null;
+            }
+            const timer = document.getElementById('walk-timer');
+            const progress = document.getElementById('walk-progress');
+            const affirmation = document.querySelector('#walk-popup .affirmation');
+            timer.textContent = '';
+            progress.style.width = '0%';
+            affirmation.style.display = 'none';
+        }
+
+        // Mindful Journaling
+        function startJournalingTechnique(type) {
+            const prompt = document.getElementById('journaling-prompt');
+            const tiles = document.getElementById('journaling-tiles');
+            const textArea = document.getElementById('journaling-text');
+            const saveButton = document.getElementById('journaling-save');
+            const prompts = {
+                'emotions': 'Write about how you’re feeling right now and why you might feel this way.',
+                'goals': 'Reflect on a goal you’d like to achieve and what steps you can take toward it.',
+                'challenges': 'Describe a challenge you’re facing and how you might approach it differently.'
+            };
+            tiles.style.display = 'none';
+            prompt.textContent = prompts[type];
+            textArea.style.display = 'block';
+            saveButton.style.display = 'inline-flex';
+        }
+
+        function saveJournaling() {
+            const text = document.getElementById('journaling-text').value;
+            if (text) {
+                const today = new Date('2025-04-27').toISOString().split('T')[0];
+                let entries = JSON.parse(localStorage.getItem(`journaling-${today}`)) || [];
+                entries.push({ text, timestamp: new Date().toISOString() });
+                localStorage.setItem(`journaling-${today}`, JSON.stringify(entries));
+                document.querySelector('#journaling-popup .affirmation').style.display = 'block';
+                document.getElementById('journaling-save').style.display = 'none';
+            }
+        }
+
+        function resetJournaling() {
+            const prompt = document.getElementById('journaling-prompt');
+            const tiles = document.getElementById('journaling-tiles');
+            const textArea = document.getElementById('journaling-text');
+            const saveButton = document.getElementById('journaling-save');
+            const affirmation = document.querySelector('#journaling-popup .affirmation');
+            tiles.style.display = 'flex';
+            prompt.textContent = '';
+            textArea.style.display = 'none';
+            textArea.value = '';
+            saveButton.style.display = 'none';
+            affirmation.style.display = 'none';
+        }
+
+        // Cognitive Reframing
+        function startReframingTechnique(type) {
+            const prompt = document.getElementById('reframing-prompt');
+            const tiles = document.getElementById('reframing-tiles');
+            const textArea = document.getElementById('reframing-text');
+            const saveButton = document.getElementById('reframing-save');
+            const prompts = {
+                'negative-thought': 'Write a negative thought you’re having, then reframe it into a more balanced perspective.',
+                'stressful-event': 'Describe a recent stressful event, then find a positive or neutral way to view it.',
+                'self-criticism': 'Write a self-critical thought, then reframe it with self-compassion.'
+            };
+            tiles.style.display = 'none';
+            prompt.textContent = prompts[type];
+            textArea.style.display = 'block';
+            saveButton.style.display = 'inline-flex';
+        }
+
+        function saveReframing() {
+            const text = document.getElementById('reframing-text').value;
+            if (text) {
+                const today = new Date('2025-04-27').toISOString().split('T')[0];
+                let entries = JSON.parse(localStorage.getItem(`reframing-${today}`)) || [];
+                entries.push({ text, timestamp: new Date().toISOString() });
+                localStorage.setItem(`reframing-${today}`, JSON.stringify(entries));
+                document.querySelector('#reframing-popup .affirmation').style.display = 'block';
+                document.getElementById('reframing-save').style.display = 'none';
+            }
+        }
+
+        function resetReframing() {
+            const prompt = document.getElementById('reframing-prompt');
+            const tiles = document.getElementById('reframing-tiles');
+            const textArea = document.getElementById('reframing-text');
+            const saveButton = document.getElementById('reframing-save');
+            const affirmation = document.querySelector('#reframing-popup .affirmation');
+            tiles.style.display = 'flex';
+            prompt.textContent = '';
+            textArea.style.display = 'none';
+            textArea.value = '';
+            saveButton.style.display = 'none';
+            affirmation.style.display = 'none';
+        }
+
+        function analyzeActivityTrends() {
+            const today = new Date('2025-04-27').toISOString().split('T')[0];
+            const allActivities = [];
+            for (let day = 1; day <= 27; day++) {
+                const dateStr = `2025-04-${String(day).padStart(2, '0')}`;
+                const activities = JSON.parse(localStorage.getItem(`activity-${dateStr}`)) || [];
+                activities.forEach(activity => {
+                    allActivities.push({ date: dateStr, ...activity });
+                });
+            }
+
+            const recentActivity = allActivities.length > 0 ? allActivities[allActivities.length - 1] : null;
+            const recentActivityText = document.getElementById('recentActivityText');
+            const recentActivityInsight = document.getElementById('recentActivityInsight');
+            if (recentActivity) {
+                recentActivityText.textContent = `${recentActivity.name} (${recentActivity.date})`;
+                recentActivityInsight.textContent = recentActivity.date === today ? 'Nice job today – keep it up!' : 'Try a new activity today to boost your mood!';
+            } else {
+                recentActivityText.textContent = 'No activities logged yet.';
+                recentActivityInsight.textContent = 'Start by trying an activity above!';
+            }
+
+            const activityCounts = {};
+            allActivities.forEach(activity => {
+                activityCounts[activity.name] = (activityCounts[activity.name] || 0) + 1;
+            });
+            const mostFrequentActivity = Object.keys(activityCounts).reduce((a, b) => activityCounts[a] > activityCounts[b] ? a : b, null);
+            const frequentActivityText = document.getElementById('frequentActivityText');
+            const frequentActivityInsight = document.getElementById('frequentActivityInsight');
+            if (mostFrequentActivity) {
+                frequentActivityText.textContent = `${mostFrequentActivity} (${activityCounts[mostFrequentActivity]} times)`;
+                if (mostFrequentActivity === 'Breathing Exercises') {
+                    frequentActivityInsight.textContent = 'Breathing exercises are great for reducing stress – keep it up!';
+                } else if (mostFrequentActivity === 'Gratitude Notes') {
+                    frequentActivityInsight.textContent = 'Gratitude notes boost positivity – nice choice!';
+                } else {
+                    frequentActivityInsight.textContent = `${mostFrequentActivity} is working well for you – great job!`;
+                }
+            } else {
+                frequentActivityText.textContent = 'No activities logged yet.';
+                frequentActivityInsight.textContent = 'Try an activity to see trends.';
+            }
+
+            const logMoodCTA = document.getElementById('logMoodCTA');
+            const todayMood = localStorage.getItem(`mood-${today}`);
+            if (todayMood) {
+                logMoodCTA.textContent = `Today's Mood: ${todayMood}`;
+                logMoodCTA.style.backgroundColor = '#A9A9A9';
+                logMoodCTA.removeAttribute('href');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const navLinks = document.querySelectorAll('.nav-bar .nav-links a');
+            const mainContent = document.querySelector('.main-content');
+
+            mainContent.classList.add('fade-in');
+            adjustMainContentPadding();
+            setupActivityCards();
+            analyzeActivityTrends();
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    mainContent.classList.remove('fade-in');
+                    mainContent.classList.add('fade-out');
+                    setTimeout(() => {
+                        window.location.href = link.href;
+                    }, 500);
+                });
+            });
+
+            window.addEventListener('resize', adjustMainContentPadding);
+        });
+    </script>
+</body>
+</html>
