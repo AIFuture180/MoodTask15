@@ -614,6 +614,10 @@
         .log-button:hover {
             background-color: #5BBF66;
         }
+        .log-button:disabled {
+            background-color: #A9A9A9;
+            cursor: not-allowed;
+        }
         .affirmation {
             display: none;
             color: #4A90E2;
@@ -1597,3 +1601,95 @@
             const timer = document.getElementById('exercise-timer');
             const progress = document.getElementById('exercise-progress');
             const prompts = {
+                'stretching': 'Perform gentle stretches for your arms, legs, and back. Hold each stretch for 10 seconds.',
+                'cardio': 'Do a quick cardio burst—jumping jacks or high knees—for 5 minutes.',
+                'strength': 'Do a set of bodyweight exercises like squats or push-ups for 5 minutes.'
+            };
+            timer.textContent = prompts[type];
+            let timeLeft = 300;
+            progress.style.width = '100%';
+
+            exerciseInterval = setInterval(() => {
+                timeLeft--;
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                progress.style.width = `${(timeLeft / 300) * 100}%`;
+                if (timeLeft <= 0) {
+                    clearInterval(exerciseInterval);
+                    timer.textContent = 'Exercise complete! Take a moment to cool down.';
+                    document.querySelector('#exercise-popup .affirmation').style.display = 'block';
+                }
+            }, 1000);
+        }
+
+        function stopExercise() {
+            if (exerciseInterval) {
+                clearInterval(exerciseInterval);
+                exerciseInterval = null;
+            }
+            const timer = document.getElementById('exercise-timer');
+            const progress = document.getElementById('exercise-progress');
+            const affirmation = document.querySelector('#exercise-popup .affirmation');
+            timer.textContent = '';
+            progress.style.width = '0%';
+            affirmation.style.display = 'none';
+        }
+
+        // Activity Trends Analysis
+        function analyzeActivityTrends() {
+            const today = new Date('2025-05-01').toISOString().split('T')[0];
+            const activityKey = `activity-${today}`;
+            let activities = JSON.parse(localStorage.getItem(activityKey)) || [];
+            const recentActivityText = document.getElementById('recentActivityText');
+            const recentActivityInsight = document.getElementById('recentActivityInsight');
+            const frequentActivityText = document.getElementById('frequentActivityText');
+            const frequentActivityInsight = document.getElementById('frequentActivityInsight');
+
+            if (activities.length > 0) {
+                const latestActivity = activities[activities.length - 1];
+                recentActivityText.textContent = latestActivity.name;
+                recentActivityInsight.textContent = 'Completing this activity may help you feel more centered or energized depending on the technique.';
+
+                const activityCount = activities.reduce((acc, curr) => {
+                    acc[curr.name] = (acc[curr.name] || 0) + 1;
+                    return acc;
+                }, {});
+                const mostFrequent = Object.keys(activityCount).reduce((a, b) => activityCount[a] > activityCount[b] ? a : b);
+                frequentActivityText.textContent = mostFrequent;
+                frequentActivityInsight.textContent = `You’ve done ${mostFrequent} ${activityCount[mostFrequent]} times today, suggesting it might be a good fit for your routine.`;
+            } else {
+                recentActivityText.textContent = 'No activities logged yet.';
+                recentActivityInsight.textContent = 'Try an activity to start tracking your progress!';
+                frequentActivityText.textContent = 'No activities logged yet.';
+                frequentActivityInsight.textContent = 'Log a few activities to see trends.';
+            }
+            console.log('Activity trends analyzed for', today);
+        }
+
+        // Initial Setup
+        window.addEventListener('load', () => {
+            adjustMainContentPadding();
+            setupActivityCards();
+            analyzeActivityTrends();
+            window.addEventListener('resize', adjustMainContentPadding);
+            console.log('Page loaded and initialized');
+        });
+
+        // Smooth page transitions
+        document.querySelectorAll('.nav-bar a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                const href = link.getAttribute('href');
+                if (href !== window.location.pathname) {
+                    e.preventDefault();
+                    const mainContent = document.querySelector('.main-content');
+                    mainContent.classList.remove('fade-in');
+                    mainContent.classList.add('fade-out');
+                    setTimeout(() => {
+                        window.location.href = href;
+                    }, 500);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
