@@ -71,6 +71,12 @@
             font-weight: 600;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
+        .burger-menu {
+            display: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: #2C3E50;
+        }
         .main-content {
             transition: opacity 0.5s ease;
             padding-top: 60px;
@@ -596,6 +602,38 @@
         .action-button:hover {
             background: #2C3E50;
         }
+        .timer-controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        .timer-adjust-button {
+            background: #4A90E2;
+            color: #fff;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background-color 0.3s;
+        }
+        .timer-adjust-button:hover {
+            background: #2C3E50;
+        }
+        .timer-pause-button {
+            background: #FF6F61;
+            color: #fff;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        .timer-pause-button:hover {
+            background: #E53E3E;
+        }
         .log-button {
             padding: 8px 15px;
             background-color: #6BCB77;
@@ -639,28 +677,36 @@
         }
         @media (max-width: 600px) {
             .nav-bar {
-                flex-direction: column;
-                gap: 8px;
+                flex-direction: row;
                 padding: 10px 20px;
-                height: auto;
-                min-height: 120px;
+                height: 60px;
+                align-items: center;
             }
             .nav-bar .nav-links {
+                display: none;
                 flex-direction: column;
-                gap: 8px;
-                align-items: center;
+                position: absolute;
+                top: 60px;
+                left: 0;
                 width: 100%;
-                padding-left: 0;
-                padding-right: 0;
+                background-color: rgba(255, 255, 255, 0.95);
+                padding: 10px 0;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            }
+            .nav-bar .nav-links.active {
+                display: flex;
             }
             .nav-bar a {
-                padding: 8px 20px;
+                padding: 10px 20px;
                 width: 100%;
                 text-align: center;
                 box-sizing: border-box;
             }
+            .burger-menu {
+                display: block;
+            }
             .main-content {
-                padding-top: 130px;
+                padding-top: 70px;
             }
             .hero {
                 padding: 40px 15px;
@@ -757,6 +803,9 @@
 <body>
     <div class="nav-bar">
         <div class="logo">MoodTask</div>
+        <div class="burger-menu" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
         <div class="nav-links">
             <a href="index.html">Home</a>
             <a href="calendar.html">Dashboard</a>
@@ -978,19 +1027,25 @@
                             <div class="thumbnail-area">
                                 <i class="fas fa-running"></i>
                             </div>
-                            <h3>Stretching</h3>
+                            <h3>Dynamic Stretching</h3>
                         </div>
                         <div class="activity-card exercise" data-tool="exercise" data-technique="cardio" onclick="openPopup('exercise', 'cardio')">
                             <div class="thumbnail-area">
                                 <i class="fas fa-heartbeat"></i>
                             </div>
-                            <h3>Cardio</h3>
+                            <h3>HIIT Cardio</h3>
                         </div>
                         <div class="activity-card exercise" data-tool="exercise" data-technique="strength" onclick="openPopup('exercise', 'strength')">
                             <div class="thumbnail-area">
                                 <i class="fas fa-dumbbell"></i>
                             </div>
-                            <h3>Strength</h3>
+                            <h3>Bodyweight Strength</h3>
+                        </div>
+                        <div class="activity-card exercise" data-tool="exercise" data-technique="core" onclick="openPopup('exercise', 'core')">
+                            <div class="thumbnail-area">
+                                <i class="fas fa-fire"></i>
+                            </div>
+                            <h3>Core Workout</h3>
                         </div>
                     </div>
                 </div>
@@ -1147,6 +1202,11 @@
                 <h4>Exercise Activity</h4>
                 <div class="progress-container"><div id="exercise-progress" class="progress-bar"></div></div>
                 <p id="exercise-timer"></p>
+                <div class="timer-controls">
+                    <button class="timer-adjust-button" onclick="adjustTimer('exercise', -10)">-10s</button>
+                    <button class="timer-adjust-button" onclick="adjustTimer('exercise', 10)">+10s</button>
+                    <button class="timer-pause-button" id="exercise-pause" onclick="pauseResumeExercise()">Pause</button>
+                </div>
                 <button class="log-button" id="exercise-log">Log Activity</button>
                 <p class="affirmation">Great job getting active!</p>
                 <button class="close-button" onclick="closePopup('exercise')"><i class="fas fa-times"></i></button>
@@ -1154,6 +1214,11 @@
         </div>
     </div>
     <script>
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        }
+
         function adjustMainContentPadding() {
             const navBar = document.querySelector('.nav-bar');
             const mainContent = document.querySelector('.main-content');
@@ -1593,33 +1658,84 @@
 
         // Exercise Activity
         let exerciseInterval = null;
+        let exercisePaused = false;
+        let exerciseTimeLeft = 0;
+        let exerciseTotalTime = 0;
+
         function initExercise() {
-            // Placeholder for initialization if needed
+            const timer = document.getElementById('exercise-timer');
+            const progress = document.getElementById('exercise-progress');
+            timer.textContent = '00:00';
+            progress.style.width = '0%';
         }
 
         function startExerciseTechnique(type) {
             const timer = document.getElementById('exercise-timer');
             const progress = document.getElementById('exercise-progress');
-            const prompts = {
-                'stretching': 'Perform gentle stretches for your arms, legs, and back. Hold each stretch for 10 seconds.',
-                'cardio': 'Do a quick cardio burst—jumping jacks or high knees—for 5 minutes.',
-                'strength': 'Do a set of bodyweight exercises like squats or push-ups for 5 minutes.'
-            };
-            timer.textContent = prompts[type];
-            let timeLeft = 300;
-            progress.style.width = '100%';
-
-            exerciseInterval = setInterval(() => {
-                timeLeft--;
-                const minutes = Math.floor(timeLeft / 60);
-                const seconds = timeLeft % 60;
-                progress.style.width = `${(timeLeft / 300) * 100}%`;
-                if (timeLeft <= 0) {
-                    clearInterval(exerciseInterval);
-                    timer.textContent = 'Exercise complete! Take a moment to cool down.';
-                    document.querySelector('#exercise-popup .affirmation').style.display = 'block';
+            const techniques = {
+                'stretching': {
+                    intervals: [
+                        { work: 30, rest: 15, label: 'Leg Stretch' },
+                        { work: 30, rest: 15, label: 'Arm Stretch' },
+                        { work: 30, rest: 15, label: 'Back Stretch' }
+                    ],
+                    totalTime: 165 // (30+15)*3
+                },
+                'cardio': {
+                    intervals: [
+                        { work: 20, rest: 10, label: 'Jumping Jacks' },
+                        { work: 20, rest: 10, label: 'High Knees' },
+                        { work: 20, rest: 10, label: 'Burpees' }
+                    ],
+                    totalTime: 90 // (20+10)*3
+                },
+                'strength': {
+                    intervals: [
+                        { work: 40, rest: 20, label: 'Push-ups' },
+                        { work: 40, rest: 20, label: 'Squats' },
+                        { work: 40, rest: 20, label: 'Plank' }
+                    ],
+                    totalTime: 180 // (40+20)*3
+                },
+                'core': {
+                    intervals: [
+                        { work: 25, rest: 15, label: 'Crunches' },
+                        { work: 25, rest: 15, label: 'Leg Raises' },
+                        { work: 25, rest: 15, label: 'Bicycle Crunches' }
+                    ],
+                    totalTime: 135 // (25+15)*3
                 }
-            }, 1000);
+            };
+            const selectedTechnique = techniques[type];
+            let intervalIndex = 0;
+            exerciseTotalTime = selectedTechnique.totalTime;
+            exerciseTimeLeft = exerciseTotalTime;
+
+            function updateTimer() {
+                if (!exercisePaused) {
+                    const minutes = Math.floor(exerciseTimeLeft / 60);
+                    const seconds = exerciseTimeLeft % 60;
+                    timer.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                    progress.style.width = `${((exerciseTotalTime - exerciseTimeLeft) / exerciseTotalTime) * 100}%`;
+
+                    if (exerciseTimeLeft <= 0 && intervalIndex < selectedTechnique.intervals.length) {
+                        intervalIndex++;
+                        if (intervalIndex < selectedTechnique.intervals.length) {
+                            exerciseTimeLeft = selectedTechnique.intervals[intervalIndex].work + selectedTechnique.intervals[intervalIndex].rest;
+                            timer.textContent = `${Math.floor(exerciseTimeLeft / 60)}:${exerciseTimeLeft % 60 < 10 ? '0' : ''}${exerciseTimeLeft % 60}`;
+                        } else {
+                            clearInterval(exerciseInterval);
+                            timer.textContent = 'Complete!';
+                            document.querySelector('#exercise-popup .affirmation').style.display = 'block';
+                        }
+                    }
+                    exerciseTimeLeft--;
+                }
+            }
+
+            if (exerciseInterval) clearInterval(exerciseInterval);
+            exerciseInterval = setInterval(updateTimer, 1000);
+            updateTimer(); // Initial call
         }
 
         function stopExercise() {
@@ -1627,19 +1743,36 @@
                 clearInterval(exerciseInterval);
                 exerciseInterval = null;
             }
+            exercisePaused = false;
             const timer = document.getElementById('exercise-timer');
             const progress = document.getElementById('exercise-progress');
-            const affirmation = document.querySelector('#exercise-popup .affirmation');
-            timer.textContent = '';
+            const pauseButton = document.getElementById('exercise-pause');
+            timer.textContent = '00:00';
             progress.style.width = '0%';
-            affirmation.style.display = 'none';
+            pauseButton.textContent = 'Pause';
+            document.querySelector('#exercise-popup .affirmation').style.display = 'none';
         }
 
-        // Activity Trends Analysis
+        function pauseResumeExercise() {
+            const pauseButton = document.getElementById('exercise-pause');
+            exercisePaused = !exercisePaused;
+            pauseButton.textContent = exercisePaused ? 'Resume' : 'Pause';
+        }
+
+        function adjustTimer(tool, adjustment) {
+            if (tool === 'exercise' && exerciseTimeLeft > 0) {
+                exerciseTimeLeft = Math.max(0, exerciseTimeLeft + adjustment);
+                const minutes = Math.floor(exerciseTimeLeft / 60);
+                const seconds = exerciseTimeLeft % 60;
+                document.getElementById('exercise-timer').textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                exerciseTotalTime = Math.max(exerciseTotalTime, exerciseTimeLeft);
+            }
+        }
+
         function analyzeActivityTrends() {
             const today = new Date('2025-05-01').toISOString().split('T')[0];
             const activityKey = `activity-${today}`;
-            let activities = JSON.parse(localStorage.getItem(activityKey)) || [];
+            const activities = JSON.parse(localStorage.getItem(activityKey)) || [];
             const recentActivityText = document.getElementById('recentActivityText');
             const recentActivityInsight = document.getElementById('recentActivityInsight');
             const frequentActivityText = document.getElementById('frequentActivityText');
@@ -1673,6 +1806,9 @@
             analyzeActivityTrends();
             window.addEventListener('resize', adjustMainContentPadding);
             console.log('Page loaded and initialized');
+
+            // Google AdSense initialization
+            (adsbygoogle = window.adsbygoogle || []).push({});
         });
 
         // Smooth page transitions
@@ -1690,6 +1826,19 @@
                 }
             });
         });
+
+        // AdSense placement example (can be adjusted as needed)
+        const adContainer = document.createElement('div');
+        adContainer.className = 'ad-container';
+        adContainer.innerHTML = `
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-15181337633801567"
+                 data-ad-slot="1234567890"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+        `;
+        document.querySelector('.content-wrapper').appendChild(adContainer);
     </script>
 </body>
 </html>
