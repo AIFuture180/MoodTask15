@@ -78,7 +78,7 @@
             color: #2C3E50;
             position: absolute;
             top: 10px;
-            right: 20px;
+            right: 10px; /* Adjusted from 20px to 10px for better visibility */
         }
         .main-content {
             transition: opacity 0.5s ease;
@@ -666,7 +666,7 @@
                 display: block;
                 position: absolute;
                 top: 10px;
-                right: 20px;
+                right: 10px; /* Adjusted to ensure visibility in top right corner */
             }
             .main-content {
                 padding-top: 70px;
@@ -1425,13 +1425,13 @@
             totalRounds = parseInt(roundsInput.value) || 5;
             workTime = parseInt(workInput.value) || 20;
             restTime = parseInt(restInput.value) || 10;
-            exerciseTotalTime = (type === 'tabata') ? 240 : (type === 'emom') ? 60 * totalRounds : (type === 'amrap') ? workTime : 0;
-            exerciseTimeLeft = (type === 'amrap') ? workTime : (type === 'tabata') ? 20 : (type === 'emom') ? 60 : 0;
+            exerciseTotalTime = (type === 'tabata') ? 240 : (type === 'emom') ? 60 * totalRounds : (type === 'for-time') ? 3600 : workTime; // 1-hour max for For Time
+            exerciseTimeLeft = (type === 'amrap') ? workTime : (type === 'tabata') ? 20 : (type === 'emom') ? 60 : (type === 'for-time') ? 0 : 0;
             forTimeElapsed = 0;
             const info = document.getElementById('exercise-info');
             const timer = document.getElementById('exercise-timer');
-            const minutes = Math.floor(exerciseTimeLeft / 60);
-            const seconds = exerciseTimeLeft % 60;
+            const minutes = Math.floor((type === 'for-time' ? forTimeElapsed : exerciseTimeLeft) / 60);
+            const seconds = (type === 'for-time' ? forTimeElapsed : exerciseTimeLeft) % 60;
             timer.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
             info.textContent = `${type.toUpperCase()} - ${type === 'for-time' ? 'Elapsed Time' : 'Time Remaining'}`;
         }
@@ -1445,8 +1445,8 @@
             totalRounds = parseInt(document.getElementById('exercise-rounds').value) || 5;
             workTime = parseInt(document.getElementById('exercise-work').value) || 20;
             restTime = parseInt(document.getElementById('exercise-rest').value) || 10;
-            exerciseTotalTime = (exerciseType === 'tabata') ? 240 : (exerciseType === 'emom') ? 60 * totalRounds : (exerciseType === 'amrap') ? workTime : 0;
-            exerciseTimeLeft = (exerciseType === 'amrap') ? workTime : (exerciseType === 'tabata') ? 20 : (exerciseType === 'emom') ? 60 : 0;
+            exerciseTotalTime = (exerciseType === 'tabata') ? 240 : (exerciseType === 'emom') ? 60 * totalRounds : (exerciseType === 'for-time') ? 3600 : workTime;
+            exerciseTimeLeft = (exerciseType === 'amrap') ? workTime : (exerciseType === 'tabata') ? 20 : (exerciseType === 'emom') ? 60 : (exerciseType === 'for-time') ? 0 : 0;
             forTimeElapsed = 0;
 
             const timer = document.getElementById('exercise-timer');
@@ -1459,10 +1459,7 @@
                     const seconds = (exerciseType === 'for-time' ? forTimeElapsed : exerciseTimeLeft) % 60;
                     timer.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 
-                    if (exerciseType === 'for-time') {
-                        forTimeElapsed++;
-                        progress.style.width = `${(forTimeElapsed / 3600) * 100}%`;
-                    } else if (exerciseType === 'amrap') {
+                    if (exerciseType === 'amrap') {
                         progress.style.width = `${((workTime - exerciseTimeLeft) / workTime) * 100}%`;
                         if (exerciseTimeLeft <= 0) {
                             clearInterval(exerciseInterval);
@@ -1471,8 +1468,17 @@
                             return;
                         }
                         exerciseTimeLeft--;
+                    } else if (exerciseType === 'for-time') {
+                        forTimeElapsed++;
+                        progress.style.width = `${(forTimeElapsed / 3600) * 100}%`;
+                        if (forTimeElapsed >= 3600) {
+                            clearInterval(exerciseInterval);
+                            info.textContent = 'FOR TIME - Complete! (1 hour max)';
+                            pauseButton.style.display = 'none';
+                            return;
+                        }
                     } else if (exerciseType === 'emom') {
-                        progress.style.width = `${((currentRound * 60 + (60 - exerciseTimeLeft)) / exerciseTotalTime) * 100}%`;
+                        progress.style.width = `${((currentRound * 60 + (60 - exerciseTimeLeft)) / (totalRounds * 60)) * 100}%`;
                         if (exerciseTimeLeft <= 0) {
                             currentRound++;
                             if (currentRound < totalRounds) {
@@ -1491,7 +1497,7 @@
                         if (exerciseTimeLeft <= 0) {
                             if (currentRound < 7) {
                                 currentRound++;
-                                exerciseTimeLeft = (currentRound % 2 === 0) ? 10 : 20;
+                                exerciseTimeLeft = (currentRound % 2 === 0) ? restTime : workTime;
                                 info.textContent = `TABATA - ${currentRound % 2 === 0 ? 'Rest' : 'Work'} (${Math.floor(currentRound / 2) + 1}/8)`;
                             } else {
                                 clearInterval(exerciseInterval);
