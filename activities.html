@@ -76,6 +76,9 @@
             font-size: 1.5em;
             cursor: pointer;
             color: #2C3E50;
+            position: absolute;
+            top: 10px;
+            right: 20px;
         }
         .main-content {
             transition: opacity 0.5s ease;
@@ -626,6 +629,12 @@
             border-radius: 5px;
             text-align: center;
         }
+        .ad-container {
+            min-width: 300px;
+            width: 100%;
+            margin: 20px auto;
+            text-align: center;
+        }
         @media (max-width: 600px) {
             .nav-bar {
                 flex-direction: row;
@@ -655,6 +664,9 @@
             }
             .burger-menu {
                 display: block;
+                position: absolute;
+                top: 10px;
+                right: 20px;
             }
             .main-content {
                 padding-top: 70px;
@@ -730,6 +742,9 @@
             #breathing-pulse {
                 width: 100px;
                 height: 100px;
+            }
+            .ad-container {
+                min-width: 250px;
             }
         }
     </style>
@@ -1373,7 +1388,7 @@
             textArea.value = '';
         }
 
-        // Exercise Activity (Refined SmartWOD Style)
+        // Exercise Activity
         let exerciseInterval = null;
         let exercisePaused = false;
         let exerciseTimeLeft = 0;
@@ -1382,7 +1397,6 @@
         let totalRounds = 0;
         let workTime = 0;
         let restTime = 0;
-        let isWorkPhase = true;
         let exerciseType = '';
         let forTimeElapsed = 0;
 
@@ -1411,8 +1425,9 @@
             totalRounds = parseInt(roundsInput.value) || 5;
             workTime = parseInt(workInput.value) || 20;
             restTime = parseInt(restInput.value) || 10;
-            exerciseTotalTime = (type === 'tabata') ? (20 + 10) * 8 : (type === 'emom') ? (workTime + restTime) * totalRounds : workTime;
-            exerciseTimeLeft = (type === 'amrap' || type === 'for-time') ? workTime : (type === 'tabata') ? 20 : workTime;
+            exerciseTotalTime = (type === 'tabata') ? 240 : (type === 'emom') ? 60 * totalRounds : (type === 'amrap') ? workTime : 0;
+            exerciseTimeLeft = (type === 'amrap') ? workTime : (type === 'tabata') ? 20 : (type === 'emom') ? 60 : 0;
+            forTimeElapsed = 0;
             const info = document.getElementById('exercise-info');
             const timer = document.getElementById('exercise-timer');
             const minutes = Math.floor(exerciseTimeLeft / 60);
@@ -1430,8 +1445,8 @@
             totalRounds = parseInt(document.getElementById('exercise-rounds').value) || 5;
             workTime = parseInt(document.getElementById('exercise-work').value) || 20;
             restTime = parseInt(document.getElementById('exercise-rest').value) || 10;
-            exerciseTotalTime = (exerciseType === 'tabata') ? (20 + 10) * 8 : (exerciseType === 'emom') ? (workTime + restTime) * totalRounds : (exerciseType === 'amrap') ? workTime : 0;
-            exerciseTimeLeft = (exerciseType === 'amrap' || exerciseType === 'tabata') ? ((exerciseType === 'tabata') ? 20 : workTime) : (exerciseType === 'emom') ? workTime : 0;
+            exerciseTotalTime = (exerciseType === 'tabata') ? 240 : (exerciseType === 'emom') ? 60 * totalRounds : (exerciseType === 'amrap') ? workTime : 0;
+            exerciseTimeLeft = (exerciseType === 'amrap') ? workTime : (exerciseType === 'tabata') ? 20 : (exerciseType === 'emom') ? 60 : 0;
             forTimeElapsed = 0;
 
             const timer = document.getElementById('exercise-timer');
@@ -1446,41 +1461,43 @@
 
                     if (exerciseType === 'for-time') {
                         forTimeElapsed++;
-                        progress.style.width = `${(forTimeElapsed / 3600) * 100}%`; // Cap at 1 hour for progress
-                    } else if (exerciseType === 'amrap' || exerciseType === 'tabata') {
+                        progress.style.width = `${(forTimeElapsed / 3600) * 100}%`;
+                    } else if (exerciseType === 'amrap') {
                         progress.style.width = `${((workTime - exerciseTimeLeft) / workTime) * 100}%`;
                         if (exerciseTimeLeft <= 0) {
-                            if (exerciseType === 'tabata' && currentRound < 7) {
-                                currentRound++;
-                                exerciseTimeLeft = (currentRound % 2 === 0) ? 10 : 20;
-                                info.textContent = `TABATA - ${currentRound % 2 === 0 ? 'Rest' : 'Work'} (${currentRound + 1}/8)`;
-                            } else if (exerciseType === 'amrap') {
+                            clearInterval(exerciseInterval);
+                            info.textContent = 'AMRAP - Complete!';
+                            pauseButton.style.display = 'none';
+                            return;
+                        }
+                        exerciseTimeLeft--;
+                    } else if (exerciseType === 'emom') {
+                        progress.style.width = `${((currentRound * 60 + (60 - exerciseTimeLeft)) / exerciseTotalTime) * 100}%`;
+                        if (exerciseTimeLeft <= 0) {
+                            currentRound++;
+                            if (currentRound < totalRounds) {
+                                exerciseTimeLeft = 60;
+                                info.textContent = `EMOM - Round ${currentRound + 1}/${totalRounds}`;
+                            } else {
                                 clearInterval(exerciseInterval);
-                                info.textContent = 'AMRAP - Complete!';
+                                info.textContent = 'EMOM - Complete!';
                                 pauseButton.style.display = 'none';
                                 return;
                             }
                         }
                         exerciseTimeLeft--;
-                    } else if (exerciseType === 'emom') {
-                        progress.style.width = `${((currentRound * (workTime + restTime) + (isWorkPhase ? workTime - exerciseTimeLeft : workTime + restTime - exerciseTimeLeft)) / exerciseTotalTime) * 100}%`;
+                    } else if (exerciseType === 'tabata') {
+                        progress.style.width = `${((240 - exerciseTimeLeft) / 240) * 100}%`;
                         if (exerciseTimeLeft <= 0) {
-                            if (isWorkPhase) {
-                                isWorkPhase = false;
-                                exerciseTimeLeft = restTime;
-                                info.textContent = `EMOM - Rest (Round ${currentRound + 1}/${totalRounds})`;
-                            } else {
-                                isWorkPhase = true;
+                            if (currentRound < 7) {
                                 currentRound++;
-                                if (currentRound < totalRounds) {
-                                    exerciseTimeLeft = workTime;
-                                    info.textContent = `EMOM - Work (Round ${currentRound + 1}/${totalRounds})`;
-                                } else {
-                                    clearInterval(exerciseInterval);
-                                    info.textContent = 'EMOM - Complete!';
-                                    pauseButton.style.display = 'none';
-                                    return;
-                                }
+                                exerciseTimeLeft = (currentRound % 2 === 0) ? 10 : 20;
+                                info.textContent = `TABATA - ${currentRound % 2 === 0 ? 'Rest' : 'Work'} (${Math.floor(currentRound / 2) + 1}/8)`;
+                            } else {
+                                clearInterval(exerciseInterval);
+                                info.textContent = 'TABATA - Complete!';
+                                pauseButton.style.display = 'none';
+                                return;
                             }
                         }
                         exerciseTimeLeft--;
@@ -1490,7 +1507,7 @@
 
             if (exerciseInterval) clearInterval(exerciseInterval);
             exerciseInterval = setInterval(updateTimer, 1000);
-            updateTimer(); // Initial call
+            updateTimer();
         }
 
         function stopExercise() {
@@ -1502,7 +1519,6 @@
             currentRound = 0;
             exerciseTimeLeft = 0;
             exerciseTotalTime = 0;
-            isWorkPhase = true;
             forTimeElapsed = 0;
             const timer = document.getElementById('exercise-timer');
             const progress = document.getElementById('exercise-progress');
@@ -1532,6 +1548,36 @@
             }
         }
 
+        // AdSense initialization with delay and visibility check
+        function initializeAds() {
+            const adContainer = document.querySelector('.ad-container');
+            if (!adContainer) {
+                console.error('Ad container not found');
+                return;
+            }
+
+            const isContainerReady = () => {
+                const rect = adContainer.getBoundingClientRect();
+                return rect.width > 0 && rect.height > 0;
+            };
+
+            const tryPushAd = () => {
+                try {
+                    if (isContainerReady()) {
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                        console.log('AdSense initialized successfully');
+                    } else {
+                        console.warn('Ad container not ready, retrying...');
+                        setTimeout(tryPushAd, 500);
+                    }
+                } catch (e) {
+                    console.error('AdSense push failed:', e);
+                }
+            };
+
+            setTimeout(tryPushAd, 100);
+        }
+
         // Initial Setup
         window.addEventListener('load', () => {
             adjustMainContentPadding();
@@ -1539,8 +1585,21 @@
             window.addEventListener('resize', adjustMainContentPadding);
             console.log('Page loaded and initialized');
 
-            // Google AdSense initialization
-            (adsbygoogle = window.adsbygoogle || []).push({});
+            // AdSense placement
+            const adContainer = document.createElement('div');
+            adContainer.className = 'ad-container';
+            adContainer.innerHTML = `
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-15181337633801567"
+                     data-ad-slot="1234567890"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            `;
+            document.querySelector('.content-wrapper').appendChild(adContainer);
+
+            // Initialize ads after DOM is ready
+            initializeAds();
         });
 
         // Smooth page transitions
@@ -1558,19 +1617,6 @@
                 }
             });
         });
-
-        // AdSense placement example (can be adjusted as needed)
-        const adContainer = document.createElement('div');
-        adContainer.className = 'ad-container';
-        adContainer.innerHTML = `
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-15181337633801567"
-                 data-ad-slot="1234567890"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-        `;
-        document.querySelector('.content-wrapper').appendChild(adContainer);
     </script>
 </body>
 </html>
