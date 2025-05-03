@@ -77,8 +77,15 @@
             cursor: pointer;
             color: #2C3E50;
             position: absolute;
-            top: 10px;
-            right: 10px; /* Adjusted from 20px to 10px for better visibility */
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1001;
+            padding: 10px;
+            transition: color 0.3s ease;
+        }
+        .burger-menu:hover {
+            color: #4A90E2;
         }
         .main-content {
             transition: opacity 0.5s ease;
@@ -637,36 +644,46 @@
         }
         @media (max-width: 600px) {
             .nav-bar {
-                flex-direction: row;
-                padding: 10px 20px;
-                height: 60px;
+                height: 50px;
+                padding: 5px 10px;
+                justify-content: space-between;
                 align-items: center;
+            }
+            .nav-bar .logo {
+                font-size: 1.2em;
+                margin-left: 10px;
             }
             .nav-bar .nav-links {
                 display: none;
                 flex-direction: column;
                 position: absolute;
-                top: 60px;
+                top: 50px;
                 left: 0;
                 width: 100%;
-                background-color: rgba(255, 255, 255, 0.95);
-                padding: 10px 0;
+                background-color: #fff;
                 box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                padding: 10px 0;
             }
             .nav-bar .nav-links.active {
                 display: flex;
             }
             .nav-bar a {
-                padding: 10px 20px;
+                padding: 10px;
                 width: 100%;
                 text-align: center;
                 box-sizing: border-box;
             }
+            .nav-bar .dropdown {
+                width: 100%;
+            }
+            .nav-bar .dropdown-content {
+                width: 100%;
+                left: 0;
+                position: relative;
+                box-shadow: none;
+            }
             .burger-menu {
                 display: block;
-                position: absolute;
-                top: 10px;
-                right: 10px; /* Adjusted to ensure visibility in top right corner */
             }
             .main-content {
                 padding-top: 70px;
@@ -839,7 +856,7 @@
                 <div class="activity-section">
                     <h2>Gratitude Notes</h2>
                     <div class="expert-quote">
-                        Gratitude notes foster positivity by shifting focus to what’s good in life.
+                        Gratitude notes foster positivity by shifting focus to what's good in life.
                         <span class="quote">"Practicing gratitude can increase happiness by 25% and improve overall mental health." — Dr. Robert Emmons, Gratitude Researcher (Thanks!, 2007)</span>
                     </div>
                     <div class="activity-row">
@@ -976,19 +993,19 @@
         <div class="content-wrapper">
             <div class="welcome-guide">
                 <h2>Your Guide to Mood-Boosting Activities</h2>
-                <p>Welcome to MoodTask’s Activities page, your go-to resource for improving emotional well-being through science-backed tools. We understand that life can be overwhelming, and small, intentional actions can make a big difference in how you feel. That’s why we’ve curated a variety of activities—such as Breathing Exercises, Gratitude Notes, Guided Meditation, Progressive Muscle Relaxation, Mindful Journaling, and Cognitive Reframing—to support you in moments of stress, anxiety, or low energy. Each activity is designed to help you reconnect with yourself, reduce negative emotions, and foster a sense of balance. Whether you’re looking to calm your mind, boost positivity, or process your feelings, there’s an activity here for you. Dive in and discover how these tools can transform your daily experience.</p>
+                <p>Welcome to MoodTask's Activities page, your go-to resource for improving emotional well-being through science-backed tools. We understand that life can be overwhelming, and small, intentional actions can make a big difference in how you feel. That's why we've curated a variety of activities—such as Breathing Exercises, Gratitude Notes, Guided Meditation, Progressive Muscle Relaxation, Mindful Journaling, and Cognitive Reframing—to support you in moments of stress, anxiety, or low energy. Each activity is designed to help you reconnect with yourself, reduce negative emotions, and foster a sense of balance. Whether you're looking to calm your mind, boost positivity, or process your feelings, there's an activity here for you. Dive in and discover how these tools can transform your daily experience.</p>
                 
                 <h3>Why These Activities Work</h3>
-                <p>Engaging in intentional activities can profoundly impact your mental health by targeting specific neurological and physiological pathways. For example, deep breathing exercises, as noted by neuroscientist Dr. Andrew Huberman, activate the parasympathetic nervous system, which slows your heart rate and reduces cortisol levels, helping you feel calmer within minutes. A 2018 study in <em>Psychophysiology</em> supports this, showing a 20% reduction in stress after just 2 minutes of diaphragmatic breathing (Ma et al., 2018). Similarly, gratitude practices increase dopamine and enhance activity in the brain’s prefrontal cortex, improving emotional regulation, according to a 2016 study in the <em>Journal of Neuroscience</em> (Fox et al., 2016). Activities like Mindful Journaling and Cognitive Reframing, rooted in cognitive-behavioral therapy, help you process emotions and shift negative thought patterns, fostering resilience. At MoodTask, we’ve carefully selected these tools to provide quick, effective ways to improve your emotional state, backed by decades of research in psychology and neuroscience.</p>
+                <p>Engaging in intentional activities can profoundly impact your mental health by targeting specific neurological and physiological pathways. For example, deep breathing exercises, as noted by neuroscientist Dr. Andrew Huberman, activate the parasympathetic nervous system, which slows your heart rate and reduces cortisol levels, helping you feel calmer within minutes. A 2018 study in <em>Psychophysiology</em> supports this, showing a 20% reduction in stress after just 2 minutes of diaphragmatic breathing (Ma et al., 2018). Similarly, gratitude practices increase dopamine and enhance activity in the brain's prefrontal cortex, improving emotional regulation, according to a 2016 study in the <em>Journal of Neuroscience</em> (Fox et al., 2016). Activities like Mindful Journaling and Cognitive Reframing, rooted in cognitive-behavioral therapy, help you process emotions and shift negative thought patterns, fostering resilience. At MoodTask, we've carefully selected these tools to provide quick, effective ways to improve your emotional state, backed by decades of research in psychology and neuroscience.</p>
                 
                 <h3>How to Use This Page</h3>
-                <p>Getting started with MoodTask’s activities is simple and intuitive. Browse the sections below, each dedicated to a unique tool like Breathing Exercises or Gratitude Notes. Within each section, you’ll find a row of options—like 4-7-8 or Box Breathing for Breathing Exercises. Select an option by clicking on the card to open a popup with guided prompts. After finishing, explore our other activities to find what suits you best. We recommend exploring all the options to discover which ones resonate most with you—whether you need to relax, refocus, or build emotional strength. Each activity takes just a few minutes but can have a lasting impact on your day.</p>
+                <p>Getting started with MoodTask's activities is simple and intuitive. Browse the sections below, each dedicated to a unique tool like Breathing Exercises or Gratitude Notes. Within each section, you'll find a row of options—like 4-7-8 or Box Breathing for Breathing Exercises. Select an option by clicking on the card to open a popup with guided prompts. After finishing, explore our other activities to find what suits you best. We recommend exploring all the options to discover which ones resonate most with you—whether you need to relax, refocus, or build emotional strength. Each activity takes just a few minutes but can have a lasting impact on your day.</p>
                 
                 <h3>Maximizing Your Experience</h3>
-                <p>To get the most out of these activities, consistency and mindfulness are key. Start by setting aside 5-10 minutes each day to try one activity—perhaps a breathing exercise in the morning to start your day calmly, or a gratitude reflection before bed to end on a positive note. Pair activities with complementary tools on MoodTask: for example, listen to our <a href="music.html">Relaxation playlist</a> during a Guided Meditation session to enhance the calming effect. Don’t rush; focus on being fully present during each session. Over time, these small habits can become powerful tools for managing stress and cultivating a more balanced, joyful life.</p>
+                <p>To get the most out of these activities, consistency and mindfulness are key. Start by setting aside 5-10 minutes each day to try one activity—perhaps a breathing exercise in the morning to start your day calmly, or a gratitude reflection before bed to end on a positive note. Pair activities with complementary tools on MoodTask: for example, listen to our <a href="music.html">Relaxation playlist</a> during a Guided Meditation session to enhance the calming effect. Don't rush; focus on being fully present during each session. Over time, these small habits can become powerful tools for managing stress and cultivating a more balanced, joyful life.</p>
                 
                 <h3>Explore More with MoodTask</h3>
-                <p>Your journey to emotional wellness doesn’t stop here—MoodTask offers a variety of resources to support you. After trying these activities, visit our <a href="music.html">Mood Music</a> page to find calming tracks for relaxation or upbeat playlists to energize your day. Our <a href="blog.html">Blog</a> offers in-depth articles on mindfulness, stress management, and mental health, packed with science-backed tips to complement your activities. For a more personalized experience, explore our affiliate partners’ offerings, such as <a href="https://www.mindfulness.com/?aff_id=67890">mindfulness apps</a> for guided meditations or <a href="https://www.online-therapy.com/?aff_id=12345">online therapy</a> for professional support. MoodTask is here to help you create a more balanced, joyful life, one activity at a time. Start exploring today and see the difference these tools can make!</p>
+                <p>Your journey to emotional wellness doesn't stop here—MoodTask offers a variety of resources to support you. After trying these activities, visit our <a href="music.html">Mood Music</a> page to find calming tracks for relaxation or upbeat playlists to energize your day. Our <a href="blog.html">Blog</a> offers in-depth articles on mindfulness, stress management, and mental health, packed with science-backed tips to complement your activities. For a more personalized experience, explore our affiliate partners' offerings, such as <a href="https://www.mindfulness.com/?aff_id=67890">mindfulness apps</a> for guided meditations or <a href="https://www.online-therapy.com/?aff_id=12345">online therapy</a> for professional support. MoodTask is here to help you create a more balanced, joyful life, one activity at a time. Start exploring today and see the difference these tools can make!</p>
             </div>
         </div>
         <div class="footer">
@@ -1260,7 +1277,7 @@
             const prompts = {
                 'daily': 'Write about three things you are grateful for today.',
                 'relationships': 'Reflect on a relationship that brings you joy and why.',
-                'achievements': 'Describe a recent achievement you’re proud of and how it made you feel.'
+                'achievements': 'Describe a recent achievement you're proud of and how it made you feel.'
             };
             prompt.textContent = prompts[type];
             textArea.style.display = 'block';
@@ -1351,9 +1368,9 @@
             const prompt = document.getElementById('journaling-prompt');
             const textArea = document.getElementById('journaling-text');
             const prompts = {
-                'emotions': 'Write about how you’re feeling right now and why you might feel this way.',
-                'goals': 'Reflect on a goal you’d like to achieve and what steps you can take toward it.',
-                'challenges': 'Describe a challenge you’re facing and how you might approach it differently.'
+                'emotions': 'Write about how you're feeling right now and why you might feel this way.',
+                'goals': 'Reflect on a goal you'd like to achieve and what steps you can take toward it.',
+                'challenges': 'Describe a challenge you're facing and how you might approach it differently.'
             };
             prompt.textContent = prompts[type];
             textArea.style.display = 'block';
@@ -1372,7 +1389,7 @@
             const prompt = document.getElementById('reframing-prompt');
             const textArea = document.getElementById('reframing-text');
             const prompts = {
-                'negative-thought': 'Write a negative thought you’re having, then reframe it into a more balanced perspective.',
+                'negative-thought': 'Write a negative thought you're having, then reframe it into a more balanced perspective.',
                 'stressful-event': 'Describe a recent stressful event, then find a positive or neutral way to view it.',
                 'self-criticism': 'Write a self-critical thought, then reframe it with self-compassion.'
             };
